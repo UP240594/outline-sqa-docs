@@ -56,5 +56,19 @@ El siguiente repositiorio tiene como objetivo tener una documentacion del trabaj
         - Referencias bibliográficas (cada uno aportó sus fuentes)
         - Revisión final y correcciones
 
+## Estructura de carpetas
+  /Olivia
+  /Noe
+  /Omar
+  /Alan
+  /Odin
+
+
+## Comandos básicos git
+git pull origin main
+git add .
+git commit -m "breve descripción"
+git push origin main
+
   # Nota:
   Se creearan carpetas para organizar y poner la parte de cada uno ahi, en caso de hacer cualquier cambio, o no documentar este mismo por olvido de un git push, favor de aclararlo.  #    
