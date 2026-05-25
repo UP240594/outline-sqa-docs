@@ -55,3 +55,5 @@ El siguiente repositiorio tiene como objetivo tener una documentacion del trabaj
         - Sección 2.1: Descripción del proyecto (entre todos la definieron)
         - Referencias bibliográficas (cada uno aportó sus fuentes)
         - Revisión final y correcciones
+
+  # Nota:Se creearan carpetas para organizar y poner la parte de cada uno ahi, en caso de hacer cualquier cambio, o no documentar este mismo por olvido de un git push, favor de aclararlo.  #    

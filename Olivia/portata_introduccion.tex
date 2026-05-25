@@ -1,0 +1,116 @@
+\documentclass[12pt]{article}
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{parskip}
+\usepackage{setspace}
+\usepackage{titlesec}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{colortbl}
+\usepackage{xcolor}
+
+\geometry{a4paper, margin=2.5cm}
+\setlength{\parindent}{0pt}
+\renewcommand{\baselinestretch}{1.15}
+
+% Configuración de títulos
+\titleformat{\section}{\large\bfseries}{}{0em}{}
+\titleformat{\subsection}{\normalsize\bfseries}{}{0em}{}
+\titleformat{\subsubsection}{\normalsize\bfseries\itshape}{}{0em}{}
+
+% Definición de colores (valores entre 0 y 1)
+\definecolor{high}{rgb}{0.9,0.2,0.2}
+\definecolor{medium}{rgb}{0.95,0.7,0.2}
+\definecolor{low}{rgb}{0.2,0.7,0.3}
+
+% Para referencias con sangría francesa
+\usepackage{quoting}
+\newenvironment{hangparas}{\begin{quoting}[hang=true, indent=0.5cm]}{\end{quoting}}
+
+\begin{document}
+
+% --- PORTADA ---
+\begin{titlepage}
+    \thispagestyle{empty}
+    \begin{center}
+        \textsc{\Large {\textbf{UNIVERSIDAD POLITÉCNICA DE AGUASCALIENTES}}}\\
+        {\Large \uppercase{Ingeniería en Tecnologías de la Información e Innovación Digital} \\[1cm] }
+
+        \begin{center}
+            % APARTADO PARA IMAGEN 1: Logo UPA
+            % \includegraphics[width=0.45\textwidth]{imagenes/LOGO UPA.png}
+            % \hspace{0.5cm}
+            % APARTADO PARA IMAGEN 2: Logo TIID
+            % \includegraphics[width=0.35\textwidth]{imagenes/TIID UPA.png}\\
+            [Logo UPA y TIID aquí]
+        \end{center}
+
+        \vspace{0.5cm}
+        \rule{\linewidth}{0.3mm} \\
+        { \Huge \bfseries Tarea 03: Aplicación de estándares\\[0.2cm]
+          \large (ISO/IEC 25010, IEEE 730, CMMI, MoProSoft) }
+        \rule{\linewidth}{0.3mm} \\
+
+        \vspace{0.8cm}
+
+        {\large \textbf{ASIGNATURA}}\\
+        Estándares y Métricas para el Desarrollo de Software\\
+
+        \vspace{0.4cm}
+
+        {\large \textbf{DOCENTE}}\\
+        Dr(c). Raul Alejandro Velasquez Ortiz \\
+
+        \vspace{0.4cm}
+
+        {\large \textbf{PROYECTO INTEGRADOR}}\\
+        Outline - Wiki interna estilo Notion (Open Source maduro) \\
+
+        \vspace{0.4cm}
+
+        {\large \textbf{EQUIPO No. 4}}\\
+        \vspace{0.4cm}
+        \textbf{CHAIREZ ALBA OLIVIA LIZBETH - UP240594} \\
+        \textbf{ESTRADA RAMÍREZ NOÉ EZEQUIEL - UP240770} \\
+        \textbf{FACIO PALOS OMAR - UP240470} \\
+        \textbf{JAUREGUI DE LA RIVA ALAN RICARDO - UP240960} \\
+        \textbf{RUBIO VIRAMONTES BRIAN ODIN - UP250004}
+
+        \vspace{0.4cm}
+
+        {\large \textbf{GRUPO}}\\
+        TIID05B
+
+        \vfill
+        %-- La repo si existe jsjsj--
+        {\large \textbf{Repositorio Git:} \url{https://github.com/UP240594/outline-sqa-docs}}
+
+        {\large Aguascalientes, México\\
+        18 de mayo de 2026}
+    \end{center}
+\end{titlepage}
+
+% --- ÍNDICE ---
+\newpage
+\tableofcontents
+\newpage
+
+% --- INTRODUCCIÓN ---
+\section{Introducción}
+
+\subsection{Contexto del proyecto}
+El presente documento corresponde a la Tarea 03 de la asignatura Estándares y Métricas para el Desarrollo de Software, en la cual se aplican los conceptos teóricos de calidad de software al proyecto integrador del equipo: \textbf{Outline}, una aplicación web de tipo wiki interna con funcionalidades similares a Notion, de código abierto y con una comunidad activa.
+
+Outline fue seleccionado del Catálogo de 30 alternativas (Semana 1) por su naturaleza madura (más de 5,000 estrellas en GitHub, licencia MIT) y por ser un caso realista para evaluar atributos de calidad como usabilidad, seguridad y fiabilidad. El proyecto será analizado desde la perspectiva de un equipo de desarrollo que busca adoptar, desplegar y posiblemente contribuir a este software en un entorno corporativo.
+
+
+% --- Aun me faltan cosas, nose si este bien, pero eso se me ocurre, no puse las imagenes pq no se verian en git, igual subire el pdf ---
+
+% -- Por cierto quedo empalmado pq sino no cabia  en la portada xd--
+\end{document}
