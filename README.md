@@ -1,6 +1,6 @@
 # outline-sqa-docs
 
-El siguiente repositiorio tiene como objetivo tener una documentacion del trabajo que cada quien hizo en el equipo, teniendo con fin una mayor organizacion en el equipo, a continuacion se mencionan de lo que se encargara cada quien en el proyecto, se subiran los cambios al repositiorio aqui, tanto su formato tex como pdf, para al final unir el trabajo y subirlo al apartado correspondiente
+El siguiente repositiorio tiene como objetivo tener una documentacion del trabajo que cada quien hizo en el equipo, teniendo como objetivo una mayor organizacion en el equipo, a continuacion se mencionan de lo que se encargara cada quien en el proyecto, se subiran los cambios al repositiorio aqui, tanto su formato tex como pdf, para al final unir el trabajo y subirlo al apartado correspondiente
 
 # Roles y cosas que le toca a cada uno: #
 
