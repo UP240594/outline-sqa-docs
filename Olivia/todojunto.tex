@@ -1,0 +1,492 @@
+\documentclass[12pt]{article}
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{parskip}
+\usepackage{setspace}
+\usepackage{titlesec}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{colortbl}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage{subcaption}
+\usepackage{quoting}
+\usepackage{enumitem}
+
+\geometry{a4paper, margin=2.5cm}
+\setlength{\parindent}{0pt}
+\renewcommand{\baselinestretch}{1.15}
+
+% Configuración de títulos
+\titleformat{\section}{\large\bfseries}{}{0em}{}
+\titleformat{\subsection}{\normalsize\bfseries}{}{0em}{}
+\titleformat{\subsubsection}{\normalsize\bfseries\itshape}{}{0em}{}
+
+% Colores
+\definecolor{high}{rgb}{0.9,0.2,0.2}
+\definecolor{medium}{rgb}{0.95,0.7,0.2}
+\definecolor{low}{rgb}{0.2,0.7,0.3}
+
+% Entorno para sangría francesa
+\newenvironment{hangparas}{\begin{quoting}[hang=true, indent=0.5cm]}{\end{quoting}}
+
+% ---- BIBLIOGRAFÍA UNIFICADA (biblatex APA 7) ----
+\usepackage[backend=biber, style=apa, citestyle=apa]{biblatex}
+\DeclareLanguageMapping{spanish}{spanish-apa}
+
+\begin{filecontents*}{referencias.bib}
+@book{galin2018,
+    title = {Software Quality: Concepts and Practice},
+    author = {Galin, Daniel},
+    year = {2018},
+    publisher = {Wiley-IEEE Computer Society Press},
+    isbn = {978-1-119-13449-7}
+}
+@book{pressman2020,
+    title = {Software Engineering: A Practitioner's Approach},
+    author = {Pressman, Roger S. and Maxim, Bruce R.},
+    year = {2020},
+    publisher = {McGraw-Hill},
+    edition = {9th},
+    isbn = {978-1-259-87297-6}
+}
+@standard{ieee730,
+    title = {IEEE Standard for Software Quality Assurance Processes},
+    author = {{IEEE Computer Society}},
+    year = {2014},
+    number = {IEEE Std 730-2014},
+    doi = {10.1109/IEEESTD.2014.6835311}
+}
+@standard{iso25010,
+    title = {ISO/IEC 25010:2023 — SQuaRE — Product quality model},
+    author = {{ISO/IEC}},
+    year = {2023}
+}
+@standard{iso25023,
+    title = {ISO/IEC 25023:2016 — Measurement of product quality},
+    author = {{ISO/IEC}},
+    year = {2016}
+}
+@book{oktaba2008,
+    title = {Software Process Improvement for Small and Medium Enterprises},
+    author = {Oktaba, Hanna and Piattini, Mario},
+    year = {2008},
+    publisher = {IGI Global}
+}
+@standard{nmx059,
+    title = {NMX-I-059-NYCE-2011 — MoProSoft},
+    author = {{NYCE} / {Secretaría de Economía}},
+    year = {2011}
+}
+@standard{cmmi2018,
+    title = {CMMI for Development v2.0},
+    author = {{CMMI Institute}},
+    year = {2018}
+}
+@standard{iso33000,
+    title = {ISO/IEC 33000:2015 — Process assessment},
+    author = {{ISO/IEC}},
+    year = {2015}
+}
+@misc{sonarqube,
+    title = {SonarQube Documentation},
+    author = {{SonarSource}},
+    year = {2024},
+    url = {https://docs.sonarqube.org/}
+}
+@misc{istqb2023,
+    title = {ISTQB Foundation Level Syllabus v4.0},
+    author = {{ISTQB}},
+    year = {2023},
+    url = {https://www.istqb.org/}
+}
+@book{forsgren2018,
+    title = {Accelerate: The Science of Lean Software and DevOps},
+    author = {Forsgren, Nicole and Humble, Jez and Kim, Gene},
+    year = {2018},
+    publisher = {IT Revolution}
+}
+\end{filecontents*}
+\addbibresource{referencias.bib}
+
+\begin{document}
+
+% ==================== PORTADA (Olivia) ====================
+\begin{titlepage}
+    \thispagestyle{empty}
+    \begin{center}
+        \textsc{\Large {\textbf{UNIVERSIDAD POLITÉCNICA DE AGUASCALIENTES}}}\\
+        {\Large \uppercase{Ingeniería en Tecnologías de la Información e Innovación Digital} \\[1cm] }
+
+        \begin{center}
+            \includegraphics[width=0.45\textwidth]{imagenes/LOGO UPA.png}
+            % \hspace{0.5cm}
+            % APARTADO PARA IMAGEN 2: Logo TIID
+             \includegraphics[width=0.35\textwidth]{imagenes/TIID UPA.png}\
+        \end
+
+        \vspace{0.1cm}
+        \rule{\linewidth}{0.1mm} \\
+        { \Huge \bfseries Tarea 03: Aplicación de estándares\\[0.2cm]
+          \large (ISO/IEC 25010, IEEE 730, CMMI, MoProSoft) }
+        \rule{\linewidth}{0.1mm} \\
+
+        \vspace{0.1cm}
+
+        {\large \textbf{ASIGNATURA}}\\
+        Estándares y Métricas para el Desarrollo de Software\\
+
+        \vspace{0.4cm}
+
+        {\large \textbf{DOCENTE}}\\
+        Dr(c). Raul Alejandro Velasquez Ortiz \\
+
+        \vspace{0.4cm}
+
+        {\large \textbf{PROYECTO INTEGRADOR}}\\
+        Outline - Wiki interna estilo Notion (Open Source maduro) \\
+
+        \vspace{0.4cm}
+
+        {\large \textbf{EQUIPO No. 4}}\\
+        \vspace{0.4cm}
+        \textbf{CHAIREZ ALBA OLIVIA LIZBETH - UP240594} \\
+        \textbf{ESTRADA RAMÍREZ NOÉ EZEQUIEL - UP240770} \\
+        \textbf{FACIO PALOS OMAR - UP240470} \\
+        \textbf{JAUREGUI DE LA RIVA ALAN RICARDO - UP240960} \\
+        \textbf{RUBIO VIRAMONTES BRIAN ODIN - UP250004}
+
+        \vspace{0.1cm}
+
+        {\large \textbf{GRUPO}}\\
+        TIID05B
+
+        \vfill
+        {\large \textbf{Repositorio Git:} \url{https://github.com/UP240594/outline-sqa-docs}}
+
+        {\large Aguascalientes, México\\
+        18 de mayo de 2026}
+    \end{center}
+\end{titlepage}
+
+% ==================== ÍNDICE ====================
+\newpage
+\tableofcontents
+\newpage
+
+% ==================== 1. INTRODUCCIÓN (Olivia) ====================
+\section{Introducción}
+
+\subsection{Contexto del proyecto}
+El presente documento corresponde a la Tarea 03 de la asignatura Estándares y Métricas para el Desarrollo de Software, en la cual se aplican los conceptos teóricos de calidad de software al proyecto integrador del equipo: \textbf{Outline}, una aplicación web de tipo wiki interna con funcionalidades similares a Notion, de código abierto y con una comunidad activa.
+
+Outline fue seleccionado del Catálogo de 30 alternativas (Semana 1) por su naturaleza madura (más de 5,000 estrellas en GitHub, licencia MIT) y por ser un caso realista para evaluar atributos de calidad como usabilidad, seguridad y fiabilidad. El proyecto será analizado desde la perspectiva de un equipo de desarrollo que busca adoptar, desplegar y posiblemente contribuir a este software en un entorno corporativo.
+
+\subsection{Objetivos de calidad}
+\begin{itemize}
+    \item Aplicar el modelo de calidad de producto ISO/IEC 25010:2023 para priorizar las características más relevantes para Outline.
+    \item Definir KPIs cuantificables basados en ISO/IEC 25023.
+    \item Estructurar un Plan SQA preliminar siguiendo IEEE 730-2014.
+    \item Comparar modelos de madurez y recomendar el más adecuado.
+    \item Identificar riesgos de calidad y proponer mitigaciones.
+\end{itemize}
+
+\subsection{Estructura del documento}
+El documento se organiza en seis secciones principales: descripción del proyecto, análisis ISO 25010, KPIs, plan SQA, modelo de madurez y matriz de riesgos. Finaliza con conclusión, aportes individuales y referencias.
+
+% ==================== 2.1 DESCRIPCIÓN DEL PROYECTO (trabajo de todos - redactado por Olivia) ====================
+\section{Descripción del proyecto integrador}
+
+\subsection{Nombre y tipo}
+\textbf{Proyecto:} Outline - Wiki interna estilo Notion \\
+\textbf{Tipo:} Web (SaaS con opción self-hosted)
+
+\subsection{Contexto de uso}
+Outline está diseñado para equipos que necesitan un repositorio centralizado de conocimiento interno. Ofrece despliegue self-hosted gratuito, integración OAuth y editor colaborativo en tiempo real.
+
+\subsection{Usuarios objetivo}
+\begin{table}[H]
+\centering
+\begin{tabularx}{\textwidth}{|l|X|}
+\hline
+\textbf{Rol} & \textbf{Necesidad principal} \\ \hline
+Editor de contenido & Crear y organizar documentos técnicos. \\ \hline
+Lector/Consultor & Buscar información rápidamente. \\ \hline
+Administrador & Gestionar permisos e invitaciones. \\ \hline
+Administrador de sistemas & Desplegar y mantener la instancia. \\ \hline
+\end{tabularx}
+\caption{Usuarios objetivo de Outline}
+\end{table}
+
+\subsection{Stack tecnológico}
+\begin{itemize}
+    \item Frontend: React 18+, TypeScript, MobX, Slate.js
+    \item Backend: Node.js + Express, Sequelize
+    \item Bases de datos: PostgreSQL, Redis
+    \item Infraestructura: Docker Compose, AWS S3/MinIO
+\end{itemize}
+
+\subsection{Alcance en historias de usuario}
+\begin{enumerate}
+    \item HU-01: Creación de documento
+    \item HU-02: Edición colaborativa en tiempo real
+    \item HU-03: Gestión de permisos y equipos
+    \item HU-04: Búsqueda y navegación
+    \item HU-05: Historial de versiones
+\end{enumerate}
+
+% ==================== 2.2 ISO 25010 (Noé) ====================
+\section{Análisis de calidad con ISO/IEC 25010}
+
+El estándar internacional ISO/IEC 25010:2023 proporciona el marco estructural para diagnosticar y asegurar la calidad del producto de software. En el contexto de \textbf{Outline}, concebido como una plataforma de gestión del conocimiento de alto rendimiento y estilo wiki, los atributos de calidad han sido mapeados y priorizados de acuerdo con su impacto crítico en entornos de productividad empresarial distribuidos.
+
+\subsection{Priorización de Características de Calidad del Producto}
+
+\begin{itemize}
+    \item \textbf{Adecuación Funcional [Prioridad: ALTA]} \\
+    Outline debe garantizar que sus funcionalidades de edición colaborativa en tiempo real, renderizado de Markdown y control de versiones cumplan con exactitud las expectativas del usuario corporativo.
+    
+    \item \textbf{Eficiencia de Desempeño [Prioridad: ALTA]} \\
+    Los tiempos de carga de documentos extensos y la latencia del motor de búsqueda deben ser mínimos, asegurando un uso fluido.
+    
+    \item \textbf{Usabilidad [Prioridad: ALTA]} \\
+    La tasa de adopción está ligada a la simplicidad de la experiencia de usuario; una interfaz intuitiva garantiza que personal no técnico colabore sin capacitación compleja.
+    
+    \item \textbf{Fiabilidad [Prioridad: ALTA]} \\
+    La tolerancia a fallos de sincronización y los mecanismos de respaldo automático son indispensables. La pérdida de documentación interna interrumpe los flujos operativos.
+    
+    \item \textbf{Seguridad [Prioridad: ALTA]} \\
+    Es obligatorio implementar control de acceso RBAC, soporte SSO/SAML y cifrado de datos en tránsito.
+    
+    \item \textbf{Compatibilidad [Prioridad: MEDIA]} \\
+    La wiki requiere integración fluida con herramientas externas (Slack, Google Drive, Figma).
+    
+    \item \textbf{Mantenibilidad [Prioridad: MEDIA]} \\
+    El diseño con NodeJS y React facilita la modularidad. Al ser open source, el equipo debe asegurar legibilidad para integraciones a medida.
+    
+    \item \textbf{Portabilidad [Prioridad: MEDIA]} \\
+    La instalación se mitiga mediante el uso de contenedores Docker y Kubernetes.
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[scale=0.85]
+        \draw[very thin, gray!30] (0,0) grid (10,8.5);
+        \draw[thick, ->] (0,0) -- (10.5,0) node[anchor=north east] {Nivel de Prioridad};
+        \draw[thick, ->] (0,0) -- (0,9) node[anchor=south east] {Características};
+        \node at (2.5,-0.4) {\footnotesize Baja};
+        \node at (6,-0.4) {\footnotesize Media};
+        \node at (9,-0.4) {\footnotesize Alta};
+        \fill[fill=low] (0,0.5) rectangle (6,1.1); \node[anchor=west] at (6,0.8) {\scriptsize Portabilidad};
+        \fill[fill=low] (0,1.5) rectangle (6,2.1); \node[anchor=west] at (6,1.8) {\scriptsize Mantenibilidad};
+        \fill[fill=low] (0,2.5) rectangle (6,3.1); \node[anchor=west] at (6,2.8) {\scriptsize Compatibilidad};
+        \fill[fill=high] (0,3.5) rectangle (9,4.1); \node[anchor=west] at (9,3.8) {\scriptsize Seguridad};
+        \fill[fill=high] (0,4.5) rectangle (9,5.1); \node[anchor=west] at (9,4.8) {\scriptsize Fiabilidad};
+        \fill[fill=high] (0,5.5) rectangle (9,6.1); \node[anchor=west] at (9,5.8) {\scriptsize Usabilidad};
+        \fill[fill=high] (0,6.5) rectangle (9,7.1); \node[anchor=west] at (9,6.8) {\scriptsize Eficiencia};
+        \fill[fill=high] (0,7.5) rectangle (9,8.1); \node[anchor=west] at (9,7.8) {\scriptsize Adecuación Funcional};
+    \end{tikzpicture}
+    \caption{Visualización gráfica del perfil de prioridades de calidad para Outline.}
+\end{figure}
+
+\subsection{Análisis de Calidad en Uso}
+Los dos componentes con mayor impacto son:
+\begin{enumerate}
+    \item \textbf{Efectividad:} Capacidad del software para permitir que los usuarios alcancen metas con precisión. En Outline, se materializa en el guardado síncrono y la precisión del buscador.
+    \item \textbf{Satisfacción:} Respuesta cognitiva y emocional del usuario. El diseño minimalista y los accesos rápidos elevan la satisfacción.
+\end{enumerate}
+
+% ==================== 2.3 KPIs (Omar) ====================
+\section{KPIs medibles según ISO/IEC 25023}
+
+Con el objetivo de cuantificar objetivamente las características de calidad priorizadas, el equipo ha definido 7 KPIs basados en la norma \cite{iso25023}.
+
+\begin{table}[H]
+\centering
+\begin{tabularx}{\textwidth}{|>{\columncolor[gray]{0.92}}p{3.2cm}|>{\centering\arraybackslash}p{2.5cm}|p{3.5cm}|>{\centering\arraybackslash}p{2.5cm}|p{2.2cm}|}
+\hline
+\rowcolor[gray]{0.85}
+\textbf{Nombre del KPI} & \textbf{Caract. ISO 25010} & \textbf{Fórmula} & \textbf{Umbral} & \textbf{Herramienta} \\ \hline
+Tasa de éxito de creación de documentos & Adecuación funcional & \(\displaystyle \frac{\text{Docs creados exitosamente}}{\text{Intentos de creación}} \times 100\) & \(\geq 99.5\%\) & Logs de API + Grafana \\ \hline
+Disponibilidad del servicio & Fiabilidad & \(\displaystyle \frac{T_{\text{up}}}{T_{\text{up}} + T_{\text{inactivo}}}\) & \(\geq 99.9\%\) & Uptime Kuma \\ \hline
+Tiempo de carga del dashboard & Eficiencia (rendimiento) & Percentil 95 (P95) en ms & \(< 1.5\) s & Lighthouse CI \\ \hline
+Tiempo de respuesta de búsqueda & Eficiencia & P95 de latencia del endpoint & \(< 500\) ms & Prometheus + Grafana \\ \hline
+Cobertura de pruebas de seguridad & Seguridad & \(\displaystyle \frac{\text{Pruebas ejecutadas}}{\text{Total casos}} \times 100\) & \(\geq 80\%\) & OWASP ZAP + SonarQube \\ \hline
+Tasa de retención de usuarios & Calidad en uso & \(\displaystyle \frac{\text{Usuarios activos 30d}}{\text{Usuarios nuevos mes}} \times 100\) & \(\geq 70\%\) & Analytics propio \\ \hline
+Tiempo para primera edición & Usabilidad & Tiempo desde registro hasta primera edición & \(< 3\) min & Session replay \\ \hline
+\end{tabularx}
+\caption{KPIs de Calidad del Producto}
+\end{table}
+
+\subsection*{Nota metodológica}
+\begin{enumerate}
+    \item \textbf{Línea base:} Establecer medición inicial después del primer sprint \cite{galin2018}.
+    \item \textbf{Automatización:} KPIs de rendimiento y seguridad deben medirse en cada commit mediante CI/CD \cite{forsgren2018}.
+    \item \textbf{Justificación de umbrales:} Basada en benchmarks de la industria y recomendaciones de Galin.
+    \item \textbf{Percentil P95:} Refleja mejor la experiencia real del usuario que el promedio \cite{pressman2020}.
+\end{enumerate}
+
+% ==================== 2.4 PLAN SQA (Alan) ====================
+\section{Plan SQA preliminar según IEEE 730}
+
+\subsection{§1 Purpose (Propósito y alcance)}
+Plan de Aseguramiento de la Calidad del Software conforme al estándar IEEE 730-2014 \cite{ieee730} para el proyecto Outline. Establece actividades, responsabilidades y métricas para garantizar el cumplimiento de requisitos funcionales y no funcionales.
+
+\subsection{§3 Management (Roles y responsabilidades)}
+\begin{table}[H]
+\centering
+\caption{Roles y responsabilidades en el plan SQA}
+\begin{tabular}{|l|p{8cm}|}
+\hline
+\textbf{Rol} & \textbf{Responsabilidades} \\ \hline
+Gerente de Proyecto & Aprobar el plan SQA, asignar recursos, supervisar hitos de calidad. \\ \hline
+Líder de Calidad (SQA) & Ejecutar auditorías internas, medir KPIs, reportar no conformidades. \\ \hline
+Desarrolladores & Seguir estándares de codificación, realizar pruebas unitarias. \\ \hline
+Analista de Pruebas & Diseñar y ejecutar casos de prueba, reportar incidentes. \\ \hline
+Cliente / Usuario clave & Validar criterios de aceptación, reportar problemas. \\ \hline
+\end{tabular}
+\end{table}
+
+\subsection{§5 Standards, practices, metrics}
+\textbf{Estándares:} PEP 8 (Python), ESLint (JavaScript), \LaTeX\ para documentación, ISTQB v4.0 para pruebas, Git Flow.
+\textbf{Prácticas:} Commits con ID de tarea, pull requests con revisión y análisis estático, reuniones semanales con revisión de KPIs.
+\textbf{Métricas:} Disponibilidad diaria, cobertura de pruebas por sprint, tiempo de respuesta semanal, etc.
+
+\subsection{§7 Test (Estrategia de pruebas)}
+\begin{enumerate}
+    \item Unitarias: JUnit/Pytest, cobertura mínima 80\%.
+    \item Integración: Postman/Newman en cada CI.
+    \item Sistema: Selenium, JMeter.
+    \item Aceptación: Con cliente en preproducción.
+\end{enumerate}
+Automatización con GitHub Actions.
+
+\subsection{§8 Problem reporting (SLA por severidad)}
+\begin{table}[H]
+\centering
+\caption{SLA para reporte de problemas}
+\begin{tabular}{|l|l|l|l|}
+\hline
+\textbf{Severidad} & \textbf{Descripción} & \textbf{Tiempo respuesta} & \textbf{Solución} \\ \hline
+Crítica (S1) & Pérdida de datos, caída total & 2 horas & 24 horas \\ \hline
+Alta (S2) & Funcionalidad principal afectada & 8 horas & 3 días hábiles \\ \hline
+Media (S3) & Funcionalidad secundaria afectada & 2 días hábiles & 7 días hábiles \\ \hline
+Baja (S4) & Error estético o mejora menor & 5 días hábiles & Siguiente sprint \\ \hline
+\end{tabular}
+\end{table}
+Reporte mediante GitHub Issues.
+
+% ==================== 2.5 MODELO DE MADUREZ (Odin) ====================
+\section{Recomendación de modelo de madurez (CMMI / MoProSoft / ISO 33000)}
+
+\subsection{Análisis comparativo de modelos}
+\begin{table}[H]
+\centering
+\small
+\begin{tabularx}{\textwidth}{|l|X|X|X|}
+\hline
+\textbf{Criterio} & \textbf{CMMI-DEV v2.0} & \textbf{MoProSoft} & \textbf{ISO/IEC 33000} \\ \hline
+Origen & EE.UU. & México & Internacional \\ \hline
+Enfoque & Grandes contratistas & PYMEs mexicanas & Evaluación de capacidad \\ \hline
+Niveles & 5 & 3 & 6 \\ \hline
+Costo & Alto & Bajo & Medio \\ \hline
+\end{tabularx}
+\caption{Comparativa de modelos de madurez}
+\end{table}
+
+\subsection{Contexto específico}
+Equipo de 5 estudiantes, PYME micro, sector software de productividad, mercado México + internacional.
+
+\subsection{Recomendación: MoProSoft (con elementos de ISO 33000)}
+\begin{itemize}
+    \item Alineación con tamaño del equipo (diseñado para PYMEs mexicanas) \cite{oktaba2008}.
+    \item Costo documental cero (norma NMX-I-059 pública).
+    \item Estructura simplificada (Alta Dirección, Gerencia, Operación).
+    \item Relevancia para el mercado mexicano.
+    \item Complemento con ISO 33000 para medición de capacidad.
+\end{itemize}
+
+\subsection{Implementación propuesta}
+\begin{itemize}
+    \item Alta Dirección: seguimiento de KPIs y asignación de roles.
+    \item Gerencia: gestión de requisitos y planificación.
+    \item Operación: estándares de codificación y estrategia de pruebas.
+\end{itemize}
+
+% ==================== 2.6 MATRIZ DE RIESGOS (Odin) ====================
+\section{Matriz de riesgos de calidad}
+
+Se identifican 7 riesgos específicos del proyecto Outline.
+
+\begin{table}[H]
+\centering
+\footnotesize
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\textwidth}{|l|X|c|c|X|}
+\hline
+\textbf{Riesgo} & \textbf{Característica afectada} & \textbf{Prob.} & \textbf{Impacto} & \textbf{Mitigación} \\ \hline
+R1: Exposición de secretos en logs & Seguridad & M & A & git-secrets, rotar secretos \\ \hline
+R2: Conflictos en editor colaborativo & Fiabilidad & M & A & Pruebas de estrés, backups cada 5 min \\ \hline
+R3: Curva de aprendizaje alta & Usabilidad & A & M & Tutorial interactivo, encuestas \\ \hline
+R4: Código extenso (50k+ líneas) & Mantenibilidad & A & M & Documentación con Typedoc \\ \hline
+R5: Vulnerabilidades en npm & Seguridad & A & A & npm audit semanal, Snyk \\ \hline
+R6: Rendimiento en búsquedas & Eficiencia & M & A & Indexar Elasticsearch, pruebas k6 \\ \hline
+R7: Falta de participación & Adecuación funcional & A & M & Reuniones semanales, checklist en PR \\ \hline
+\end{tabularx}
+\caption{Matriz de riesgos de calidad}
+\end{table}
+
+\textbf{Leyenda:} A = Alta, M = Media, B = Baja
+
+\subsection{Plan de contingencia}
+\begin{itemize}
+    \item \textbf{R5:} Vulnerabilidad crítica sin parche → bloqueador de release, buscar workaround.
+    \item \textbf{R2:} Pérdida de datos → shadow log que registra todas las operaciones.
+\end{itemize}
+
+% ==================== CONCLUSIÓN (Olivia) ====================
+\newpage
+\section{Conclusión integral}
+
+La aplicación de los estándares ISO/IEC 25010, IEEE 730, CMMI y MoProSoft al proyecto Outline ha permitido al equipo descubrir varios aprendizajes clave:
+
+\paragraph{Hallazgo 1: La priorización es esencial.} No todas las características de calidad tienen el mismo peso. Para una wiki interna, usabilidad y seguridad dominan sobre portabilidad.
+
+\paragraph{Hallazgo 2: Los KPIs deben ser realistas.} Definir umbrales como disponibilidad 99,9\% es alcanzable; 99,999\% no lo es para un proyecto open-source.
+
+\paragraph{Hallazgo 3: IEEE 730 es estructurado pero adaptable.} Adaptarlo a un equipo de 5 personas requirió recortar secciones no aplicables.
+
+\paragraph{Hallazgo 4: MoProSoft es relevante y vigente.} Sigue siendo pertinente para PYMEs locales, con principios de baja burocracia.
+
+\paragraph{Conexión con próximos parciales:} Los KPIs definidos serán la base para las pruebas del Parcial 2, y la matriz de riesgos alimentará el informe técnico del Parcial 3.
+
+% ==================== APORTES INDIVIDUALES ====================
+\newpage
+\section{Aportes individuales}
+
+\paragraph{Chairez Alba Olivia Lizbeth (UP240594) -  y Developer:}
+Redacté la portada, introducción, descripción del proyecto (sección 2.1) y conclusión. Unifiqué y armonicé todas las partes de mis compañeros en un solo documento LaTeX, corregí errores de compilación y formateé el documento final. Gestioné el repositorio Git y aseguré la consistencia general.
+
+\paragraph{Estrada Ramírez Noé Ezequiel (UP240770) - Líder:}
+Desarrollé la sección 2.2 completa (análisis ISO 25010), incluyendo la priorización de las 8 características, justificaciones específicas para Outline y el análisis de calidad en uso (efectividad y satisfacción). Además, elaboré el gráfico de barras con TikZ.
+
+\paragraph{Facio Palos Omar (UP240470) - QA Tester:}
+Elaboré la sección 2.3 (KPIs según ISO 25023), definiendo 7 indicadores con fórmulas, umbrales numéricos y herramientas de medición. Redacté la nota metodológica justificando el uso del percentil P95 y la automatización en CI/CD.
+
+\paragraph{Jauregui De La Riva Alan Ricardo (UP240960) - Documentador:}
+Redacté la sección 2.4 (Plan SQA según IEEE 730), incluyendo propósito, gestión, estándares, estrategia de pruebas y SLA por severidad. Adapté el estándar al contexto del equipo.
+
+\paragraph{Rubio Viramontes Brian Odin (UP250004) - Developer:}
+Desarrollé la sección 2.5 (recomendación de modelo de madurez) con análisis comparativo CMMI/MoProSoft/ISO 33000, justificando MoProSoft como la opción óptima. También elaboré la sección 2.6 (matriz de riesgos) con 7 riesgos identificados, probabilidad, impacto y estrategias de mitigación.
+
+% ==================== REFERENCIAS ====================
+\newpage
+\printbibliography[title={Referencias}]
+
+\end{document}
