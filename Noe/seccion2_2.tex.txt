@@ -197,5 +197,10 @@ Adicionalmente al comportamiento del software aislado, resulta indispensable eva
     \item \textbf{Efectividad:} Se define como la capacidad del software para permitir que los usuarios alcancen metas declaradas con precisión y completitud. En el contexto de Outline, la efectividad se materializa en la veracidad del guardado síncrono e inmediato de los textos y en la precisión algorítmica de su buscador interno, mitigando cualquier margen de error operacional o duplicidad en la documentación de la empresa.
     \item \textbf{Satisfacción:} Representa la respuesta cognitiva y emocional que experimenta el trabajador al utilizar la aplicación de manera cotidiana. Debido a que el software está diseñado para mitigar la fricción operativa mediante un diseño visual minimalista, menús contextuales fluidos y accesos rápidos por teclado, el índice de satisfacción se eleva sustancialmente, estimulando una cultura orgánica de compartición del conocimiento interdepartamental.
 \end{enumerate}
+\subsubsection{Referencias del Apartado}
+\begin{hangparas}
+ISO/IEC. (2023). \textit{ISO/IEC 25010:2023 - Systems and software engineering - Systems and software Quality Requirements and Evaluation (SQuaRE) - Product quality model}. International Organization for Standardization.
 
+Pressman, R. \& Maxim, B. (2020). \textit{Software Engineering: A Practitioner's Approach} (9ª ed.). McGraw-Hill.
+\end{hangparas}
 \end{document}
