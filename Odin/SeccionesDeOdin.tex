@@ -1,0 +1,178 @@
+\documentclass[12pt]{article}
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{parskip}
+\usepackage{setspace}
+\usepackage{titlesec}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{colortbl}
+\usepackage{xcolor}
+\usepackage{enumitem}
+
+\geometry{a4paper, margin=2.5cm}
+\setlength{\parindent}{0pt}
+\renewcommand{\baselinestretch}{1.15}
+
+% Configuración de títulos
+\titleformat{\section}{\large\bfseries}{}{0em}{}
+\titleformat{\subsection}{\normalsize\bfseries}{}{0em}{}
+\titleformat{\subsubsection}{\normalsize\bfseries\itshape}{}{0em}{}
+
+% Definición de colores (valores entre 0 y 1)
+\definecolor{high}{rgb}{0.9,0.2,0.2}
+\definecolor{medium}{rgb}{0.95,0.7,0.2}
+\definecolor{low}{rgb}{0.2,0.7,0.3}
+
+% Para referencias con sangría francesa
+\usepackage{quoting}
+\newenvironment{hangparas}{\begin{quoting}[hang=true, indent=0.5cm]}{\end{quoting}}
+\begin{document}
+\setcounter{section}{1}
+\setcounter{subsection}{4}
+\subsection{Recomendación de modelo de madurez (CMMI / MoProSoft / ISO 33000)}
+
+\subsubsection{Análisis comparativo de modelos}
+
+A continuación se presenta una comparativa entre los tres modelos de madurez considerados para el contexto del proyecto Outline:
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabularx}{\textwidth}{|l|X|X|X|}
+\hline
+\textbf{Criterio} & \textbf{CMMI-DEV v2.0} & \textbf{MoProSoft (NMX-I-059)} & \textbf{ISO/IEC 33000 (antigua 15504)} \\
+\hline
+Origen & EE.UU. (SEI/ISACA) & México (NYCE/UNAM) & Internacional (ISO) \\
+\hline
+Enfoque & Mejora de procesos para grandes contratistas (DoD) & PYMEs mexicanas de software & Evaluación de capacidad de procesos \\
+\hline
+Niveles & 5 niveles de madurez (0-5) & 3 niveles (Básico, Estándar, Avanzado) & 6 niveles de capacidad (0-5) \\
+\hline
+Costo de implementación & Alto (consultoría especializada) & Bajo a medio (documentación gratuita) & Medio (auditoría requerida) \\
+\hline
+Reconocimiento en México & Alto en empresas transnacionales & Alto en industria nacional (certificación NYCE) & Medio (usado para exportación) \\
+\hline
+Documentación requerida & Extensa (CMMI Practice Area) & Moderada (3 procesos: alta dirección, gerencia, operación) & Variable según objetivo \\
+\hline
+\end{tabularx}
+\caption{Comparativa de modelos de madurez}
+\end{table}
+
+\subsubsection{Contexto específico de Outline}
+
+El proyecto Outline (como producto open-source) y nuestro equipo (simulado de 5 estudiantes) tienen las siguientes características:
+
+\begin{itemize}
+    \item \textbf{Tamaño del equipo:} Muy pequeño (5 personas) - categoría PYME micro.
+    \item \textbf{Sector:} Software de productividad, sin regulación específica (no aeroespacial, no médico).
+    \item \textbf{Mercado objetivo:} México (empresa adoptante) + internacional (código abierto).
+    \item \textbf{Ciclo de vida:} El equipo no desarrolla desde cero, sino que evalúa/adapta software existente.
+\end{itemize}
+
+\subsubsection{Recomendación: MoProSoft (con elementos de ISO 33000)}
+
+\textbf{Justificación detallada:}
+
+\begin{enumerate}
+    \item \textbf{Alineación con el tamaño del equipo:} MoProSoft fue diseñado específicamente para PYMEs mexicanas de software (Oktaba \& Piattini, 2008). CMMI es excesivo para 5 personas (requiere roles como SEPG, QAG que no podemos cubrir).
+    
+    \item \textbf{Costo documental cero:} La norma NMX-I-059 está disponible públicamente en NYCE. Esto es crítico para un proyecto académico sin presupuesto.
+    
+    \item \textbf{Estructura simplificada:} MoProSoft organiza los procesos en tres categorías (Alta Dirección, Gerencia, Operación) que mapean directamente a:
+    \begin{itemize}
+        \item Alta Dirección $\rightarrow$ nuestro plan SQA (liderazgo del equipo)
+        \item Gerencia $\rightarrow$ gestión de requisitos y planificación de proyectos
+        \item Operación $\rightarrow$ desarrollo, pruebas y mantenimiento de Outline
+    \end{itemize}
+    
+    \item \textbf{Relevancia para el mercado mexicano:} La empresa simulada que adoptaría Outline opera en Aguascalientes, México. Implementar prácticas de MoProSoft demuestra entendimiento del contexto nacional.
+    
+    \item \textbf{Complemento con ISO 33000:} Para la parte de medición de calidad, podemos tomar prestado el modelo de capacidad de procesos de ISO/IEC 33000 (niveles 0-5). Esto nos permite evaluar en qué nivel está nuestro proceso de pruebas, por ejemplo.
+\end{enumerate}
+
+\textbf{¿Por qué no CMMI?} Aunque CMMI es reconocido internacionalmente, requiere:
+
+\begin{itemize}
+    \item Un equipo dedicado a procesos (no factible con 5 personas).
+    \item Entrenamiento formal (miles de dólares).
+    \item Múltiples niveles de verificación (revisiones de pares, auditorías).
+\end{itemize}
+
+Esto no es práctico para un proyecto open-source mantenido por voluntarios.
+
+\textbf{¿Por qué no solo ISO 33000?} ISO 33000 (antes 15504) es un modelo de evaluación más que de implementación. No prescribe prácticas específicas como MoProSoft; solo dice cómo medir capacidad. Necesitamos un modelo prescriptivo para guiar nuestras actividades diarias.
+
+\subsubsection{Implementación propuesta de MoProSoft en nuestro contexto}
+
+\begin{enumerate}
+    \item \textbf{Procesos de Alta Dirección:}
+    \begin{itemize}
+        \item Gestión de calidad: seguimiento de KPIs (sección 2.3).
+        \item Gestión de recursos: asignación de roles (tabla en \S 3 del plan SQA).
+    \end{itemize}
+    
+    \item \textbf{Procesos de Gerencia:}
+    \begin{itemize}
+        \item Gestión de requisitos: backlog priorizado de HU (sección 2.1).
+        \item Planificación de proyectos: cronograma de entregas (parcial 2 y 3).
+    \end{itemize}
+    
+    \item \textbf{Procesos de Operación:}
+    \begin{itemize}
+        \item Desarrollo y mantenimiento: estándares de codificación (sección \S 5).
+        \item Pruebas: estrategia definida en \S 7 del plan SQA.
+    \end{itemize}
+\end{enumerate}
+
+En conclusión, MoProSoft complementado con ISO 33000 es la opción óptima para nuestro contexto por su adecuación a PYMEs, costo nulo, relevancia nacional y flexibilidad.
+
+\subsection{Matriz de riesgos de calidad}
+
+Se identifican 7 riesgos específicos del proyecto Outline, cada uno vinculado a una característica ISO 25010.
+
+\begin{table}[H]
+\centering
+\footnotesize
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\textwidth}{|l|X|c|c|X|}
+\hline
+\textbf{Riesgo} & \textbf{Característica afectada} & \textbf{Prob.} & \textbf{Impacto} & \textbf{Estrategia de mitigación} \\
+\hline
+R1: Configuración incorrecta de variables de entorno expone secretos (API keys, JWT secret) en logs o commits. & Seguridad & \cellcolor{medium}M & \cellcolor{high}A & Usar \texttt{git-secrets} pre-commit. Rotar secretos semanalmente. \\
+\hline
+R2: Editor colaborativo falla en conflictos de fusión, causando pérdida de datos. & Fiabilidad & \cellcolor{medium}M & \cellcolor{high}A & Pruebas de estrés con simulación de 10 usuarios concurrentes. Backups cada 5 min. \\
+\hline
+R3: Curva de aprendizaje alta para usuarios no técnicos. & Usabilidad & \cellcolor{high}A & \cellcolor{medium}M & Tutorial interactivo (tour guiado). Encuestas post-registro. \\
+\hline
+R4: Base de código de 50k+ líneas dificulta encontrar módulos específicos. & Mantenibilidad & \cellcolor{high}A & \cellcolor{medium}M & Generar documentación con Typedoc. Ownership de submódulos. \\
+\hline
+R5: Dependencias (npm) con vulnerabilidades críticas no detectadas. & Seguridad & \cellcolor{high}A & \cellcolor{high}A & Ejecutar \texttt{npm audit} y Snyk semanalmente. Política de actualización <7 días para CVSS >7. \\
+\hline
+R6: Rendimiento degradado en búsquedas cuando hay >10,000 documentos. & Eficiencia & \cellcolor{medium}M & \cellcolor{high}A & Indexar Elasticsearch. Pruebas de carga con k6. \\
+\hline
+R7: Falta de participación del equipo en actividades SQA. & Adecuación funcional & \cellcolor{high}A & \cellcolor{medium}M & Reunión semanal obligatoria de retrospectiva calidad (15 min). Checklist en cada PR. \\
+\hline
+\end{tabularx}
+\caption{Matriz de riesgos de calidad para Outline}
+\end{table}
+
+\textbf{Leyenda:} \colorbox{high}{A = Alta} \quad \colorbox{medium}{M = Media} \quad \colorbox{low}{B = Baja}
+
+\subsubsection{Plan de contingencia para riesgos críticos}
+
+\begin{itemize}
+    \item \textbf{R5 (vulnerabilidades en dependencias):} Si se detecta una vulnerabilidad crítica sin parche, se considera bloqueador de release y se busca workaround (ej. downgrade, parche manual).
+    
+    \item \textbf{R2 (pérdida de datos en colaboración):} Se implementa un \textit{shadow log} que registra todas las operaciones del editor; permite reconstruir documento desde cero.
+\end{itemize}
+
+% -- Fin de la parte que me tocó jaja... --
+
+\end{document}
