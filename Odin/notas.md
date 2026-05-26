@@ -1,0 +1,1 @@
+Estas notas solo serán usadas por mi para añadir puntos relevantes a la parte de mi contribución al documento
