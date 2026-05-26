@@ -1,0 +1,206 @@
+\documentclass[12pt]{article}
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{parskip}
+\usepackage{setspace}
+\usepackage{titlesec}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{colortbl}
+\usepackage{xcolor}
+\usepackage{tikz}
+
+\geometry{a4paper, margin=2.5cm}
+\setlength{\parindent}{0pt}
+\renewcommand{\baselinestretch}{1.15}
+
+% Configuración de títulos
+\titleformat{\section}{\large\bfseries}{}{0em}{}
+\titleformat{\subsection}{\normalsize\bfseries}{}{0em}{}
+\titleformat{\subsubsection}{\normalsize\bfseries\itshape}{}{0em}{}
+
+% Definición de colores (valores entre 0 y 1)
+\definecolor{high}{rgb}{0.9,0.2,0.2}
+\definecolor{medium}{rgb}{0.95,0.7,0.2}
+\definecolor{low}{rgb}{0.2,0.7,0.3}
+
+% Para referencias con sangría francesa
+\usepackage{quoting}
+\newenvironment{hangparas}{\begin{quoting}[hang=true, indent=0.5cm]}{\end{quoting}}
+
+\begin{document}
+
+% --- PORTADA ---
+\begin{titlepage}
+    \thispagestyle{empty}
+    \begin{center}
+        \textsc{\Large {\textbf{UNIVERSIDAD POLITÉCNICA DE AGUASCALIENTES}}}\\
+        {\Large \uppercase{Ingeniería en Tecnologías de la Información e Innovación Digital} \\[1cm] }
+
+        \begin{center}
+            % APARTADO PARA IMAGEN 1: Logo UPA
+            % \includegraphics[width=0.45\textwidth]{imagenes/LOGO UPA.png}
+            % \hspace{0.5cm}
+            % APARTADO PARA IMAGEN 2: Logo TIID
+            % \includegraphics[width=0.35\textwidth]{imagenes/TIID UPA.png}\\
+            [Logo UPA y TIID aquí]
+        \end{center}
+
+        \vspace{0.5cm}
+        \rule{\linewidth}{0.3mm} \\
+        { \Huge \bfseries Tarea 03: Aplicación de estándares\\[0.2cm]
+          \large (ISO/IEC 25010, IEEE 730, CMMI, MoProSoft) }
+        \rule{\linewidth}{0.3mm} \\
+
+        \vspace{0.8cm}
+
+        {\large \textbf{ASIGNATURA}}\\
+        Estándares y Métricas para el Desarrollo de Software\\
+
+        \vspace{0.4cm}
+
+        {\large \textbf{DOCENTE}}\\
+        Dr(c). Raul Alejandro Velasquez Ortiz \\
+
+        \vspace{0.4cm}
+
+        {\large \textbf{PROYECTO INTEGRADOR}}\\
+        Outline - Wiki interna estilo Notion (Open Source maduro) \\
+
+        \vspace{0.4cm}
+
+        {\large \textbf{EQUIPO No. 4}}\\
+        \vspace{0.4cm}
+        \textbf{CHAIREZ ALBA OLIVIA LIZBETH - UP240594} \\
+        \textbf{ESTRADA RAMÍREZ NOÉ EZEQUIEL - UP240770} \\
+        \textbf{FACIO PALOS OMAR - UP240470} \\
+        \textbf{JAUREGUI DE LA RIVA ALAN RICARDO - UP240960} \\
+        \textbf{RUBIO VIRAMONTES BRIAN ODIN - UP250004}
+
+        \vspace{0.4cm}
+
+        {\large \textbf{GRUPO}}\\
+        TIID05B
+
+        \vfill
+        %-- La repo si existe jsjsj--
+        {\large \textbf{Repositorio Git:} \url{https://github.com/UP240594/outline-sqa-docs}}
+
+        {\large Aguascalientes, México\\
+        18 de mayo de 2026}
+    \end{center}
+\end{titlepage}
+
+% --- ÍNDICE ---
+\newpage
+\tableofcontents
+\newpage
+
+% --- INTRODUCCIÓN ---
+\section{Introducción}
+
+\subsection{Contexto del proyecto}
+El presente documento corresponde a la Tarea 03 de la asignatura Estándares y Métricas para el Desarrollo de Software, en la cual se aplican los conceptos teóricos de calidad de software al proyecto integrador del equipo: \textbf{Outline}, una aplicación web de tipo wiki interna con funcionalidades similares a Notion, de código abierto y con una comunidad activa.
+
+Outline fue seleccionado del Catálogo de 30 alternativas (Semana 1) por su naturaleza madura (más de 5,000 estrellas en GitHub, licencia MIT) y por ser un caso realista para evaluar atributos de calidad como usabilidad, seguridad y fiabilidad. El proyecto será analizado desde la perspectiva de un equipo de desarrollo que busca adoptar, desplegar y posiblemente contribuir a este software en un entorno corporativo.
+
+
+% --- Aun me faltan cosas, nose si este bien, pero eso se me ocurre, no puse las imagenes pq no se verian en git, igual subire el pdf ---
+
+% -- Por cierto quedo empalmado pq sino no cabia  en la portada xd--
+
+\subsection{Análisis de calidad con ISO/IEC 25010}
+
+El estándar internacional ISO/IEC 25010:2023 proporciona el marco estructural para diagnosticar y asegurar la calidad del producto de software. En el contexto de \textbf{Outline}, concebido como una plataforma de gestión del conocimiento de alto rendimiento y estilo wiki, los atributos de calidad han sido mapeados y priorizados de acuerdo con su impacto crítico en entornos de productividad empresarial distribuidos.
+
+\subsubsection{Priorización de Características de Calidad del Producto}
+
+Para representar la estrategia de calidad de forma ejecutiva, se ha estructurado una matriz de prioridades (Alta, Media, Baja) asignando justificaciones analíticas estrictamente ligadas a la naturaleza técnica y operativa de Outline:
+
+\begin{small}
+\begin{longtable}{p{3.5cm}cp{9.5cm}}
+\caption{Matriz de priorización de características de calidad del producto (ISO/IEC 25010).} \label{tab:iso25010} \\
+\toprule
+\textbf{Característica} & \textbf{Prioridad} & \textbf{Justificación específica aplicada a Outline} \\
+\midrule
+\end{longtable}
+\end{small}
+
+\begin{itemize}
+    \item \textbf{Adecuación Funcional [Prioridad: ALTA]} \\
+    Outline debe garantizar que sus funcionalidades de edición colaborativa en tiempo real, renderizado de Markdown y control de versiones de páginas cumplan con exactitud las expectativas del usuario corporativo, ofreciendo un sustituto viable, maduro y confiable frente a competidores cerrados como Notion.
+    
+    \item \textbf{Eficiencia de Desempeño [Prioridad: ALTA]} \\
+    Al servir como el repositorio central de conocimiento de una organización, los tiempos de carga de documentos extensos y la latencia del motor de búsqueda global indexada deben ser mínimos, asegurando un uso fluido incluso bajo demandas concurrentes severas.
+    
+    \item \textbf{Usabilidad [Prioridad: ALTA]} \\
+    La tasa de adopción de la plataforma está directamente ligada a la simplicidad de su experiencia de usuario (UX); una interfaz intuitiva y un editor libre de distracciones garantizan que personal de áreas no técnicas colabore activamente sin requerir capacitación compleja.
+    
+    \item \textbf{Fiabilidad [Prioridad: ALTA]} \\
+    La tolerancia a fallos de sincronización y los mecanismos de respaldo automático son indispensables en Outline. La pérdida accidental de documentación interna o la indisponibilidad del servicio interrumpen de forma drástica los flujos operativos de la empresa.
+    
+    \item \textbf{Seguridad [Prioridad: ALTA]} \\
+    Debido a que resguarda la propiedad intelectual, manuales técnicos y datos sensibles de la organización, es obligatorio implementar un control de acceso estricto basado en roles (RBAC), soporte nativo para protocolos SSO/SAML y el cifrado seguro de los datos en tránsito.
+    
+    \item \textbf{Compatibilidad [Prioridad: MEDIA]} \\
+    La wiki requiere un alto nivel de co-existencia e integración fluida con herramientas externas preestablecidas (como Slack, Google Drive y Figma), garantizando que las previsualizaciones de enlaces y los webhooks operen de manera armónica sin degradar el entorno informático general.
+    
+    \item \textbf{Mantenibilidad [Prioridad: MEDIA]} \\
+    El diseño de Outline, estructurado bajo NodeJS y React, facilita la modularidad del código y los parches de actualización. Al ser software de código abierto, recae en el equipo asegurar la legibilidad del código para integraciones a medida, aunque la estabilidad del core provenga de la comunidad global.
+    
+    \item \textbf{Portabilidad [Prioridad: MEDIA]} \\
+    La facilidad de instalación y traslado del sistema entre diferentes servidores se mitiga eficientemente mediante el uso estandarizado de contenedores Docker y orquestadores Kubernetes, permitiendo despliegues híbridos o \textit{on-premise} según las políticas del cliente corporativo.
+\end{itemize}
+
+% --- APARTADO DE GRÁFICOS (Gráfico de barras en TikZ) ---
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{\textwidth}
+        \centering
+        \begin{tikzpicture}[scale=0.85]
+            % Ejes y Fondo
+            \draw[very thin, gray!30] (0,0) grid (10,8.5);
+            \draw[thick, ->] (0,0) -- (10.5,0) node[anchor=north east] {Nivel de Prioridad};
+            \draw[thick, ->] (0,0) -- (0,9) node[anchor=south east] {Características};
+            
+            % Etiquetas del eje X
+            \node at (2.5,-0.4) {\footnotesize Baja};
+            \node at (6,-0.4) {\footnotesize Media};
+            \node at (9,-0.4) {\footnotesize Alta};
+            
+            % Barras (Invertidas de abajo hacia arriba para legibilidad)
+            \fill[fill=low] (0,0.5) rectangle (6,1.1); \node[anchor=west] at (6,0.8) {\scriptsize Portabilidad};
+            \fill[fill=low] (0,1.5) rectangle (6,2.1); \node[anchor=west] at (6,1.8) {\scriptsize Mantenibilidad};
+            \fill[fill=low] (0,2.5) rectangle (6,3.1); \node[anchor=west] at (6,2.8) {\scriptsize Compatibilidad};
+            \fill[fill=high] (0,3.5) rectangle (9,4.1); \node[anchor=west] at (9,3.8) {\scriptsize Seguridad};
+            \fill[fill=high] (0,4.5) rectangle (9,5.1); \node[anchor=west] at (9,4.8) {\scriptsize Fiabilidad};
+            \fill[fill=high] (0,5.5) rectangle (9,6.1); \node[anchor=west] at (9,5.8) {\scriptsize Usabilidad};
+            \fill[fill=high] (0,6.5) rectangle (9,7.1); \node[anchor=west] at (9,6.8) {\scriptsize Eficiencia};
+            \fill[fill=high] (0,7.5) rectangle (9,8.1); \node[anchor=west] at (9,7.8) {\scriptsize Adecuación Funcional};
+        \end{tikzpicture}
+        \caption{Visualización gráfica del perfil de prioridades de calidad para el proyecto Outline.}
+        \label{fig:perfil_calidad}
+    \end{subfigure}
+\end{figure}
+
+\subsubsection{Análisis de Calidad en Uso}
+
+Adicionalmente al comportamiento del software aislado, resulta indispensable evaluar la interacción del sistema frente a los objetivos del usuario final. El estándar ISO/IEC 25010 categoriza este fenómeno bajo cinco atributos de \textit{Calidad en Uso}: Efectividad, Eficiencia, Satisfacción, Ausencia de Riesgo y Cobertura de Contexto. Siguiendo el plan estratégico trazado para Outline, se determinó que los dos componentes con mayor impacto son:
+
+\begin{enumerate}
+    \item \textbf{Efectividad:} Se define como la capacidad del software para permitir que los usuarios alcancen metas declaradas con precisión y completitud. En el contexto de Outline, la efectividad se materializa en la veracidad del guardado síncrono e inmediato de los textos y en la precisión algorítmica de su buscador interno, mitigando cualquier margen de error operacional o duplicidad en la documentación de la empresa.
+    \item \textbf{Satisfacción:} Representa la respuesta cognitiva y emocional que experimenta el trabajador al utilizar la aplicación de manera cotidiana. Debido a que el software está diseñado para mitigar la fricción operativa mediante un diseño visual minimalista, menús contextuales fluidos y accesos rápidos por teclado, el índice de satisfacción se eleva sustancialmente, estimulando una cultura orgánica de compartición del conocimiento interdepartamental.
+\end{enumerate}
+\subsubsection{Referencias del Apartado}
+\begin{hangparas}
+ISO/IEC. (2023). \textit{ISO/IEC 25010:2023 - Systems and software engineering - Systems and software Quality Requirements and Evaluation (SQuaRE) - Product quality model}. International Organization for Standardization.
+
+Pressman, R. \& Maxim, B. (2020). \textit{Software Engineering: A Practitioner's Approach} (9ª ed.). McGraw-Hill.
+\end{hangparas}
+\end{document}
