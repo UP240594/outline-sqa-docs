@@ -1,0 +1,224 @@
+\documentclass[12pt]{article}
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{parskip}
+\usepackage{setspace}
+\usepackage{titlesec}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{colortbl}
+\usepackage{xcolor}
+
+% Configuración de biblatex para APA 7
+\usepackage[backend=biber, style=apa, citestyle=apa]{biblatex}
+\DeclareLanguageMapping{spanish}{spanish-apa}
+
+\geometry{a4paper, margin=2.5cm}
+\setlength{\parindent}{0pt}
+\renewcommand{\baselinestretch}{1.15}
+
+% Configuración de títulos
+\titleformat{\section}{\large\bfseries}{}{0em}{}
+\titleformat{\subsection}{\normalsize\bfseries}{}{0em}{}
+\titleformat{\subsubsection}{\normalsize\bfseries\itshape}{}{0em}{}
+
+% Definición de colores
+\definecolor{high}{rgb}{0.9,0.2,0.2}
+\definecolor{medium}{rgb}{0.95,0.7,0.2}
+\definecolor{low}{rgb}{0.2,0.7,0.3}
+
+% Para referencias con sangría francesa
+\usepackage{quoting}
+\newenvironment{hangparas}{\begin{quoting}[hang=true, indent=0.5cm]}{\end{quoting}}
+
+% ARCHIVO DE BIBLIOGRAFÍA 
+
+\begin{filecontents*}{references.bib}
+@book{galin2018,
+    title = {Software Quality: Concepts and Practice},
+    author = {Galin, Daniel},
+    year = {2018},
+    publisher = {Wiley-IEEE Computer Society Press},
+    address = {Hoboken, NJ},
+    isbn = {978-1-119-13449-7},
+    edition = {1st}
+}
+
+@book{pressman2020,
+    title = {Software Engineering: A Practitioner's Approach},
+    author = {Pressman, Roger S. and Maxim, Bruce R.},
+    year = {2020},
+    publisher = {McGraw-Hill},
+    address = {New York, NY},
+    isbn = {978-1-259-87297-6},
+    edition = {9th}
+}
+
+@standard{ieee730,
+    title = {IEEE Standard for Software Quality Assurance Processes},
+    author = {{IEEE Computer Society}},
+    year = {2014},
+    organization = {IEEE},
+    number = {IEEE Std 730-2014},
+    doi = {10.1109/IEEESTD.2014.6835311}
+}
+
+@standard{iso25010,
+    title = {ISO/IEC 25010:2023 Systems and software engineering — Systems and software Quality Requirements and Evaluation (SQuaRE) — Product quality model},
+    author = {{ISO/IEC}},
+    year = {2023},
+    organization = {International Organization for Standardization},
+    address = {Geneva, Switzerland}
+}
+
+@standard{iso25023,
+    title = {ISO/IEC 25023:2016 Systems and software engineering — Measurement of product quality},
+    author = {{ISO/IEC}},
+    year = {2016},
+    organization = {International Organization for Standardization},
+    address = {Geneva, Switzerland}
+}
+
+@book{oktaba2008,
+    title = {Software Process Improvement for Small and Medium Enterprises: Techniques and Case Studies},
+    author = {Oktaba, Hanna and Piattini, Mario},
+    year = {2008},
+    publisher = {IGI Global},
+    address = {Hershey, PA},
+    isbn = {978-1-59904-906-9}
+}
+
+@standard{nmx059,
+    title = {NMX-I-059-NYCE-2011 — Tecnología de la información — Modelo de Procesos para la Industria de Software (MoProSoft)},
+    author = {{NYCE} / {Secretaría de Economía}},
+    year = {2011},
+    organization = {NYCE},
+    address = {Ciudad de México, México}
+}
+
+@standard{cmmi2018,
+    title = {CMMI for Development (CMMI-DEV) Version 2.0},
+    author = {{CMMI Institute} / {ISACA}},
+    year = {2018},
+    organization = {ISACA},
+    address = {Schaumburg, IL}
+}
+
+@standard{iso33000,
+    title = {ISO/IEC 33000:2015 Information technology — Process assessment},
+    author = {{ISO/IEC}},
+    year = {2015},
+    organization = {International Organization for Standardization},
+    address = {Geneva, Switzerland}
+}
+
+@book{forsgren2018,
+    title = {Accelerate: The Science of Lean Software and DevOps},
+    author = {Forsgren, Nicole and Humble, Jez and Kim, Gene},
+    year = {2018},
+    publisher = {IT Revolution},
+    address = {Portland, OR},
+    isbn = {978-1-942788-33-1}
+}
+
+@book{piattini2019,
+    title = {Calidad de Sistemas de Información},
+    author = {Piattini, Mario G.},
+    year = {2019},
+    publisher = {RA-MA},
+    address = {Madrid, España},
+    isbn = {978-84-9964-800-4},
+    edition = {5th}
+}
+
+@misc{sonarqube,
+    title = {SonarQube Documentation},
+    author = {{SonarSource}},
+    year = {2024},
+    howpublished = {\url{https://docs.sonarqube.org/}},
+    note = {Accedido: mayo de 2026}
+}
+
+@misc{istqb2023,
+    title = {ISTQB Foundation Level Syllabus v4.0},
+    author = {{International Software Testing Qualifications Board}},
+    year = {2023},
+    howpublished = {\url{https://www.istqb.org/downloads/category/2-foundation-level-documents.html}}
+}
+\end{filecontents*}
+
+% Cargar la bibliografía
+\addbibresource{references.bib}
+
+\begin{document}
+
+% SECCIÓN 2.3: KPIs MEDIBLES SEGÚN ISO/IEC 25023
+
+
+\subsection{KPIs medibles según ISO/IEC 25023}
+
+Con el objetivo de cuantificar objetivamente las características de calidad priorizadas en la sección anterior, el equipo ha definido un conjunto de Indicadores Clave de Rendimiento (KPIs) basados en la norma \cite{iso25023}. A continuación se definen 7 KPIs , cada uno vinculado a una característica priorizada como Alta, con su fórmula de cálculo, umbral numérico de aceptación y herramienta de medición propuesta para su automatización.
+
+\vspace{0.5cm}
+
+\begin{table}[H]
+\centering
+\begin{tabularx}{\textwidth}{|>{\columncolor[gray]{0.92}}p{3.2cm}|>{\centering\arraybackslash}p{2.5cm}|p{3.5cm}|>{\centering\arraybackslash}p{2.5cm}|p{2.2cm}|}
+\hline
+\rowcolor[gray]{0.85}
+\textbf{Nombre del KPI} & \textbf{Caract. ISO 25010} & \textbf{Fórmula} & \textbf{Umbral} & \textbf{Herramienta} \\ \hline
+Tasa de éxito de creación de documentos & Adecuación funcional & \(\displaystyle \frac{\text{Docs creados exitosamente}}{\text{Intentos de creación}} \times 100\) & \(\geq 99.5\%\) & Logs de API + Grafana \\ \hline
+Disponibilidad del servicio & Fiabilidad & \(\displaystyle \frac{T_{\text{up}}}{T_{\text{up}} + T_{\text{inactivo}}}\) & \(\geq 99.9\%\) (excl. mantenimiento programado) & Uptime Kuma / Statuspage \\ \hline
+Tiempo de carga del dashboard & Eficiencia (rendimiento) & Percentil 95 (P95) en ms desde request hasta renderizado completo & \(< 1.5\) segundos & Lighthouse CI / Grafana \\ \hline
+Tiempo de respuesta de búsqueda & Eficiencia (rendimiento) & P95 de latencia del endpoint \texttt{/api/search} & \(< 500\) ms & Prometheus + Grafana \\ \hline
+Cobertura de pruebas de seguridad & Seguridad & \(\displaystyle \frac{\text{Pruebas de seguridad ejecutadas}}{\text{Total de casos de seguridad identificados}} \times 100\) & \(\geq 80\%\) & OWASP ZAP + SonarQube \cite{sonarqube} \\ \hline
+Tasa de retención de usuarios & Calidad en uso (Satisfacción) & \(\displaystyle \frac{\text{Usuarios activos después de 30 días}}{\text{Usuarios nuevos en el mes}} \times 100\) & \(\geq 70\%\) & Analytics propio (PostgreSQL) \\ \hline
+Tiempo para primera edición & Usabilidad & Tiempo desde registro hasta primera edición exitosa de un documento & \(< 3\) minutos & Session replay (Hotjar / OpenReplay) \\ \hline
+\end{tabularx}
+\caption{Indicadores Clave de Rendimiento (KPIs) de Calidad del Producto}
+\label{tab:kpis}
+\small\textit{Fuente: Elaboración propia basada en ISO/IEC 25023:2016 \cite{iso25023}.}
+\end{table}
+
+\subsubsection*{Nota metodológica}
+
+Para la correcta implementación de estos KPIs se debe considerar los siguientes principios:
+
+\begin{enumerate}
+    \item \textbf{Línea base (baseline):} Es crítico establecer la medición inicial de estos KPIs una vez que el primer incremento del software esté estable (por ejemplo, después del Sprint 1 o del primer despliegue a producción). Sin esta línea base, es imposible calcular la mejora o degradación de la calidad a lo largo del proyecto \cite{galin2018}.
+
+    \item \textbf{Automatización (shift-left):} Los KPIs relacionados con el rendimiento y la seguridad (KPI-03, KPI-04 y KPI-05) deben calcularse automáticamente en cada confirmación (commit) mediante un sistema de Integración Continua (CI) como GitHub Actions o GitLab CI. Esto permite detectar regresiones de calidad de forma inmediata \cite{forsgren2018}.
+
+    \item \textbf{Justificación de umbrales:} Los umbrales se definieron considerando:
+    \begin{itemize}
+        \item Benchmarks de la industria para wikis corporativas/Notion.
+        \item Recomendaciones de \citeauthor{galin2018} (\citeyear{galin2018}) para SLOs (Service Level Objectives) en entornos corporativos.
+        \item Capacidad real de monitoreo con herramientas open-source.
+    \end{itemize}
+
+    \item \textbf{Justificación del percentil P95:} Se ha seleccionado el percentil 95 (P95) en lugar del promedio aritmético para los KPIs de tiempo de respuesta porque el promedio es sensible a valores atípicos extremadamente altos (outliers). El P95 refleja mejor la experiencia real del usuario en el "peor de los casos", ignorando el 5\% de las peticiones más lentas que pueden deberse a factores ajenos al control inmediato del sistema (como latencia de red). Esta es una práctica común en ingeniería de rendimiento \cite{pressman2020}.
+\end{enumerate}
+
+\paragraph{Relación con entregables futuros:} Los KPIs definidos en esta sección servirán como base para:
+\begin{itemize}
+    \item \textbf{Parcial 2 (Pruebas):} Los umbrales se convertirán en criterios de aceptación para las pruebas de rendimiento, seguridad y usabilidad, según lo establecido en el estándar \cite{istqb2023}.
+    \item \textbf{Parcial 3 (Informe técnico final):} Se reportará el valor real alcanzado por cada KPI al final del proyecto, comparándolo con el umbral definido y explicando las desviaciones.
+\end{itemize}
+
+\vspace{0.3cm}
+\noindent Los KPIs serán medidos \textbf{semanalmente} durante el cuatrimestre, con reportes de tendencia cada quince días.
+
+\newpage
+
+
+% REFERENCIAS BIBLIOGRÁFICAS (APA 7ª edición)
+
+\printbibliography[title={Referencias}]
+
+\end{document}
