@@ -1,0 +1,131 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{geometry}
+\geometry{a4paper, margin=2.5cm}
+\usepackage{tabularx}
+\usepackage{graphicx}
+\usepackage{hyperref}
+
+\begin{document}
+
+
+\section{Plan SQA preliminar según IEEE 730}
+
+\subsection{§1 Purpose (Propósito y alcance)}
+
+El presente Plan de Aseguramiento de la Calidad del Software (SQA) se elabora conforme al estándar IEEE 730-2014 \cite{ieee730} para el proyecto \textbf{“Sistema de Gestión de Proyectos de Investigación (SGPI)”}. 
+
+\textbf{Propósito:} Establecer las actividades, responsabilidades, métricas y procedimientos que garantizarán que el software desarrollado cumpla con los requisitos funcionales y no funcionales definidos, especialmente aquellos priorizados según ISO/IEC 25010. El plan busca asegurar la calidad durante todo el ciclo de vida del proyecto, desde la especificación hasta la entrega final.
+
+\textbf{Alcance:} Aplica a todos los entregables del proyecto SGPI: código fuente, documentación técnica, manuales de usuario, informes de pruebas, y cualquier artefacto generado por el equipo de desarrollo. Cubre las fases de análisis, diseño, implementación, pruebas y despliegue. No cubre el mantenimiento posterior a la entrega final, aunque se recomienda extender el plan para futuras fases.
+
+\subsection{§3 Management (Roles y responsabilidades)}
+
+Los roles definidos para la ejecución del plan SQA se muestran en la Tabla~\ref{tab:roles_sqa}.
+
+\begin{table}[h]
+\centering
+\caption{Roles y responsabilidades en el plan SQA}
+\label{tab:roles_sqa}
+\begin{tabular}{|l|p{8cm}|}
+\hline
+\textbf{Rol} & \textbf{Responsabilidades} \\
+\hline
+Gerente de Proyecto & Aprobar el plan SQA, asignar recursos, supervisar el cumplimiento de hitos de calidad. \\
+\hline
+Líder de Calidad (SQA) & Ejecutar auditorías internas, medir KPIs, reportar no conformidades, gestionar el repositorio de métricas. \\
+\hline
+Desarrolladores & Seguir estándares de codificación, realizar pruebas unitarias, documentar su trabajo. \\
+\hline
+Analista de Pruebas & Diseñar y ejecutar casos de prueba, reportar incidentes, mantener la trazabilidad. \\
+\hline
+Cliente / Usuario clave & Validar criterios de aceptación, reportar problemas en fase de pruebas de usuario. \\
+\hline
+\end{tabular}
+\end{table}
+
+\subsection{§5 Standards, practices, metrics}
+
+\subsubsection{Estándares aplicados}
+\begin{itemize}
+    \item \textbf{Codificación:} Guía de estilo basada en PEP 8 (Python) y ESLint (JavaScript).
+    \item \textbf{Documentación:} Formato uniforme en \LaTeX, con plantilla institucional.
+    \item \textbf{Pruebas:} Estructura basada en ISTQB v4.0 \cite{istqb} para casos de prueba.
+    \item \textbf{Versi onamiento:} Git con flujo \emph{Git Flow} (rama develop, feature, release, main).
+\end{itemize}
+
+\subsubsection{Prácticas obligatorias}
+\begin{itemize}
+    \item Todo \textit{commit} debe incluir un identificador de tarea (JIRA o GitHub Issues).
+    \item Las \textit{pull requests} requieren revisión por al menos un compañero y superar análisis estático (SonarQube).
+    \item Las reuniones semanales incluirán una revisión de los KPIs de calidad.
+\end{itemize}
+
+\subsubsection{Métricas (KPIs)}
+Los KPIs definidos en la sección 2.3 (ISO/IEC 25023) se medirán con las siguientes frecuencias:
+\begin{itemize}
+    \item \textbf{Disponibilidad:} diaria (Grafana/Prometheus).
+    \item \textbf{Integridad de datos:} por transacción crítica (logs estructurados).
+    \item \textbf{Cobertura de pruebas:} al final de cada \textit{sprint} (pytest-cov / JaCoCo).
+    \item \textbf{Tiempo de respuesta:} semanal (Apache JMeter).
+    \item \textbf{Usabilidad (tasa de éxito):} después de cada prueba con usuarios (medición manual).
+    \item \textbf{Mantenibilidad (deuda técnica):} por cada \textit{commit} (SonarQube).
+\end{itemize}
+
+\subsection{§7 Test (Estrategia de pruebas)}
+
+La estrategia de pruebas sigue un modelo basado en niveles:
+
+\begin{enumerate}
+    \item \textbf{Pruebas unitarias:} Realizadas por los desarrolladores sobre cada función/módulo. Cobertura mínima exigida: 80\% de líneas de código. Herramienta: JUnit/Pytest.
+    \item \textbf{Pruebas de integración:} Validan la interacción entre módulos (API, base de datos). Se ejecutan en cada integración continua. Herramienta: Postman/Newman.
+    \item \textbf{Pruebas de sistema:} End-to-end sobre requisitos funcionales y no funcionales (rendimiento, seguridad básica). Herramientas: Selenium, JMeter.
+    \item \textbf{Pruebas de aceptación:} Definidas junto al cliente mediante criterios de aceptación de las historias de usuario. Se realizan en un entorno de preproducción.
+\end{enumerate}
+
+\textbf{Automatización:} Se utiliza GitHub Actions para ejecutar automáticamente las pruebas unitarias y de integración en cada \textit{push} a las ramas \texttt{develop} y \texttt{main}. Los informes de pruebas se almacenan como artefactos.
+
+\subsection{§8 Problem reporting (SLA por severidad)}
+
+Todo problema (defecto, falla, incumplimiento) debe reportarse mediante el sistema de seguimiento (GitHub Issues). Se asignan los siguientes niveles de severidad y SLA:
+
+\begin{table}[h]
+\centering
+\caption{SLA para reporte de problemas según severidad}
+\label{tab:sla}
+\begin{tabular}{|l|l|l|l|}
+\hline
+\textbf{Severidad} & \textbf{Descripción} & \textbf{Tiempo respuesta inicial} & \textbf{Solución / parche} \\
+\hline
+Crítica (S1) & Impide totalmente el uso del sistema; pérdida de datos. & 2 horas & 24 horas \\
+\hline
+Alta (S2) & Funcionalidad principal afectada; no hay \textit{workaround}. & 8 horas & 3 días hábiles \\
+\hline
+Media (S3) & Funcionalidad secundaria afectada; existe \textit{workaround}. & 2 días hábiles & 7 días hábiles \\
+\hline
+Baja (S4) & Error estético, texto incorrecto, mejora menor. & 5 días hábiles & Siguiente \textit{sprint} \\
+\hline
+\end{tabular}
+\end{table}
+
+El proceso de reporte incluye: apertura del \textit{issue} con etiqueta de severidad, asignación a un desarrollador, actualización diaria del estado y notificación al Líder de Calidad. Los problemas críticos deben escalarse inmediatamente al Gerente de Proyecto.
+
+% --- Referencias de esta sección ---
+\begin{thebibliography}{9}
+\bibitem{ieee730}
+IEEE Computer Society. (2014). \textit{IEEE Standard for Software Quality Assurance Processes (IEEE Std 730-2014)}. IEEE. DOI: 10.1109/IEEESTD.2014.6835311.
+
+\bibitem{istqb}
+International Software Testing Qualifications Board. (2023). \textit{ISTQB Foundation Level Syllabus v4.0}. ISTQB.
+
+\bibitem{galin}
+Galin, D. (2018). \textit{Software Quality: Concepts and Practice}. Wiley-IEEE Computer Society Press. (Capítulos 21–22).
+
+\bibitem{pressman}
+Pressman, R. \& Maxim, B. (2020). \textit{Software Engineering: A Practitioner’s Approach} (9ª ed.). McGraw-Hill. (Capítulo 24 sobre SQA).
+
+\end{thebibliography}
+
+
+\end{document}
