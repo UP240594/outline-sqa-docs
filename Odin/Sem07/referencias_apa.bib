@@ -1,0 +1,97 @@
+% =====================================================================
+%  referencias_apa.bib  ->  Referencias para las secciones 4.1 y 4.2
+%  Estilo: APA 7 (biblatex-apa, backend biber)
+%  Uso en main.tex:
+%     \usepackage[style=apa,backend=biber]{biblatex}
+%     \addbibresource{referencias_apa.bib}
+%     ... y al final del documento:  \printbibliography
+%
+%  Incluye 4 de las 5 fuentes OBLIGATORIAS (Garcia, Jorgensen, Aniche,
+%  Khorikov) + documentacion oficial. El equipo debe sumar las fuentes
+%  de las demas secciones para llegar al minimo de 7.
+% =====================================================================
+
+% --------- FUENTES OBLIGATORIAS (libros) ---------
+
+@book{garcia2022,
+  author    = {García, Boni},
+  title     = {Hands-On Selenium WebDriver with Java},
+  year      = {2022},
+  publisher = {O'Reilly Media},
+  address   = {Sebastopol, CA},
+  isbn      = {978-1-098-11000-6}
+}
+
+@book{jorgensen2022,
+  author    = {Jorgensen, Paul C.},
+  title     = {Software Testing: A Craftsman's Approach},
+  edition   = {5},
+  year      = {2022},
+  publisher = {CRC Press},
+  address   = {Boca Raton, FL},
+  isbn      = {978-0-367-76735-1}
+}
+
+@book{aniche2022,
+  author    = {Aniche, Maurício},
+  title     = {Effective Software Testing: A Developer's Guide},
+  year      = {2022},
+  publisher = {Manning Publications},
+  address   = {Shelter Island, NY},
+  isbn      = {978-1-617-29982-7}
+}
+
+@book{khorikov2020,
+  author    = {Khorikov, Vladimir},
+  title     = {Unit Testing Principles, Practices, and Patterns},
+  year      = {2020},
+  publisher = {Manning Publications},
+  address   = {Shelter Island, NY},
+  isbn      = {978-1-617-29627-7}
+}
+
+% --------- DOCUMENTACION OFICIAL (recursos en linea) ---------
+% Ajusta el campo urldate a la fecha real en que consultaste cada sitio.
+
+@online{seleniumdocs,
+  author       = {{Selenium Project}},
+  title        = {Selenium Documentation},
+  year         = {2026},
+  url          = {https://www.selenium.dev/documentation/},
+  urldate      = {2026-06-21}
+}
+
+@online{cypressdocs,
+  author       = {{Cypress.io}},
+  title        = {Cypress Documentation},
+  year         = {2026},
+  url          = {https://docs.cypress.io/},
+  urldate      = {2026-06-21}
+}
+
+@online{playwrightdocs,
+  author       = {{Microsoft}},
+  title        = {Playwright Documentation},
+  year         = {2026},
+  url          = {https://playwright.dev/},
+  urldate      = {2026-06-21}
+}
+
+@online{sonarqubedocs,
+  author       = {{SonarSource}},
+  title        = {SonarQube Documentation},
+  year         = {2026},
+  url          = {https://docs.sonarsource.com/},
+  urldate      = {2026-06-21}
+}
+
+% --------- MARCO TEORICO (opcional, recomendado) ---------
+
+@manual{istqb2023,
+  author       = {{International Software Testing Qualifications Board}},
+  title        = {Certified Tester Foundation Level Syllabus v4.0},
+  organization = {ISTQB},
+  year         = {2023},
+  url          = {https://www.istqb.org/},
+  urldate      = {2026-06-21}
+}

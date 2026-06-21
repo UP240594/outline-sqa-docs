@@ -1,0 +1,350 @@
+% =====================================================================
+%  TAREA 07 - EMDS | Secciones 4.1 y 4.2  (responsable: Odin)
+% =====================================================================
+
+\documentclass[12pt,a4paper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}                                  % Latin Modern
+\usepackage[spanish,es-tabla,es-noshorthands]{babel} % "Tabla", sin shorthands
+\usepackage[margin=2.5cm]{geometry}                   % margenes 2.5 cm
+\usepackage{setspace}\onehalfspacing                  % interlineado 1.5
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{ragged2e}
+\usepackage[authoryear,round]{natbib}                 % citas APA autor-anio
+\usepackage{xcolor}
+\usepackage[hidelinks]{hyperref}
+
+\setlength{\parskip}{0.4em}
+\setlength{\bibsep}{0.5em}
+
+\begin{document}
+
+% La numeracion arranca en 4 para coincidir con el documento del equipo.
+\setcounter{section}{3}
+
+\begin{center}
+{\large\bfseries Tarea 07 --- Secciones 4.1 y 4.2}\\[2pt]
+{\normalsize Investigación de herramientas de prueba y análisis estático}\\[2pt]
+{\footnotesize Estándares y Métricas para el Desarrollo de Software (E-EMDS-2)}
+\end{center}
+\vspace{0.6em}
+
+% =====================================================================
+\section{Desarrollo}
+
+% ---------------------------------------------------------------------
+\subsection{Investigación: frameworks de automatización E2E}
+\label{sec:4-1}
+
+La automatización de pruebas de extremo a extremo (\textit{end-to-end}, E2E) valida
+el comportamiento del sistema desde la perspectiva del usuario final, ejercitando la
+interfaz real contra una aplicación en ejecución \citep{jorgensen2022}. Para nuestro
+proyecto integrador ---un wiki colaborativo construido con un frontend en
+React/TypeScript y un backend en Node.js--- la elección del framework determina la
+velocidad de la retroalimentación, la estabilidad de la \textit{suite} y el costo de
+mantenimiento a largo plazo. A continuación comparamos las tres herramientas de
+referencia del ecosistema E2E en 2026: \textbf{Selenium WebDriver}, \textbf{Cypress} y
+\textbf{Playwright}.
+
+\paragraph{Selenium WebDriver.}
+Es la herramienta más madura del ecosistema y opera sobre el estándar
+\textit{W3C WebDriver}, comunicándose con cada navegador a través de su \textit{driver}
+correspondiente \citep{seleniumdocs}. Su mayor fortaleza es la amplitud: soporta
+múltiples lenguajes (Java, Python, C\#, JavaScript, Ruby, Kotlin) y la mayor variedad de
+navegadores, incluyendo motores heredados. La gestión de esperas se realiza mediante
+esperas explícitas con \texttt{WebDriverWait} y condiciones esperadas, lo que evita la
+fragilidad de las esperas fijas \citep{garcia2022}. Como contrapartida, exige más
+código de andamiaje (\textit{boilerplate}), su curva de aprendizaje es más pronunciada y
+la ejecución en paralelo depende de infraestructura adicional (Selenium Grid).
+
+\paragraph{Cypress.}
+Adopta una arquitectura distinta: ejecuta el código de prueba \emph{dentro} del propio
+navegador, en el mismo bucle de eventos de JavaScript que la aplicación bajo prueba
+\citep{cypressdocs}. Esto le otorga latencia de red nula, espera automática
+(\textit{auto-waiting}) y un depurador con ``viaje en el tiempo'' que captura el estado
+del DOM en cada paso, lo que se traduce en una experiencia de desarrollo (DX) superior.
+Sus limitaciones son consecuencia de esa misma arquitectura: solo admite
+JavaScript/TypeScript, su soporte de WebKit/Safari es experimental e incompleto, y la
+ejecución paralela robusta requiere el servicio de pago Cypress Cloud.
+
+\paragraph{Playwright.}
+Desarrollado por Microsoft, automatiza de forma nativa los tres motores principales
+---Chromium, Firefox y WebKit--- y ofrece enlaces oficiales para JavaScript/TypeScript,
+Python, Java y C\# \citep{playwrightdocs}. Incorpora espera automática basada en
+comprobaciones de \textit{actionability} (el elemento debe ser visible, estable, habilitado
+y no estar obstruido antes de interactuar), contextos de navegador aislados, un
+\textit{Trace Viewer} para el análisis post-mortem y, de forma destacada, ejecución
+paralela y \textit{sharding} nativos sin necesidad de un \textit{grid}. Estas
+características reducen la cantidad de pruebas inestables (\textit{flaky}) y disminuyen el
+costo total de propiedad al escalar la \textit{suite}.
+
+\paragraph{Tabla comparativa.}
+La Tabla~\ref{tab:e2e} sintetiza la comparación según diez criterios técnicos relevantes
+para nuestro contexto.
+
+\begin{table}[htbp]
+\centering
+\footnotesize
+\caption{Comparación de frameworks de automatización E2E (2026).}
+\label{tab:e2e}
+\renewcommand{\arraystretch}{1.25}
+\begin{tabularx}{\textwidth}{>{\RaggedRight\arraybackslash}p{0.18\textwidth}
+                             >{\RaggedRight\arraybackslash}X
+                             >{\RaggedRight\arraybackslash}X
+                             >{\RaggedRight\arraybackslash}X}
+\toprule
+\textbf{Criterio} & \textbf{Selenium} & \textbf{Cypress} & \textbf{Playwright} \\
+\midrule
+Lenguajes soportados &
+Java, Python, C\#, JavaScript, Ruby, Kotlin &
+Solo JavaScript / TypeScript &
+JavaScript/TypeScript, Python, Java, C\# \\
+
+Arquitectura &
+Protocolo W3C WebDriver vía \textit{drivers} externos &
+Ejecuta dentro del navegador (mismo bucle de JS) &
+Comunicación directa con el navegador (WebSocket/CDP) \\
+
+Curva de aprendizaje &
+Pronunciada; requiere más \textit{boilerplate} &
+Baja para equipos de JS; DX muy amigable &
+Media; API moderna y \textit{codegen} \\
+
+Velocidad / rendimiento &
+Moderada; sobrecarga de WebDriver &
+Buena en local; arranque más lento &
+Alta; la más rápida en ejecución paralela \\
+
+Manejo de esperas &
+Explícitas (\texttt{WebDriverWait}); evita esperas fijas &
+Espera automática integrada &
+Espera automática por \textit{actionability} \\
+
+Soporte de navegadores &
+El más amplio (incluye motores heredados) &
+Chromium y Firefox nativos; WebKit experimental &
+Chromium, Firefox y WebKit nativos \\
+
+Ejecución en paralelo &
+Mediante Selenium Grid (infraestructura adicional) &
+Limitada; paralelismo robusto requiere Cypress Cloud &
+Nativa, sin \textit{grid} (\textit{workers} y \textit{sharding}) \\
+
+Pruebas móviles &
+Nativas vía Appium &
+No (solo emulación de \textit{viewport}) &
+No (solo emulación de dispositivos) \\
+
+Comunidad / madurez &
+La más madura; estándar de facto empresarial &
+Fuerte en \textit{frontend} JS; comunidad consolidada &
+Crecimiento más rápido; comunidad en expansión \\
+
+Licencia &
+Apache 2.0 (código abierto) &
+MIT (código abierto; \textit{Cloud} de pago) &
+Apache 2.0 (código abierto) \\
+\bottomrule
+\end{tabularx}
+\\[2pt]
+{\footnotesize Fuente: elaboración propia con base en la documentación oficial de
+Selenium, Cypress y Playwright \citep{seleniumdocs, cypressdocs, playwrightdocs} y
+en \citet{garcia2022}.}
+\end{table}
+
+\paragraph{Recomendación justificada.}
+Para el contexto de nuestro proyecto ---una aplicación web de página única (SPA) con uso
+intensivo de JavaScript y un \textit{stack} de TypeScript/React/Node.js--- la
+recomendación técnica es \textbf{Playwright}. Tres razones lo respaldan: (1)~sus enlaces
+de primera clase para TypeScript se alinean directamente con el lenguaje del proyecto,
+reduciendo la fricción de adopción; (2)~su soporte nativo de WebKit permite cubrir Safari,
+navegador relevante para un wiki de acceso público que Cypress no cubre de forma fiable; y
+(3)~su ejecución paralela nativa, junto con la espera por \textit{actionability}, ataca
+directamente el principal problema de las \textit{suites} E2E ---la inestabilidad--- sin
+costos de infraestructura adicionales, en línea con el principio de pruebas rápidas y
+confiables que recomienda \citet{aniche2022}.
+
+No obstante, conforme a lo trabajado en la Semana 7, la \emph{implementación} práctica
+(sección~4.3 y siguientes) se realiza con \textbf{Selenium + pytest} aplicando el
+patrón \textit{Page Object Model}. Esta diferencia entre la herramienta recomendada y la
+implementada es deliberada y está prevista por la asignatura: Selenium ofrece el soporte
+más amplio de lenguajes y navegadores, una base conceptual sólida sobre el estándar
+WebDriver y un ecosistema empresarial maduro, lo que lo hace idóneo como herramienta de
+aprendizaje \citep{garcia2022}. Las técnicas de diseño de casos (válidos, de frontera
+y de error) que aplicamos son independientes del framework \citep{jorgensen2022}, por
+lo que la suite construida con Selenium puede migrarse a Playwright en el futuro
+conservando su valor.
+
+% ---------------------------------------------------------------------
+\subsection{Investigación: análisis estático de código}
+\label{sec:4-2}
+
+El análisis estático examina el código fuente \emph{sin ejecutarlo}, identificando
+defectos a partir de su estructura sintáctica y semántica. Es una práctica de
+``desplazamiento a la izquierda'' (\textit{shift-left}) que detecta problemas en las
+etapas tempranas del ciclo de vida, cuando corregirlos es más barato. En esta sección
+comparamos tres herramientas representativas de categorías distintas
+---\textbf{SonarQube}, \textbf{Semgrep} y los \textit{linters} \textbf{ESLint/Pylint}---
+y diferenciamos el análisis estático del dinámico.
+
+\paragraph{SonarQube.}
+Es una plataforma de calidad y seguridad de código que cubre más de 30 lenguajes mediante
+miles de reglas predefinidas \citep{sonarqubedocs}. Detecta \textit{bugs}
+(confiabilidad), vulnerabilidades y \textit{security hotspots} (seguridad) y \textit{code
+smells} (mantenibilidad), y además mide cobertura, duplicación y complejidad ciclomática y
+cognitiva. Su característica distintiva son las \textit{Quality Gates}: criterios
+automáticos de aprobación o rechazo que pueden bloquear la fusión (\textit{merge}) de una
+rama cuando el código nuevo no cumple los umbrales definidos. Es importante una precisión
+para la sección 4.4: bajo el modelo \textit{Clean Code} actual, SonarQube define
+\emph{tres} cualidades de software ---Seguridad, Confiabilidad y Mantenibilidad--- que,
+sumadas a las medidas de \emph{Cobertura} y \emph{Duplicación} del tablero, conforman las
+cinco dimensiones que reporta la herramienta \citep{sonarqubedocs}.
+
+\paragraph{Semgrep.}
+Es un motor de análisis estático orientado a la seguridad (SAST) que opera mediante
+coincidencia de patrones sobre el árbol de sintaxis abstracta, no sobre texto plano. Su
+fortaleza es la rapidez (escaneos del orden de segundos) y la facilidad para escribir
+reglas personalizadas en YAML, lo que lo hace popular para hacer cumplir políticas de
+seguridad específicas. Detecta patrones explotables ---inyección SQL, \textit{cross-site
+scripting} (XSS), credenciales codificadas, deserialización insegura--- mediante análisis
+de contaminación (\textit{taint analysis}). Su limitación es que está enfocado en
+seguridad: no calcula métricas de mantenibilidad, complejidad, duplicación ni cobertura.
+
+\paragraph{ESLint / Pylint (linters).}
+Representan la capa más rápida y cercana al desarrollador. ESLint analiza JavaScript y
+TypeScript mediante un sistema de reglas configurable basado en el AST, mientras que Pylint
+hace lo equivalente para Python. Aplican estilo y convenciones, detectan errores comunes y
+se ejecutan en tiempo real dentro del IDE. Su limitación es la profundidad: no realizan
+análisis de seguridad entre archivos ni detectan errores lógicos o de tiempo de ejecución;
+por ello suelen complementarse con una herramienta SAST o una plataforma de calidad.
+
+\paragraph{Tabla comparativa.}
+La Tabla~\ref{tab:static} resume las diferencias. Se incluye CodeClimate (hoy en
+transición a ``qlty'') como referencia adicional de plataforma orientada a la
+mantenibilidad.
+
+\begin{table}[htbp]
+\centering
+\footnotesize
+\caption{Comparación de herramientas de análisis estático (2026).}
+\label{tab:static}
+\renewcommand{\arraystretch}{1.25}
+\begin{tabularx}{\textwidth}{>{\RaggedRight\arraybackslash}p{0.16\textwidth}
+                             >{\RaggedRight\arraybackslash}X
+                             >{\RaggedRight\arraybackslash}X
+                             >{\RaggedRight\arraybackslash}X}
+\toprule
+\textbf{Criterio} & \textbf{SonarQube} & \textbf{Semgrep} & \textbf{ESLint / Pylint} \\
+\midrule
+Categoría &
+Plataforma de calidad + seguridad &
+Motor SAST (seguridad) &
+\textit{Linter} (estilo + errores básicos) \\
+
+Defectos que detecta &
+\textit{Bugs}, vulnerabilidades, \textit{code smells}, duplicación &
+Vulnerabilidades de seguridad y \textit{anti-patrones} &
+Estilo, convenciones y errores comunes \\
+
+Enfoque de detección &
+Miles de reglas predefinidas por lenguaje &
+Coincidencia de patrones sobre el AST (reglas en YAML) &
+Reglas configurables sobre el AST \\
+
+Métricas de calidad &
+Sí: complejidad, duplicación, cobertura, deuda técnica &
+No (solo seguridad) &
+No (solo reglas de estilo/sintaxis) \\
+
+Integración CI/CD &
+\textit{Quality Gates} que bloquean \textit{merges} &
+Rápida; ideal para escaneo en cada \textit{pull request} &
+En cada \textit{commit}; muy rápida \\
+
+Lenguajes &
+30+ lenguajes &
+35+ lenguajes &
+ESLint: JS/TS; Pylint: Python \\
+
+Licencia / costo &
+\textit{Community Edition} gratuita; ediciones de pago &
+Núcleo de código abierto (LGPL); gratis hasta cierto número de contribuyentes &
+Código abierto (gratuito) \\
+\bottomrule
+\end{tabularx}
+\\[2pt]
+{\footnotesize Fuente: elaboración propia con base en la documentación oficial de las
+herramientas \citep{sonarqubedocs}.}
+\end{table}
+
+\paragraph{Análisis estático frente a análisis dinámico.}
+La diferencia fundamental es la \emph{ejecución}. El análisis estático inspecciona el
+código sin correrlo y, por ello, puede razonar sobre \emph{todas} las rutas del programa,
+detectando \textit{code smells}, vulnerabilidades por patrón, complejidad excesiva y
+duplicación antes de que el software se ejecute siquiera. Su contrapartida son los falsos
+positivos y la imposibilidad de observar comportamientos que solo emergen en tiempo de
+ejecución. El análisis dinámico, en cambio, examina el programa \emph{mientras se ejecuta}
+con entradas concretas: detecta fallos reales, fugas de memoria, cuellos de botella de
+rendimiento y condiciones de carrera, pero solo sobre las rutas efectivamente ejercitadas
+(de ahí su riesgo de falsos negativos) y requiere un entorno de ejecución y datos de
+prueba. De hecho, la propia \textit{suite} E2E con Selenium de la sección~4.3 constituye
+una forma de análisis dinámico, pues valida la aplicación en funcionamiento. Ambos enfoques
+son complementarios y se integran en el Plan de Pruebas de la Unidad~II: SonarQube (estático)
+y la suite de pruebas con pytest/Selenium (dinámico) cubren clases de defectos distintas
+\citep{aniche2022, khorikov2020}.
+
+\paragraph{Justificación para nuestro \textit{stack}.}
+Recomendamos \textbf{SonarQube} como herramienta principal de análisis estático para el
+proyecto por cuatro motivos: (1)~analiza de forma nativa JavaScript y TypeScript, los
+lenguajes de nuestro frontend y backend; (2)~unifica en un solo tablero las cinco
+dimensiones que pide la evaluación (Confiabilidad, Seguridad, Mantenibilidad, Cobertura y
+Duplicación), facilitando la sección~4.4; (3)~sus \textit{Quality Gates} se integran con el
+pipeline de CI de la sección~4.5 para bloquear fusiones que no cumplan los umbrales; y
+(4)~su \textit{Community Edition} es gratuita y, mediante SonarCloud, el análisis es
+gratuito para repositorios públicos. Como complemento, conservamos \textbf{ESLint} ---ya
+estándar en proyectos de React/Node.js--- como capa rápida de \textit{linting} en cada
+\textit{commit}, y dejamos abierta la incorporación de \textbf{Semgrep} si el equipo
+requiere profundizar en seguridad. Esta estratificación (\textit{linter} en cada commit,
+plataforma de calidad en cada PR) es la práctica recomendada para mantener la salud del
+código sin sacrificar velocidad \citep{aniche2022}.
+
+% =====================================================================
+%  REFERENCIAS  (APA 7, incrustadas; natbib autor-anio)
+% =====================================================================
+\begin{thebibliography}{99}
+\setlength{\itemsep}{0.4em}
+
+\bibitem[Aniche(2022)]{aniche2022}
+Aniche, M. (2022). \textit{Effective software testing: A developer's guide}. Manning Publications.
+
+\bibitem[Cypress.io(2026)]{cypressdocs}
+Cypress.io. (2026). \textit{Cypress documentation}. \url{https://docs.cypress.io/}
+
+\bibitem[García(2022)]{garcia2022}
+García, B. (2022). \textit{Hands-on Selenium WebDriver with Java}. O'Reilly Media.
+
+\bibitem[ISTQB(2023)]{istqb2023}
+International Software Testing Qualifications Board. (2023). \textit{Certified tester foundation level syllabus v4.0}. ISTQB. \url{https://www.istqb.org/}
+
+\bibitem[Jorgensen(2022)]{jorgensen2022}
+Jorgensen, P. C. (2022). \textit{Software testing: A craftsman's approach} (5.\textsuperscript{a} ed.). CRC Press.
+
+\bibitem[Khorikov(2020)]{khorikov2020}
+Khorikov, V. (2020). \textit{Unit testing principles, practices, and patterns}. Manning Publications.
+
+\bibitem[Microsoft(2026)]{playwrightdocs}
+Microsoft. (2026). \textit{Playwright documentation}. \url{https://playwright.dev/}
+
+\bibitem[Selenium Project(2026)]{seleniumdocs}
+Selenium Project. (2026). \textit{Selenium documentation}. \url{https://www.selenium.dev/documentation/}
+
+\bibitem[SonarSource(2026)]{sonarqubedocs}
+SonarSource. (2026). \textit{SonarQube documentation}. \url{https://docs.sonarsource.com/}
+
+\end{thebibliography}
+
+\end{document}
