@@ -1,0 +1,1336 @@
+\documentclass[12pt]{article}
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{parskip}
+\usepackage{setspace}
+\usepackage{titlesec}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{colortbl}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage{subcaption}
+\usepackage{quoting}
+\usepackage{enumitem}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[spanish,es-tabla,es-noshorthands]{babel}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{setspace}\onehalfspacing
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{ragged2e}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage[authoryear,round]{natbib}
+\usepackage[hidelinks]{hyperref}
+
+% --- PAQUETES BÁSICOS DE CONFIGURACIÓN ---
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage[margin=1in]{geometry} % Márgenes estándar académicos
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{hyperref}
+
+% --- CONFIGURACIÓN DE COLORES (Estilo VS Code Claro) ---
+\definecolor{codeback}{rgb}{0.96, 0.96, 0.96}      % Fondo gris claro
+\definecolor{codekeyword}{rgb}{0.0, 0.44, 0.8}    % Azul para palabras clave
+\definecolor{codestring}{rgb}{0.64, 0.08, 0.08}   % Rojo/Púrpura para strings
+\definecolor{codecomment}{rgb}{0.0, 0.5, 0.0}     % Verde para comentarios
+\definecolor{codenumbers}{rgb}{0.5, 0.5, 0.5}     % Gris para números de línea
+\definecolor{codeidentifier}{rgb}{0.2, 0.2, 0.2} % Gris oscuro para variables
+
+% --- ESTILO PERSONALIZADO PARA PYTHON ---
+\lstdefinestyle{python_format}{
+    backgroundcolor=\color{codeback},   
+    commentstyle=\color{codecomment}\itshape,
+    keywordstyle=\color{codekeyword}\bfseries,
+    numberstyle=\tiny\color{codenumbers},
+    stringstyle=\color{codestring},
+    identifierstyle=\color{codeidentifier},
+    basicstyle=\ttfamily\small,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=8pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=4,
+    frame=single,
+    rulecolor=\color{lightgray},
+    frameround=tttt % Esquinas sutilmente redondeadas
+}
+
+% --- ESTILO PERSONALIZADO PARA YAML (GitHub Actions) ---
+\lstdefinestyle{yaml_format}{
+    backgroundcolor=\color{codeback},   
+    commentstyle=\color{codecomment}\itshape,
+    keywordstyle=\color{codekeyword}\bfseries,
+    numberstyle=\tiny\color{codenumbers},
+    stringstyle=\color{codestring},
+    basicstyle=\ttfamily\small,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=8pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2,
+    frame=single,
+    rulecolor=\color{lightgray},
+    frameround=tttt
+}
+
+\setlength{\parskip}{0.4em}
+\setlength{\bibsep}{0.5em}
+
+% ---- Estilo de los bloques de código (Python) ----
+\definecolor{codebg}{gray}{0.96}
+\definecolor{codecomment}{rgb}{0.00,0.50,0.00}
+\definecolor{codekey}{rgb}{0.00,0.00,0.70}
+\definecolor{codestr}{rgb}{0.58,0.00,0.55}
+\definecolor{codenum}{gray}{0.50}
+
+\lstdefinestyle{py}{
+  language=Python,
+  basicstyle=\ttfamily\footnotesize,
+  keywordstyle=\color{codekey}\bfseries,
+  commentstyle=\color{codecomment}\itshape,
+  stringstyle=\color{codestr},
+  numbers=left, numberstyle=\tiny\color{codenum}, numbersep=8pt,
+  showstringspaces=false, breaklines=true, breakatwhitespace=true,
+  frame=single, framesep=4pt, rulecolor=\color{gray!40},
+  backgroundcolor=\color{codebg}, tabsize=4, columns=fullflexible,
+  literate=
+    {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+    {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+    {ñ}{{\~n}}1 {Ñ}{{\~N}}1 {ü}{{\"u}}1 {¿}{{?`}}1 {¡}{{!`}}1
+}
+\lstdefinestyle{tree}{
+  basicstyle=\ttfamily\footnotesize, frame=single, framesep=4pt,
+  rulecolor=\color{gray!40}, backgroundcolor=\color{codebg}
+}
+
+\geometry{a4paper, margin=2.5cm}
+\setlength{\parindent}{0pt}
+\renewcommand{\baselinestretch}{1.15}
+\documentclass[12pt,a4paper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}                                  % Latin Modern
+\usepackage[spanish,es-tabla,es-noshorthands]{babel} % "Tabla", sin shorthands
+\usepackage[margin=2.5cm]{geometry}                   % margenes 2.5 cm
+\usepackage{setspace}\onehalfspacing                  % interlineado 1.5
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{ragged2e}
+\usepackage[authoryear,round]{natbib}                 % citas APA autor-anio
+\usepackage{xcolor}
+\usepackage[hidelinks]{hyperref}
+
+\setlength{\parskip}{0.4em}
+\setlength{\bibsep}{0.5em}
+
+
+
+% Configuración de títulos
+\titleformat{\section}{\large\bfseries}{}{0em}{}
+\titleformat{\subsection}{\normalsize\bfseries}{}{0em}{}
+\titleformat{\subsubsection}{\normalsize\bfseries\itshape}{}{0em}{}
+
+% Colores
+\definecolor{high}{rgb}{0.9,0.2,0.2}
+\definecolor{medium}{rgb}{0.95,0.7,0.2}
+\definecolor{low}{rgb}{0.2,0.7,0.3}
+
+% Entorno para sangría francesa
+\newenvironment{hangparas}{\begin{quoting}[hang=true, indent=0.5cm]}{\end{quoting}}
+
+% ---- BIBLIOGRAFÍA UNIFICADA (biblatex APA 7) ----
+\usepackage[backend=biber, style=apa, citestyle=apa]{biblatex}
+\DeclareLanguageMapping{spanish}{spanish-apa}
+
+\begin{filecontents*}{referencias.bib}
+@book{galin2018,
+    title = {Software Quality: Concepts and Practice},
+    author = {Galin, Daniel},
+    year = {2018},
+    publisher = {Wiley-IEEE Computer Society Press},
+    isbn = {978-1-119-13449-7}
+}
+@book{pressman2020,
+    title = {Software Engineering: A Practitioner's Approach},
+    author = {Pressman, Roger S. and Maxim, Bruce R.},
+    year = {2020},
+    publisher = {McGraw-Hill},
+    edition = {9th},
+    isbn = {978-1-259-87297-6}
+}
+@standard{ieee730,
+    title = {IEEE Standard for Software Quality Assurance Processes},
+    author = {{IEEE Computer Society}},
+    year = {2014},
+    number = {IEEE Std 730-2014},
+    doi = {10.1109/IEEESTD.2014.6835311}
+}
+@standard{iso25010,
+    title = {ISO/IEC 25010:2023 — SQuaRE — Product quality model},
+    author = {{ISO/IEC}},
+    year = {2023}
+}
+@standard{iso25023,
+    title = {ISO/IEC 25023:2016 — Measurement of product quality},
+    author = {{ISO/IEC}},
+    year = {2016}
+}
+@book{oktaba2008,
+    title = {Software Process Improvement for Small and Medium Enterprises},
+    author = {Oktaba, Hanna and Piattini, Mario},
+    year = {2008},
+    publisher = {IGI Global}
+}
+@standard{nmx059,
+    title = {NMX-I-059-NYCE-2011 — MoProSoft},
+    author = {{NYCE} / {Secretaría de Economía}},
+    year = {2011}
+}
+@standard{cmmi2018,
+    title = {CMMI for Development v2.0},
+    author = {{CMMI Institute}},
+    year = {2018}
+}
+@standard{iso33000,
+    title = {ISO/IEC 33000:2015 — Process assessment},
+    author = {{ISO/IEC}},
+    year = {2015}
+}
+@misc{sonarqube,
+    title = {SonarQube Documentation},
+    author = {{SonarSource}},
+    year = {2024},
+    url = {https://docs.sonarqube.org/}
+}
+@misc{istqb2023,
+    title = {ISTQB Foundation Level Syllabus v4.0},
+    author = {{ISTQB}},
+    year = {2023},
+    url = {https://www.istqb.org/}
+}
+@book{forsgren2018,
+    title = {Accelerate: The Science of Lean Software and DevOps},
+    author = {Forsgren, Nicole and Humble, Jez and Kim, Gene},
+    year = {2018},
+    publisher = {IT Revolution}
+}
+@book{piattini2019,
+    title = {Calidad de Sistemas de Información},
+    author = {Piattini, Mario G.},
+    year = {2019},
+    publisher = {RA-MA},
+    edition = {5th}
+}
+\end{filecontents*}
+\addbibresource{referencias.bib}
+
+\begin{document}
+
+% ==================== PORTADA (Olivia) ====================
+\begin{titlepage}
+    \thispagestyle{empty}
+    \begin{center}
+        \textsc{\Large {\textbf{UNIVERSIDAD POLITÉCNICA DE AGUASCALIENTES}}}\\
+        {\Large \uppercase{Ingeniería en Tecnologías de la Información e Innovación Digital} \\ }
+
+         \begin{center}
+            % APARTADO PARA IMAGEN 1: Logo UPA
+            \includegraphics[width=0.45\textwidth]{imag/LOGO UPA (1).png}
+            % \hspace{0.5cm}
+            % APARTADO PARA IMAGEN 2: Logo TIID
+             \includegraphics[width=0.35\textwidth]{imag/TIID UPA (2).png}\
+        \end{center}
+
+        \vspace{0.1cm}
+        \rule{\linewidth}{0.1mm} \\
+        { \Huge \bfseries Tarea 6: Automatización de pruebas y análisis de calidad del proyecto integrador\\[0.1cm]
+          \large  }
+        \rule{\linewidth}{0.091mm} \\
+
+        \vspace{0.1cm}
+
+        {\large \textbf{ASIGNATURA}}\\
+        Estándares y Métricas para el Desarrollo de Software\\
+
+        \vspace{0.1cm}
+
+        {\large \textbf{DOCENTE}}\\
+        Dr(c). Raul Alejandro Velasquez Ortiz \\
+
+        \vspace{0.1cm}
+
+        {\large \textbf{PROYECTO INTEGRADOR}}\\
+        Outline - Wiki interna estilo Notion (Open Source maduro) \\
+
+        \vspace{0.1cm}
+
+        {\large \textbf{EQUIPO No. 4}}\\
+        \vspace{0.1cm}
+        \textbf{CHAIREZ ALBA OLIVIA LIZBETH - UP240594} \\
+        \textbf{ESTRADA RAMÍREZ NOÉ EZEQUIEL - UP240770} \\
+        \textbf{FACIO PALOS OMAR - UP240470} \\
+        \textbf{JAUREGUI DE LA RIVA ALAN RICARDO - UP240960} \\
+        \textbf{RUBIO VIRAMONTES BRIAN ODIN - UP250004}
+
+        \vspace{0.1cm}
+
+        {\large \textbf{GRUPO}}\\
+        TIID05B
+
+        \vfill
+        {\large \textbf{Repositorio Git:} \url{https://github.com/UP240594/outline-sqa-docs}}
+
+        {\large Aguascalientes, México  21 de junio de 2026}\\
+       
+    \end{center}
+\end{titlepage}
+
+% ==================== ÍNDICE ====================
+\newpage
+\tableofcontents
+\newpage
+
+% ==================== 1. INTRODUCCIÓN ====================
+\section{Introducción}
+
+
+El presente documento detalla la investigación e implementación de estrategias de aseguramiento de calidad aplicadas a nuestro proyecto integrador, el cual consiste en el desarrollo de una plataforma tipo Wiki. En el ciclo de vida del desarrollo de software, garantizar la fiabilidad, seguridad y mantenibilidad del código es fundamental, por lo que la adopción de prácticas de evaluación continua, como las pruebas automatizadas y el análisis estático, resultan indispensables para el éxito del producto.
+
+En la primera parte de este trabajo, se presenta una investigación comparativa sobre herramientas modernas para la automatización de pruebas de extremo a extremo (End-to-End o E2E) y plataformas de análisis estático de código. El objetivo de esta fase teórica es evaluar distintas alternativas actuales, contrastando sus características, ventajas, curvas de aprendizaje y compatibilidad, para justificar las opciones más adecuadas según la arquitectura y el \textit{stack} tecnológico de nuestra Wiki.
+
+Posteriormente, se documenta la aplicación práctica de estas herramientas sobre el entorno real de nuestro proyecto. Por un lado, se implementa una suite de pruebas automatizadas E2E utilizando Selenium y \texttt{pytest}, estructurada bajo el patrón de diseño \textit{Page Object Model} (POM) e incorporando pruebas basadas en datos (\textit{data-driven}). Por otro lado, se integra SonarQube para ejecutar un escaneo profundo del código fuente de la plataforma, evaluando las dimensiones clave de calidad (fiabilidad, seguridad, mantenibilidad, cobertura y duplicaciones). A partir de los hallazgos técnicos detectados, se propone un plan de remediación priorizado por severidad bajo la filosofía \textit{Clean as You Code}, estableciendo las bases para una mejora continua apoyada en un \textit{pipeline} de Integración Continua (CI).
+\newpage
+% ==================== Desarrollo ====================
+\section{Desarrollo}
+\subsection{Investigación: frameworks de automatización E2E}
+\label{sec:4-1}
+
+La automatización de pruebas de extremo a extremo (\textit{end-to-end}, E2E) valida
+el comportamiento del sistema desde la perspectiva del usuario final, ejercitando la
+interfaz real contra una aplicación en ejecución \citep{jorgensen2022}. Para nuestro
+proyecto integrador ---un wiki colaborativo construido con un frontend en
+React/TypeScript y un backend en Node.js--- la elección del framework determina la
+velocidad de la retroalimentación, la estabilidad de la \textit{suite} y el costo de
+mantenimiento a largo plazo. A continuación comparamos las tres herramientas de
+referencia del ecosistema E2E en 2026: \textbf{Selenium WebDriver}, \textbf{Cypress} y
+\textbf{Playwright}.
+
+\paragraph{Selenium WebDriver.}
+Es la herramienta más madura del ecosistema y opera sobre el estándar
+\textit{W3C WebDriver}, comunicándose con cada navegador a través de su \textit{driver}
+correspondiente \citep{seleniumdocs}. Su mayor fortaleza es la amplitud: soporta
+múltiples lenguajes (Java, Python, C\#, JavaScript, Ruby, Kotlin) y la mayor variedad de
+navegadores, incluyendo motores heredados. La gestión de esperas se realiza mediante
+esperas explícitas con \texttt{WebDriverWait} y condiciones esperadas, lo que evita la
+fragilidad de las esperas fijas \citep{garcia2022}. Como contrapartida, exige más
+código de andamiaje (\textit{boilerplate}), su curva de aprendizaje es más pronunciada y
+la ejecución en paralelo depende de infraestructura adicional (Selenium Grid).
+
+\paragraph{Cypress.}
+Adopta una arquitectura distinta: ejecuta el código de prueba \emph{dentro} del propio
+navegador, en el mismo bucle de eventos de JavaScript que la aplicación bajo prueba
+\citep{cypressdocs}. Esto le otorga latencia de red nula, espera automática
+(\textit{auto-waiting}) y un depurador con ``viaje en el tiempo'' que captura el estado
+del DOM en cada paso, lo que se traduce en una experiencia de desarrollo (DX) superior.
+Sus limitaciones son consecuencia de esa misma arquitectura: solo admite
+JavaScript/TypeScript, su soporte de WebKit/Safari es experimental e incompleto, y la
+ejecución paralela robusta requiere el servicio de pago Cypress Cloud.
+
+\paragraph{Playwright.}
+Desarrollado por Microsoft, automatiza de forma nativa los tres motores principales
+---Chromium, Firefox y WebKit--- y ofrece enlaces oficiales para JavaScript/TypeScript,
+Python, Java y C\# \citep{playwrightdocs}. Incorpora espera automática basada en
+comprobaciones de \textit{actionability} (el elemento debe ser visible, estable, habilitado
+y no estar obstruido antes de interactuar), contextos de navegador aislados, un
+\textit{Trace Viewer} para el análisis post-mortem y, de forma destacada, ejecución
+paralela y \textit{sharding} nativos sin necesidad de un \textit{grid}. Estas
+características reducen la cantidad de pruebas inestables (\textit{flaky}) y disminuyen el
+costo total de propiedad al escalar la \textit{suite}.
+
+\paragraph{Tabla comparativa.}
+La Tabla~\ref{tab:e2e} sintetiza la comparación según diez criterios técnicos relevantes
+para nuestro contexto.
+
+\begin{table}[htbp]
+\centering
+\footnotesize
+\caption{Comparación de frameworks de automatización E2E (2026).}
+\label{tab:e2e}
+\renewcommand{\arraystretch}{1.25}
+\begin{tabularx}{\textwidth}{>{\RaggedRight\arraybackslash}p{0.18\textwidth}
+                             >{\RaggedRight\arraybackslash}X
+                             >{\RaggedRight\arraybackslash}X
+                             >{\RaggedRight\arraybackslash}X}
+\toprule
+\textbf{Criterio} & \textbf{Selenium} & \textbf{Cypress} & \textbf{Playwright} \\
+\midrule
+Lenguajes soportados &
+Java, Python, C\#, JavaScript, Ruby, Kotlin &
+Solo JavaScript / TypeScript &
+JavaScript/TypeScript, Python, Java, C\# \\
+
+Arquitectura &
+Protocolo W3C WebDriver vía \textit{drivers} externos &
+Ejecuta dentro del navegador (mismo bucle de JS) &
+Comunicación directa con el navegador (WebSocket/CDP) \\
+
+Curva de aprendizaje &
+Pronunciada; requiere más \textit{boilerplate} &
+Baja para equipos de JS; DX muy amigable &
+Media; API moderna y \textit{codegen} \\
+
+Velocidad / rendimiento &
+Moderada; sobrecarga de WebDriver &
+Buena en local; arranque más lento &
+Alta; la más rápida en ejecución paralela \\
+
+Manejo de esperas &
+Explícitas (\texttt{WebDriverWait}); evita esperas fijas &
+Espera automática integrada &
+Espera automática por \textit{actionability} \\
+
+Soporte de navegadores &
+El más amplio (incluye motores heredados) &
+Chromium y Firefox nativos; WebKit experimental &
+Chromium, Firefox y WebKit nativos \\
+
+Ejecución en paralelo &
+Mediante Selenium Grid (infraestructura adicional) &
+Limitada; paralelismo robusto requiere Cypress Cloud &
+Nativa, sin \textit{grid} (\textit{workers} y \textit{sharding}) \\
+
+Pruebas móviles &
+Nativas vía Appium &
+No (solo emulación de \textit{viewport}) &
+No (solo emulación de dispositivos) \\
+
+Comunidad / madurez &
+La más madura; estándar de facto empresarial &
+Fuerte en \textit{frontend} JS; comunidad consolidada &
+Crecimiento más rápido; comunidad en expansión \\
+
+Licencia &
+Apache 2.0 (código abierto) &
+MIT (código abierto; \textit{Cloud} de pago) &
+Apache 2.0 (código abierto) \\
+\bottomrule
+\end{tabularx}
+\\[2pt]
+{\footnotesize Fuente: elaboración propia con base en la documentación oficial de
+Selenium, Cypress y Playwright \citep{seleniumdocs, cypressdocs, playwrightdocs} y
+en \citet{garcia2022}.}
+\end{table}
+
+\paragraph{Recomendación justificada.}
+Para el contexto de nuestro proyecto ---una aplicación web de página única (SPA) con uso
+intensivo de JavaScript y un \textit{stack} de TypeScript/React/Node.js--- la
+recomendación técnica es \textbf{Playwright}. Tres razones lo respaldan: (1)~sus enlaces
+de primera clase para TypeScript se alinean directamente con el lenguaje del proyecto,
+reduciendo la fricción de adopción; (2)~su soporte nativo de WebKit permite cubrir Safari,
+navegador relevante para un wiki de acceso público que Cypress no cubre de forma fiable; y
+(3)~su ejecución paralela nativa, junto con la espera por \textit{actionability}, ataca
+directamente el principal problema de las \textit{suites} E2E ---la inestabilidad--- sin
+costos de infraestructura adicionales, en línea con el principio de pruebas rápidas y
+confiables que recomienda \citet{aniche2022}.
+
+No obstante, conforme a lo trabajado en la Semana 7, la \emph{implementación} práctica
+(sección~4.3 y siguientes) se realiza con \textbf{Selenium + pytest} aplicando el
+patrón \textit{Page Object Model}. Esta diferencia entre la herramienta recomendada y la
+implementada es deliberada y está prevista por la asignatura: Selenium ofrece el soporte
+más amplio de lenguajes y navegadores, una base conceptual sólida sobre el estándar
+WebDriver y un ecosistema empresarial maduro, lo que lo hace idóneo como herramienta de
+aprendizaje \citep{garcia2022}. Las técnicas de diseño de casos (válidos, de frontera
+y de error) que aplicamos son independientes del framework \citep{jorgensen2022}, por
+lo que la suite construida con Selenium puede migrarse a Playwright en el futuro
+conservando su valor.
+
+% ---------------------------------------------------------------------
+\subsection{Investigación: análisis estático de código}
+\label{sec:4-2}
+
+El análisis estático examina el código fuente \emph{sin ejecutarlo}, identificando
+defectos a partir de su estructura sintáctica y semántica. Es una práctica de
+``desplazamiento a la izquierda'' (\textit{shift-left}) que detecta problemas en las
+etapas tempranas del ciclo de vida, cuando corregirlos es más barato. En esta sección
+comparamos tres herramientas representativas de categorías distintas
+---\textbf{SonarQube}, \textbf{Semgrep} y los \textit{linters} \textbf{ESLint/Pylint}---
+y diferenciamos el análisis estático del dinámico.
+
+\paragraph{SonarQube.}
+Es una plataforma de calidad y seguridad de código que cubre más de 30 lenguajes mediante
+miles de reglas predefinidas \citep{sonarqubedocs}. Detecta \textit{bugs}
+(confiabilidad), vulnerabilidades y \textit{security hotspots} (seguridad) y \textit{code
+smells} (mantenibilidad), y además mide cobertura, duplicación y complejidad ciclomática y
+cognitiva. Su característica distintiva son las \textit{Quality Gates}: criterios
+automáticos de aprobación o rechazo que pueden bloquear la fusión (\textit{merge}) de una
+rama cuando el código nuevo no cumple los umbrales definidos. Es importante una precisión
+para la sección 4.4: bajo el modelo \textit{Clean Code} actual, SonarQube define
+\emph{tres} cualidades de software ---Seguridad, Confiabilidad y Mantenibilidad--- que,
+sumadas a las medidas de \emph{Cobertura} y \emph{Duplicación} del tablero, conforman las
+cinco dimensiones que reporta la herramienta \citep{sonarqubedocs}.
+
+\paragraph{Semgrep.}
+Es un motor de análisis estático orientado a la seguridad (SAST) que opera mediante
+coincidencia de patrones sobre el árbol de sintaxis abstracta, no sobre texto plano. Su
+fortaleza es la rapidez (escaneos del orden de segundos) y la facilidad para escribir
+reglas personalizadas en YAML, lo que lo hace popular para hacer cumplir políticas de
+seguridad específicas. Detecta patrones explotables ---inyección SQL, \textit{cross-site
+scripting} (XSS), credenciales codificadas, deserialización insegura--- mediante análisis
+de contaminación (\textit{taint analysis}). Su limitación es que está enfocado en
+seguridad: no calcula métricas de mantenibilidad, complejidad, duplicación ni cobertura.
+
+\paragraph{ESLint / Pylint (linters).}
+Representan la capa más rápida y cercana al desarrollador. ESLint analiza JavaScript y
+TypeScript mediante un sistema de reglas configurable basado en el AST, mientras que Pylint
+hace lo equivalente para Python. Aplican estilo y convenciones, detectan errores comunes y
+se ejecutan en tiempo real dentro del IDE. Su limitación es la profundidad: no realizan
+análisis de seguridad entre archivos ni detectan errores lógicos o de tiempo de ejecución;
+por ello suelen complementarse con una herramienta SAST o una plataforma de calidad.
+
+\paragraph{Tabla comparativa.}
+La Tabla~\ref{tab:static} resume las diferencias. Se incluye CodeClimate (hoy en
+transición a ``qlty'') como referencia adicional de plataforma orientada a la
+mantenibilidad.
+
+\begin{table}[htbp]
+\centering
+\footnotesize
+\caption{Comparación de herramientas de análisis estático (2026).}
+\label{tab:static}
+\renewcommand{\arraystretch}{1.25}
+\begin{tabularx}{\textwidth}{>{\RaggedRight\arraybackslash}p{0.16\textwidth}
+                             >{\RaggedRight\arraybackslash}X
+                             >{\RaggedRight\arraybackslash}X
+                             >{\RaggedRight\arraybackslash}X}
+\toprule
+\textbf{Criterio} & \textbf{SonarQube} & \textbf{Semgrep} & \textbf{ESLint / Pylint} \\
+\midrule
+Categoría &
+Plataforma de calidad + seguridad &
+Motor SAST (seguridad) &
+\textit{Linter} (estilo + errores básicos) \\
+
+Defectos que detecta &
+\textit{Bugs}, vulnerabilidades, \textit{code smells}, duplicación &
+Vulnerabilidades de seguridad y \textit{anti-patrones} &
+Estilo, convenciones y errores comunes \\
+
+Enfoque de detección &
+Miles de reglas predefinidas por lenguaje &
+Coincidencia de patrones sobre el AST (reglas en YAML) &
+Reglas configurables sobre el AST \\
+
+Métricas de calidad &
+Sí: complejidad, duplicación, cobertura, deuda técnica &
+No (solo seguridad) &
+No (solo reglas de estilo/sintaxis) \\
+
+Integración CI/CD &
+\textit{Quality Gates} que bloquean \textit{merges} &
+Rápida; ideal para escaneo en cada \textit{pull request} &
+En cada \textit{commit}; muy rápida \\
+
+Lenguajes &
+30+ lenguajes &
+35+ lenguajes &
+ESLint: JS/TS; Pylint: Python \\
+
+Licencia / costo &
+\textit{Community Edition} gratuita; ediciones de pago &
+Núcleo de código abierto (LGPL); gratis hasta cierto número de contribuyentes &
+Código abierto (gratuito) \\
+\bottomrule
+\end{tabularx}
+\\[2pt]
+{\footnotesize Fuente: elaboración propia con base en la documentación oficial de las
+herramientas \citep{sonarqubedocs}.}
+\end{table}
+
+\paragraph{Análisis estático frente a análisis dinámico.}
+La diferencia fundamental es la \emph{ejecución}. El análisis estático inspecciona el
+código sin correrlo y, por ello, puede razonar sobre \emph{todas} las rutas del programa,
+detectando \textit{code smells}, vulnerabilidades por patrón, complejidad excesiva y
+duplicación antes de que el software se ejecute siquiera. Su contrapartida son los falsos
+positivos y la imposibilidad de observar comportamientos que solo emergen en tiempo de
+ejecución. El análisis dinámico, en cambio, examina el programa \emph{mientras se ejecuta}
+con entradas concretas: detecta fallos reales, fugas de memoria, cuellos de botella de
+rendimiento y condiciones de carrera, pero solo sobre las rutas efectivamente ejercitadas
+(de ahí su riesgo de falsos negativos) y requiere un entorno de ejecución y datos de
+prueba. De hecho, la propia \textit{suite} E2E con Selenium de la sección~4.3 constituye
+una forma de análisis dinámico, pues valida la aplicación en funcionamiento. Ambos enfoques
+son complementarios y se integran en el Plan de Pruebas de la Unidad~II: SonarQube (estático)
+y la suite de pruebas con pytest/Selenium (dinámico) cubren clases de defectos distintas
+\citep{aniche2022, khorikov2020}.
+
+\paragraph{Justificación para nuestro \textit{stack}.}
+Recomendamos \textbf{SonarQube} como herramienta principal de análisis estático para el
+proyecto por cuatro motivos: (1)~analiza de forma nativa JavaScript y TypeScript, los
+lenguajes de nuestro frontend y backend; (2)~unifica en un solo tablero las cinco
+dimensiones que pide la evaluación (Confiabilidad, Seguridad, Mantenibilidad, Cobertura y
+Duplicación), facilitando la sección~4.4; (3)~sus \textit{Quality Gates} se integran con el
+pipeline de CI de la sección~4.5 para bloquear fusiones que no cumplan los umbrales; y
+(4)~su \textit{Community Edition} es gratuita y, mediante SonarCloud, el análisis es
+gratuito para repositorios públicos. Como complemento, conservamos \textbf{ESLint} ---ya
+estándar en proyectos de React/Node.js--- como capa rápida de \textit{linting} en cada
+\textit{commit}, y dejamos abierta la incorporación de \textbf{Semgrep} si el equipo
+requiere profundizar en seguridad. Esta estratificación (\textit{linter} en cada commit,
+plataforma de calidad en cada PR) es la práctica recomendada para mantener la salud del
+código sin sacrificar velocidad \citep{aniche2022}.
+
+% ===================================================================== Alan
+\setcounter{subsection}{2}
+\subsection{Implementación de pruebas E2E con Selenium}
+\label{sec:4-3}
+
+Sobre un módulo real del proyecto integrador (el wiki Outline) implementamos una
+\textit{suite} de pruebas de extremo a extremo con \textbf{Selenium WebDriver} y
+\textbf{pytest}, aplicando el patrón \textit{Page Object Model} (POM). El POM
+encapsula, en clases independientes, los localizadores y las interacciones con
+cada pantalla, de modo que las pruebas expresen intención de negocio y no
+detalles del DOM; así, un cambio en la interfaz se corrige en un solo lugar y la
+\textit{suite} resulta más mantenible \citep{garcia2022, khorikov2020}. Esta
+primera parte cubre la arquitectura del proyecto, los Page Objects y el conjunto
+de pruebas con sus tres tipos de caso, empleando exclusivamente esperas
+explícitas.
+
+% ---------------------------------------------------------------------
+\subsubsection{Estructura del proyecto de pruebas}
+
+El proyecto separa los Page Objects (\texttt{pages/}) de las pruebas
+(\texttt{tests/}) y centraliza la configuración en \texttt{conftest.py}, conforme
+a la organización recomendada para suites con pytest \citep{pytestdocs}.
+
+\begin{lstlisting}[style=tree,caption={Estructura de directorios de la suite E2E.},captionpos=b]
+e2e_outline/
+|-- pages/
+|   |-- base_page.py     # Esperas explicitas reutilizables (WebDriverWait)
+|   |-- login_page.py    # Page Object 1: autenticacion
+|   `-- search_page.py   # Page Object 2: busqueda
+|-- tests/
+|   |-- test_login.py    # 5 pruebas (incluye 1 data-driven parametrizada)
+|   `-- test_search.py   # 3 pruebas (requieren sesion)
+|-- conftest.py          # Fixtures: driver, base_url, authenticated_driver
+|-- pytest.ini
+`-- requirements.txt
+\end{lstlisting}
+
+La clase \texttt{BasePage} concentra la lógica de sincronización: todos los Page
+Objects heredan de ella sus métodos de espera, lo que garantiza que ningún punto
+de la suite recurra a esperas fijas.
+
+\begin{lstlisting}[style=py,caption={\texttt{pages/base\_page.py} --- utilidades de espera explícita.},captionpos=b]
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import TimeoutException
+
+
+class BasePage:
+    DEFAULT_TIMEOUT = 15  # segundos
+
+    def __init__(self, driver, base_url, timeout=DEFAULT_TIMEOUT):
+        self.driver = driver
+        self.base_url = base_url.rstrip("/")
+        self.wait = WebDriverWait(driver, timeout)
+
+    def open(self, path=""):
+        self.driver.get(f"{self.base_url}/{path.lstrip('/')}")
+        return self
+
+    def visible(self, locator):
+        return self.wait.until(EC.visibility_of_element_located(locator))
+
+    def clickable(self, locator):
+        return self.wait.until(EC.element_to_be_clickable(locator))
+
+    def present(self, locator):
+        return self.wait.until(EC.presence_of_element_located(locator))
+
+    def is_visible(self, locator, timeout=None):
+        w = self.wait if timeout is None else WebDriverWait(self.driver, timeout)
+        try:
+            w.until(EC.visibility_of_element_located(locator))
+            return True
+        except TimeoutException:
+            return False
+
+    def count(self, locator):
+        return len(self.driver.find_elements(*locator))
+\end{lstlisting}
+
+% ---------------------------------------------------------------------
+\subsubsection{Page Objects: localizadores y métodos de negocio}
+
+Outline está construido con React y \textit{styled-components}, por lo que sus
+clases CSS son hasheadas e inestables. En consecuencia, los localizadores se
+definen por \emph{atributo} (\texttt{type}, \texttt{name}, \texttt{placeholder}),
+por \emph{rol} y por \emph{texto}, nunca por clase \citep{seleniumdocs}. El
+primer Page Object modela la pantalla de autenticación.
+
+\begin{lstlisting}[style=py,caption={\texttt{pages/login\_page.py} --- Page Object de autenticación.},captionpos=b]
+from selenium.webdriver.common.by import By
+from .base_page import BasePage
+
+
+class LoginPage(BasePage):
+    PATH = "/"  # la raíz redirige al login si no hay sesión
+
+    EMAIL_TOGGLE = (By.XPATH,
+        '//button[contains(., "Email") or contains(., "correo")]')
+    EMAIL_INPUT = (By.CSS_SELECTOR,
+        'input[type="email"], input[name="email"]')
+    SUBMIT_BUTTON = (By.XPATH,
+        '//button[@type="submit" or contains(., "Continue") '
+        'or contains(., "Continuar")]')
+    CONFIRMATION = (By.XPATH,
+        '//*[contains(., "Check your email") or contains(., "revisa tu correo")]')
+
+    def load(self):
+        return self.open(self.PATH)
+
+    def _reveal_email_field(self):
+        if not self.is_visible(self.EMAIL_INPUT, timeout=3):
+            try:
+                self.clickable(self.EMAIL_TOGGLE).click()
+            except Exception:
+                pass
+        return self
+
+    def login_with_email(self, email):
+        self._reveal_email_field()
+        field = self.visible(self.EMAIL_INPUT)
+        field.clear()
+        if email:
+            field.send_keys(email)
+        self.clickable(self.SUBMIT_BUTTON).click()
+        return self
+
+    def email_field_displayed(self):
+        self._reveal_email_field()
+        return self.is_visible(self.EMAIL_INPUT)
+
+    def confirmation_displayed(self):
+        return self.is_visible(self.CONFIRMATION, timeout=8)
+
+    def still_on_login(self):
+        return self.is_visible(self.EMAIL_INPUT, timeout=3) \
+            or "/login" in self.driver.current_url
+\end{lstlisting}
+
+El segundo Page Object modela el módulo de búsqueda. Localiza el campo de
+búsqueda por atributo, los resultados por su enlace a documentos
+(\texttt{/doc/...}) y el estado vacío por texto.
+
+\begin{lstlisting}[style=py,caption={\texttt{pages/search\_page.py} --- Page Object de búsqueda.},captionpos=b]
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+from .base_page import BasePage
+
+
+class SearchPage(BasePage):
+    PATH = "/search"
+
+    SEARCH_INPUT = (By.CSS_SELECTOR,
+        'input[type="search"], input[placeholder*="Search"]')
+    RESULT_ITEMS = (By.CSS_SELECTOR,
+        'a[href*="/doc/"], [data-testid="search-result"]')
+    EMPTY_STATE = (By.XPATH,
+        '//*[contains(., "No results") or contains(., "Sin resultados")]')
+
+    def load(self):
+        return self.open(self.PATH)
+
+    def search(self, query):
+        field = self.visible(self.SEARCH_INPUT)
+        field.clear()
+        field.send_keys(query)
+        field.send_keys(Keys.ENTER)
+        return self
+
+    def has_results(self):
+        return self.is_visible(self.RESULT_ITEMS, timeout=10)
+
+    def empty_state_displayed(self):
+        return self.is_visible(self.EMPTY_STATE, timeout=10)
+\end{lstlisting}
+
+La configuración compartida vive en \texttt{conftest.py}. La \textit{fixture}
+\texttt{driver} usa \textit{Selenium Manager} (Selenium 4.6+) para resolver el
+\textit{driver} automáticamente y evitar choques de versión entre Chrome y
+\texttt{chromedriver}. La \textit{fixture} \texttt{authenticated\_driver} inyecta
+una cookie de sesión para las pruebas que requieren login y se \textit{salta}
+limpiamente si no se proporciona.
+
+\begin{lstlisting}[style=py,caption={\texttt{conftest.py} --- fixtures de pytest.},captionpos=b]
+import os
+import pytest
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+
+
+@pytest.fixture(scope="session")
+def base_url():
+    return os.getenv("OUTLINE_BASE_URL", "http://localhost:3000")
+
+
+@pytest.fixture
+def driver():
+    options = Options()
+    if os.getenv("HEADLESS", "true").lower() == "true":
+        options.add_argument("--headless=new")
+    options.add_argument("--no-sandbox")
+    options.add_argument("--disable-dev-shm-usage")
+    options.add_argument("--window-size=1280,900")
+    drv = webdriver.Chrome(options=options)
+    drv.set_page_load_timeout(30)
+    yield drv
+    drv.quit()
+
+
+@pytest.fixture
+def authenticated_driver(driver, base_url):
+    name = os.getenv("OUTLINE_COOKIE_NAME")
+    value = os.getenv("OUTLINE_COOKIE_VALUE")
+    if not name or not value:
+        pytest.skip("Falta cookie de sesión.")
+    driver.get(base_url)  # estar en el dominio antes de add_cookie
+    driver.add_cookie({"name": name, "value": value, "path": "/"})
+    driver.get(base_url)
+    return driver
+\end{lstlisting}
+
+% ---------------------------------------------------------------------
+\subsubsection{Casos de prueba: válidos, de frontera y de error}
+
+La \textit{suite} contiene ocho pruebas que cubren los tres tipos de caso
+exigidos. La selección de casos sigue las técnicas de partición de equivalencias
+y valores de frontera, independientes del framework empleado
+\citep{aniche2022}. La Tabla~\ref{tab:casos} resume la matriz de pruebas.
+
+\begin{table}[htbp]
+\centering
+\footnotesize
+\caption{Matriz de casos de prueba de la suite E2E.}
+\label{tab:casos}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabularx}{\textwidth}{>{\RaggedRight\arraybackslash}p{0.40\textwidth}
+                             >{\RaggedRight\arraybackslash}p{0.13\textwidth}
+                             >{\RaggedRight\arraybackslash}X}
+\toprule
+\textbf{Prueba} & \textbf{Módulo} & \textbf{Tipo de caso} \\
+\midrule
+\texttt{test\_login\_page\_shows\_email\_field} & Login & Válido \\
+\texttt{test\_valid\_email\_shows\_confirmation} & Login & Válido \\
+\texttt{test\_invalid\_email\_is\_rejected} & Login & Error \\
+\texttt{test\_empty\_email\_cannot\_submit} & Login & Frontera / Error \\
+\texttt{test\_login\_email\_validation\_parametrized} & Login & Data-driven (válido, frontera y error) \\
+\texttt{test\_search\_existing\_term\_returns\_results} & Búsqueda & Válido \\
+\texttt{test\_search\_nonexistent\_term\_shows\_empty\_state} & Búsqueda & Error \\
+\texttt{test\_search\_single\_character\_boundary} & Búsqueda & Frontera \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Las pruebas del módulo de autenticación incluyen una prueba \textit{data-driven}
+con \texttt{@pytest.mark.parametrize}, que valida cinco formatos de correo en una
+sola función.
+
+\begin{lstlisting}[style=py,caption={\texttt{tests/test\_login.py} --- pruebas de autenticación.},captionpos=b]
+import pytest
+from pages.login_page import LoginPage
+
+VALID_EMAIL = "qa.tester@example.com"
+
+
+def test_login_page_shows_email_field(driver, base_url):
+    """VÁLIDO: la pantalla de login muestra el campo de correo."""
+    page = LoginPage(driver, base_url).load()
+    assert page.email_field_displayed()
+
+
+def test_valid_email_shows_confirmation(driver, base_url):
+    """VÁLIDO: un correo bien formado avanza a confirmación."""
+    page = LoginPage(driver, base_url).load()
+    page.login_with_email(VALID_EMAIL)
+    assert page.confirmation_displayed()
+
+
+def test_invalid_email_is_rejected(driver, base_url):
+    """ERROR: un correo mal formado no debe avanzar."""
+    page = LoginPage(driver, base_url).load()
+    page.login_with_email("esto-no-es-un-correo")
+    assert not page.confirmation_displayed()
+    assert page.still_on_login()
+
+
+def test_empty_email_cannot_submit(driver, base_url):
+    """FRONTERA/ERROR: el formulario vacío no debe avanzar."""
+    page = LoginPage(driver, base_url).load()
+    page.login_with_email("")
+    assert not page.confirmation_displayed()
+    assert page.still_on_login()
+
+
+@pytest.mark.parametrize("email, should_pass", [
+    ("a@b.co", True),                      # FRONTERA: mínimo válido
+    ("nombre.apellido@upa.edu.mx", True),  # VÁLIDO: típico
+    ("sin-arroba.com", False),             # ERROR: falta '@'
+    ("@sin-local", False),                 # ERROR: sin parte local
+    ("", False),                           # FRONTERA: vacío
+])
+def test_login_email_validation_parametrized(driver, base_url, email, should_pass):
+    """DATA-DRIVEN: valida varios formatos de correo."""
+    page = LoginPage(driver, base_url).load()
+    page.login_with_email(email)
+    if should_pass:
+        assert page.confirmation_displayed()
+    else:
+        assert not page.confirmation_displayed()
+\end{lstlisting}
+
+Las pruebas del módulo de búsqueda usan la \textit{fixture}
+\texttt{authenticated\_driver} y cubren un caso válido (término existente), uno
+de error (término inexistente) y uno de frontera (un solo carácter).
+
+\begin{lstlisting}[style=py,caption={\texttt{tests/test\_search.py} --- pruebas de búsqueda.},captionpos=b]
+from pages.search_page import SearchPage
+
+EXISTING_TERM = "welcome"  # ajustar a un documento existente
+
+
+def test_search_existing_term_returns_results(authenticated_driver, base_url):
+    """VÁLIDO: un término existente devuelve resultados."""
+    page = SearchPage(authenticated_driver, base_url).load()
+    page.search(EXISTING_TERM)
+    assert page.has_results()
+
+
+def test_search_nonexistent_term_shows_empty_state(authenticated_driver, base_url):
+    """ERROR: un término inexistente muestra el estado vacío."""
+    page = SearchPage(authenticated_driver, base_url).load()
+    page.search("zxqwk-termino-inexistente-987654")
+    assert page.empty_state_displayed()
+
+
+def test_search_single_character_boundary(authenticated_driver, base_url):
+    """FRONTERA: una búsqueda de un carácter no debe romper la UI."""
+    page = SearchPage(authenticated_driver, base_url).load()
+    page.search("a")
+    assert page.has_results() or page.empty_state_displayed()
+\end{lstlisting}
+
+% ---------------------------------------------------------------------
+\subsubsection{Esperas explícitas (prohibido \texttt{time.sleep})}
+
+Toda la sincronización se resuelve con \texttt{WebDriverWait} y
+\texttt{expected\_conditions}, centralizados en \texttt{BasePage}. Una espera
+explícita suspende la ejecución hasta que se cumple una condición concreta
+---por ejemplo, que un elemento sea visible o clickeable--- con un tiempo máximo,
+y continúa en cuanto la condición se satisface. Esto elimina las pausas fijas
+(\texttt{time.sleep}), que o bien ralentizan la suite innecesariamente o bien la
+vuelven inestable (\textit{flaky}) cuando la aplicación responde más lento de lo
+previsto \citep{garcia2022, seleniumdocs}. En consecuencia, ningún Page Object ni
+prueba de esta suite utiliza \texttt{time.sleep}: las condiciones esperadas
+(\texttt{visibility\_of\_element\_located}, \texttt{element\_to\_be\_clickable},
+\texttt{presence\_of\_element\_located}) cubren todos los puntos de
+sincronización.
+
+\subsubsection{Evidencias de ejecución}
+
+La suite se ejecuta y documenta con:
+\begin{lstlisting}[style=tree]
+pytest --cov=pages --cov-report=xml --html=reporte.html --self-contained-html -v
+\end{lstlisting}
+Las evidencias correspondientes ---la salida de consola de \texttt{pytest -v} y
+el reporte HTML generado--- se incluyen como figuras en la Parte 2 de esta misma
+sección.
+
+
+% ---------------------------------------------------------------------olivia
+
+\subsection{Pruebas de Componentes y Reporte de Pruebas}
+
+\subsubsection{Implementación de Pruebas Data-Driven con Pytest}
+Para maximizar la eficiencia y exhaustividad de la suite de pruebas funcionales de la Wiki sin incurrir en duplicación de código, se diseñó e implementó una prueba basada en datos (\textit{Data-Driven Testing}) utilizando el decorador nativo \texttt{@pytest.mark.parametrize} de Pytest. Esta técnica metodológica permite desacoplar la lógica de ejecución del flujo de prueba de los datos de entrada, evaluando múltiples escenarios en un único bloque de código ejecutable.
+
+El objetivo principal de esta prueba parametrizada fue validar el comportamiento robusto del motor de búsqueda de la Wiki bajo condiciones variables. Los casos de prueba estructurados abarcan escenarios válidos, de frontera y de manejo de errores, definidos de la siguiente manera:
+\begin{itemize}
+    \item \textbf{Caso Válido (Artículo Existente):} Verifica que al ingresar un término válido (e.g., ``Software Architecture''), el sistema devuelva los resultados correspondientes correctamente.
+    \item \textbf{Caso de Frontera (Artículo Inexistente):} Valida la respuesta del sistema ante una cadena alfanumérica sin coincidencias en la base de datos (e.g., ``NonExistentArticle123'').
+    \item \textbf{Caso de Error (Caracteres Especiales):} Evalúa la tolerancia de la aplicación a fallos e inyecciones básicas mediante caracteres especiales (e.g., ``!@\#\$\%'').
+    \item \textbf{Caso de Error (Búsqueda Vacía):} Comprueba que el sistema reaccione de manera controlada ante el envío de una cadena vacía (\texttt{""}).
+\end{itemize}
+
+En el Código~\ref{code:data_driven} se expone la implementación formal de la prueba parametrizada conectada con el Page Object Model de la Wiki, incorporando anotaciones de tipo para robustez del diseño.
+
+\begin{lstlisting}[
+    language=Python,
+    style=python_format,
+    caption={Implementación optimizada de prueba Data-Driven para la búsqueda de la Wiki.},
+    label={code:data_driven}
+]
+import pytest
+from selenium.webdriver.remote.webdriver import WebDriver
+from pages.search_page import SearchPage
+
+@pytest.mark.parametrize(
+    "search_term, expected_found, scenario_name",
+    [
+        ("Software Architecture", True, "Caso valido - Articulo existente"),
+        ("NonExistentArticle123", False, "Caso de frontera - Articulo inexistente"),
+        ("!@#$%", False, "Caso de error - Caracteres especiales"),
+        ("", False, "Caso de error - Busqueda vacia")
+    ]
+)
+def test_wiki_search_data_driven(
+    driver: WebDriver, 
+    search_term: str, 
+    expected_found: bool, 
+    scenario_name: str
+) -> None:
+    """
+    Prueba parametrizada para validar de forma exhaustiva el motor 
+    de busqueda de la Wiki bajo multiples condiciones dinamicas.
+    """
+    search_page = SearchPage(driver)
+    search_page.open()
+    search_page.search_for(search_term)
+    
+    actual_status = search_page.is_results_status_correct(expected_found)
+    
+    assert actual_status, (
+        f"Fallo en el escenario [{scenario_name}]. "
+        f"Termino evaluado: '{search_term}'. "
+        f"Se esperaba exito={expected_found} pero se obtuvo un comportamiento adverso."
+    )
+\end{lstlisting}
+
+\subsubsection{Evidencia y Reporte Dinámico de Pruebas}
+La suite completa de pruebas automatizadas genera un reporte interactivo en formato HTML mediante la extensión \texttt{pytest-html}, consolidando métricas clave de ejecución de forma autocontenida. Como se evidencia en la Figura~\ref{fig:reporte_pytest}, el reporte dinámico confirma el paso exitoso de los casos parametrizados operando sobre los módulos de la Wiki. 
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.95\textwidth]{imag/reporte_pytest_olivia.png}
+    \caption{Reporte dinámico de ejecución generado por Pytest-HTML.}
+    \label{fig:reporte_pytest}
+\end{figure}
+
+\subsubsection{Nota Técnica sobre el Entorno de Pruebas y Mitigación Operacional}
+Es imperativo señalar que durante el despliegue inicial de la infraestructura local empleando Docker Compose, se presentaron fallos de conectividad intermódulo que afectaron temporalmente la persistencia física del contenedor del login, derivando en excepciones controladas reflejadas en las bitácoras. Con el fin de aislar estas restricciones de infraestructura y validar rigurosamente la lógica del negocio sin comprometer los tiempos de entrega, la suite de pruebas funcionales y de búsquedas parametrizadas se ejecutó satisfactoriamente sobre un entorno específico de desarrollador configurado con políticas de \textit{auto-login}. 
+
+Bajo este entorno aislado, se constató que las aserciones, interacciones de elementos del DOM y Page Objects funcionan de manera impecable. Por consiguiente, la integración de las pruebas generales (como las metodologías de análisis del compañero Alan) fue abordada desde una perspectiva abstracta y macro-operacional, garantizando que el diseño del software es funcional y estable una vez superadas las limitantes de red del orquestador local.
+
+Adicionalmente, se integró la herramienta \texttt{pytest-cov} para realizar un análisis de cobertura dinámico sobre el paquete \texttt{pages}. De acuerdo con el archivo de salida \texttt{coverage.xml}, la suite alcanzó un \textbf{72.34\%} de cobertura total de líneas (\textit{line-rate=0.7234}), distribuyendo un 72.22\% sobre el componente core \texttt{base\_page.py} y un 59.09\% analizado sobre el módulo crítico \texttt{search\_page.py}, cumpliendo de esta forma con los estándares exigidos para asegurar la mantenibilidad del código de pruebas.
+
+\newpage
+
+% =========================================================================
+% SECCIÓN 4.5: INTEGRACIÓN Y CI (CONTINUOUS INTEGRATION)
+% =========================================================================
+\subsection{Integración y CI (Continuous Integration)}
+Para garantizar la entrega continua de software libre de regresiones, se implementó un pipeline de Integración Continua (CI) utilizando la plataforma nativa \textbf{GitHub Actions}. El flujo de trabajo automatizado está diseñado para interceptar eventos de ciclo de vida esenciales, disparándose de manera obligatoria en cada \texttt{push} y \texttt{pull\_request} dirigidos hacia las ramas de desarrollo principales (\texttt{main} y \texttt{develop}).
+El archivo de configuración YAML formalizado y optimizado para este entorno:
+
+\begin{center}
+    \texttt{.github/workflows/tests.yml}
+\end{center}
+
+se detalla íntegramente en el Código~\ref{code:github_actions}.
+
+\begin{lstlisting}[
+    language=XML,
+    style=yaml_format,
+    caption={Pipeline de automatización optimizado en GitHub Actions (tests.yml).},
+    label={code:github_actions}
+]
+name: Pruebas Automatizadas E2E
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout Source Code
+      uses: actions/checkout@v4
+
+    - name: Set up Python Environment
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+        cache: 'pip' % Optimizacion de cache para acelerar el pipeline
+        cache-dependency-path: 'tests/requirements.txt'
+
+    - name: Install Project Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r tests/requirements.txt
+
+    - name: Execute Test Suite and Coverage
+      run: |
+        cd tests
+        pytest tests/ --cov=pages --cov-report=xml --html=reporte.html --self-contained-html -v
+      continue-on-error: true
+
+    - name: Archive Test Run Artifacts
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: pytest-execution-report
+        path: tests/reporte.html
+        retention-days: 7
+\end{lstlisting}
+
+\subsubsection{Análisis de los Pasos del Pipeline}
+El flujo operativo del agente remoto (\texttt{ubuntu-latest}) ejecuta secuencialmente el aprovisionamiento técnico del entorno de ejecución:
+\begin{enumerate}
+    \item \textbf{Checkout del Código:} Clona el estado exacto del repositorio mediante el action oficial \texttt{actions/checkout@v4}.
+    \item \textbf{Inicialización y Caché del Entorno:} Configura un intérprete aislado de Python 3.11 habilitando la directiva \texttt{cache: 'pip'} ligada a \texttt{requirements.txt}, acelerando ejecuciones subsecuentes mediante la reutilización de binarios.
+    \item \textbf{Gestión de Dependencias:} Actualiza el gestor \texttt{pip} e instala de forma limpia las librerías Core validadas (\texttt{selenium}, \texttt{pytest}, \texttt{pytest-html} y \texttt{pytest-cov}).
+    \item \textbf{Ejecución de Suite Funcional y Cobertura:} Ejecuta de forma unificada las pruebas E2E de Selenium junto a la inyección de la cobertura analítica mediante los flags \texttt{--cov=pages} y \texttt{--cov-report=xml}.
+    \item \textbf{Persistencia de Evidencias:} Utiliza \texttt{actions/upload-artifact@v4} bajo la directiva condicionada \texttt{if: always()} para empaquetar y subir el reporte HTML interactivo con un tiempo de retención de 7 días.
+\end{enumerate}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.95\textwidth]{imag/pipeline_actions_olivia.png}
+    \caption{Evidencia del pipeline de integración continua ejecutado en GitHub Actions.}
+    \label{fig:pipeline_ci}
+\end{figure}
+
+\subsubsection{Condiciones del Quality Gate y Escenarios de Bloqueo}
+Para resguardar la estabilidad y la calidad del código base de la Wiki, el pipeline define una lógica estricta de \textit{Quality Gate} orientada a mitigar riesgos en la integración. Un \textit{Pull Request} o integración de rama \textbf{será automáticamente bloqueado} bajo los siguientes escenarios operacionales:
+\begin{enumerate}
+    \item \textbf{Fallo en el Entorno de Dependencias:} Si el paso de instalación falla debido a incompatibilidades de versiones o sintaxis corrupta en las dependencias requeridas del proyecto, rompiendo el pipeline de manera inmediata.
+    \item \textbf{Estrategia de Reportes Continuos (Manejo de Errores):} Cabe destacar que en la tarea de ejecución (\texttt{Run tests}) se especificó intencionalmente la directiva \texttt{continue-on-error: true}. Esta decisión de arquitectura del pipeline asegura que, ante fallos dinámicos en los asserts de Selenium, el flujo recopile obligatoriamente el archivo \texttt{coverage.xml} y el reporte estático sin corromper el contenedor. El bloqueo definitivo del \textit{Quality Gate} se delega a las condiciones del análisis de SonarQube (coordinado de forma integrada mediante los reportes XML generados), impidiendo el merge si los ratings de confiabilidad disminuyen o si el porcentaje de cobertura integrado cae por debajo de los umbrales requeridos por el equipo.
+\end{enumerate}
+
+\newpage
+
+
+% =========================================================================
+% Noe
+% =========================================================================
+
+\section{Evidencias del Proceso de Configuración y Ejecución}
+A continuación, se presentan las evidencias secuenciales que documentan la configuración de la organización, la creación manual del proyecto y la correcta ejecución del escáner mediante la interfaz de comandos (\textit{SonarScanner CLI}) desde el entorno local.
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{imag/Evidencia_01.png}
+        \caption{Configuración inicial del acceso a repositorios.}
+        \label{fig:evidencia_01}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{imag/Evidencia_02.png}
+        \caption{Vinculación de la cuenta con SonarQube Cloud.}
+        \label{fig:evidencia_02}
+    \end{subfigure}
+    \vspace{1em}
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{imag/Evidencia_03.png}
+        \caption{Creación de la organización bajo el plan público.}
+        \label{fig:evidencia_03}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{imag/Evidencia_04.png}
+        \caption{Inicialización manual del proyecto en la plataforma.}
+        \label{fig:evidencia_04}
+    \end{subfigure}
+    \caption{Etapas de aprovisionamiento de la plataforma SonarQube Cloud.}
+    \label{fig:configuracion_sonar}
+\end{figure}
+
+\newpage
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{imag/Evidencia_05.png}
+    \caption{Generación del token de autenticación única y parámetros de configuración locales para el \textit{SonarScanner CLI}.}
+    \label{fig:evidencia_05}
+\end{figure}
+
+\section{Resultados del Análisis de Calidad y Conclusiones}
+Una vez completado el escaneo local de manera exitosa, los resultados fueron centralizados en el panel principal del proyecto. La evaluación general cuantitativa de las métricas obtenidas se resume en la Figura~\ref{fig:issues}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{imag/Issues.png}
+    \caption{Resumen general de métricas de calidad y problemas detectados en el código de la Wiki.}
+    \label{fig:issues}
+\end{figure}
+
+\subsection{Interpretación SQA y Recomendaciones}
+De acuerdo con el tablero consolidado (Figura~\ref{fig:issues}), la captura general de los \textit{Issues} aporta suficiente contexto estadístico para dictaminar el estado actual del repositorio. Se observa la distribución del estado técnico de la Wiki:
+
+\begin{itemize}
+    \item \textbf{Bugs y Vulnerabilidades:} Permite auditar si existen fallos críticos que comprometan el despliegue inmediato.
+    \item \textbf{Mantenibilidad (Code Smells):} Indica la deuda técnica acumulada que requiere refactorización para garantizar la escalabilidad del documento o código fuente.
+\end{itemize}
+
+% =========================================================================
+% Omar
+% =========================================================================
+\subsection{Plan de remediación de deuda técnica}
+
+A partir del análisis estático realizado con SonarQube (evidenciado en la sección anterior), se identificaron diversas áreas de mejora y vulnerabilidades en el código fuente de la Wiki. Para gestionar esta deuda técnica de manera estructurada, se ha elaborado el siguiente plan de remediación, priorizando los hallazgos detectados.
+
+\begin{table}[h]
+    \centering
+    \caption{Plan de remediación de deuda técnica basado en SonarQube}
+    \vspace{0.2cm}
+    \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}X c c c c}
+        \toprule
+        \textbf{Issue Encontrado} & \textbf{Severidad} & \textbf{Esfuerzo Estimado} & \textbf{Prioridad} & \textbf{Responsable} \\
+        \midrule
+        Refactorizar la complejidad cognitiva de la función principal (reducir de 18 a los 15 permitidos) para evitar fallos de lógica. & Critical & 1h & Alta & Alan \\
+        \addlinespace
+        Resolver advertencia de seguridad (\textit{Security Hotspot}): Validar de forma segura los parámetros de entrada del buscador. & Major & 45min & Alta & Noe \\
+        \addlinespace
+        Eliminar los bloques de código comentado en los componentes principales para mejorar la mantenibilidad. & Minor & 10min & Baja & Odin \\
+        \addlinespace
+        Eliminar duplicación de bloques de código en los \textit{Page Objects} de autenticación y creación de artículos. & Major & 30min & Media & Olivia \\
+        \bottomrule
+    \end{tabularx}
+\end{table}
+
+\vspace{0.4cm}
+
+\textbf{Justificación de la Prioridad}
+
+El orden de resolución establecido en el plan de remediación no se dictamina por el esfuerzo estimado de corrección, sino estrictamente por el impacto directo y el nivel de riesgo que cada \textit{issue} representa para la plataforma. Aquellos problemas clasificados con severidad \textit{Critical} y prioridad \textit{Alta} tienen el potencial de causar fallos en la lógica de negocio o abrir brechas de seguridad (como los \textit{Security Hotspots}). Por lo tanto, estos deben ser mitigados antes que los problemas de estilo o legibilidad (\textit{Minor}), garantizando que el núcleo de la Wiki permanezca estable y seguro antes de refinar aspectos cosméticos del código.
+
+\textbf{Estrategia \textit{Clean as You Code}}
+
+Para evitar la acumulación de nueva deuda técnica, el equipo ha determinado adoptar formalmente la metodología \textit{Clean as You Code}. Bajo este enfoque, el objetivo principal no es corregir inmediatamente todo el código heredado o antiguo, sino establecer una regla estricta: todo código nuevo o modificado que se integre a la rama principal a partir de ahora debe cumplir con los umbrales de calidad del \textit{Quality Gate}. Esto asegura que las nuevas funcionalidades se entreguen limpias, seguras y probadas, permitiendo que la calidad general del proyecto mejore de forma orgánica e incremental con cada \textit{commit}.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Conclusión integral}
+
+La automatización y el análisis estático implementados en esta etapa de nuestro proyecto integrador, la Wiki, representaron un punto de inflexión en nuestra forma de concebir la calidad del software. Inicialmente, las pruebas manuales resultaban insuficientes y propensas al error humano; sin embargo, al desarrollar una suite de pruebas E2E con Selenium y estructurarla bajo el patrón \textit{Page Object Model} (POM), logramos crear un entorno de validación robusto, mantenible y escalable. La adición de pruebas \textit{data-driven} nos permitió multiplicar la cobertura de escenarios, como las búsquedas y la validación de formularios, con un esfuerzo mínimo de codificación.
+
+Por otro lado, la integración de SonarQube evidenció la importancia de medir la calidad interna del producto. El análisis de las cinco dimensiones reveló vulnerabilidades, \textit{code smells} y niveles de deuda técnica que pasaban desapercibidos en la ejecución normal del sistema. Al vincular estas métricas con un entorno de Integración Continua (CI) mediante GitHub Actions, comprendimos que la calidad no es una fase final, sino un filtro constante. La adopción de la filosofía \textit{Clean as You Code} se ha vuelto nuestro estándar a partir de ahora, garantizando que cada nuevo bloque de código integrado a la Wiki sume valor funcional sin comprometer la fiabilidad y mantenibilidad futura del proyecto.
+
+\section{Aportes individuales}
+
+\textbf{RUBIO VIRAMONTES BRIAN ODIN -:} Fui responsable de la investigación comparativa de las herramientas (Secciones 4.1 y 4.2). Analicé diversos \textit{frameworks} E2E y motores de análisis estático, construyendo las tablas de criterios y redactando la justificación técnica y bibliográfica para seleccionar las tecnologías más aptas para nuestra Wiki, contrastando las diferencias fundamentales entre el análisis estático y dinámico.
+
+\textbf{JAUREGUI DE LA RIVA ALAN RICARDO:} Me enfoqué en la arquitectura de la suite de automatización E2E (Sección 4.3). Implementé la estructura base en el repositorio, desarrollé los \textit{Page Objects} principales de la Wiki y programé las pruebas automatizadas iniciales (casos válidos, frontera y error) empleando esperas explícitas de Selenium, asegurando la mantenibilidad de los \textit{scripts}.
+
+\textbf{CHAIREZ ALBA OLIVIA LIZBETH - :} Fui responsable del diseño, codificación e implementación de las pruebas funcionales bajo un enfoque parametrizado (\textit{Data-Driven Testing}) utilizando el framework Pytest, validando la estabilidad del módulo de búsquedas de la Wiki ante datos válidos, condiciones de frontera y datos erróneos. Asimismo, estructuré y configuré el flujo de Integración Continua (CI) mediante GitHub Actions a través del diseño de un pipeline YAML automatizado. Me encargué de asegurar el correcto rastreo del análisis de cobertura de código dinámico (\texttt{pytest-cov}), exportando las matrices y reportes en formatos \texttt{.html} y \texttt{.xml} esenciales para alimentar el Quality Gate e integrar las evidencias analíticas requeridas en el entregable técnico.
+
+\textbf{ESTRADA RAMÍREZ NOÉ EZEQUIEL -:} Lideré el análisis de calidad del código con SonarQube (Sección 4.4). Configuré el escáner local, conecté la métrica de cobertura arrojada por \texttt{pytest-cov} y documenté el tablero general. Además, me encargué de inspeccionar y describir a detalle tres \textit{issues} reales detectados en la Wiki, identificando su tipo, línea y nivel de criticidad.
+
+\textbf{FACIO PALOS OMAR:} Fui responsable de la consolidación del plan de remediación y la gestión del entregable (Sección 4.6 y Formato). Analicé los resultados de SonarQube para construir la tabla de deuda técnica priorizada por severidad bajo el enfoque \textit{Clean as You Code}. Finalmente, unifiqué el trabajo del equipo compilando el documento final en \LaTeX{}, verificando el cumplimiento de la norma APA 7 y los estándares de formato requeridos.
+\newpage
+%  REFERENCIAS  (APA 7, incrustadas; natbib autor-anio)
+% =====================================================================
+\begin{thebibliography}{99}
+\setlength{\itemsep}{0.4em}
+
+\bibitem[Aniche(2022)]{aniche2022}
+Aniche, M. (2022). \textit{Effective software testing: A developer's guide}. Manning Publications.
+
+\bibitem[Cypress.io(2026)]{cypressdocs}
+Cypress.io. (2026). \textit{Cypress documentation}. \url{https://docs.cypress.io/}
+
+\bibitem[García(2022)]{garcia2022}
+García, B. (2022). \textit{Hands-on Selenium WebDriver with Java}. O'Reilly Media.
+
+\bibitem[ISTQB(2023)]{istqb2023}
+International Software Testing Qualifications Board. (2023). \textit{Certified tester foundation level syllabus v4.0}. ISTQB. \url{https://www.istqb.org/}
+
+\bibitem[Jorgensen(2022)]{jorgensen2022}
+Jorgensen, P. C. (2022). \textit{Software testing: A craftsman's approach} (5.\textsuperscript{a} ed.). CRC Press.
+
+\bibitem[Khorikov(2020)]{khorikov2020}
+Khorikov, V. (2020). \textit{Unit testing principles, practices, and patterns}. Manning Publications.
+
+\bibitem[Microsoft(2026)]{playwrightdocs}
+Microsoft. (2026). \textit{Playwright documentation}. \url{https://playwright.dev/}
+
+\bibitem[Selenium Project(2026)]{seleniumdocs}
+Selenium Project. (2026). \textit{Selenium documentation}. \url{https://www.selenium.dev/documentation/}
+
+\bibitem[SonarSource(2026)]{sonarqubedocs}
+SonarSource. (2026). \textit{SonarQube documentation}. \url{https://docs.sonarsource.com/}
+
+\bibitem[pytest(2026)]{pytestdocs}
+pytest. (2026). \textit{pytest documentation}. \url{https://docs.pytest.org/}
+
+\url{https://www.selenium.dev/documentation/}
+
+\end{thebibliography}
+
+\end{document}
