@@ -1,0 +1,35 @@
+name: Pruebas Automatizadas E2E
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+
+    - name: Install dependencies
+      run: |
+        pip install -r tests/requirements.txt
+
+    - name: Run tests
+      run: |
+        cd tests
+        pytest tests/ --cov=pages --cov-report=xml --html=reporte.html --self-contained-html -v
+      continue-on-error: true
+
+    - name: Upload HTML report
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: pytest-report
+        path: tests/reporte.html

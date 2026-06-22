@@ -1,0 +1,310 @@
+% =====================================================================
+%  Actividad en equipo en clase — Semana 4, Sesión 1
+%  "Conteo IFPUG colaborativo — Sistema 'CitasUPA'"
+%  Estándares y Métricas para el Desarrollo de Software (E-EMDS-2)
+%  UPA — TIID 5° cuatrimestre — Mayo 2026
+% =====================================================================
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-tabla]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=1.6cm,top=1.5cm,bottom=1.5cm]{geometry}
+\usepackage[table]{xcolor}
+\usepackage{colortbl}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{amsmath}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+\usepackage[hidelinks]{hyperref}
+
+\definecolor{accent}{HTML}{0F766E}
+\definecolor{accentbg}{HTML}{ECFDF5}
+\definecolor{darktext}{HTML}{1F2937}
+\definecolor{midtext}{HTML}{4B5563}
+\definecolor{lighttext}{HTML}{6B7280}
+\definecolor{rowalt}{HTML}{F3F4F6}
+\definecolor{redaccent}{HTML}{DC2626}
+\definecolor{amber}{HTML}{D97706}
+\definecolor{amberbg}{HTML}{FEF3C7}
+
+\renewcommand{\familydefault}{\sfdefault}
+
+\titleformat{\section}
+  {\color{darktext}\sffamily\large\bfseries}
+  {}{0pt}{}[{\color{accent}\rule{1.2cm}{1.5pt}}]
+\titlespacing*{\section}{0pt}{10pt}{4pt}
+
+\titleformat{\subsection}
+  {\color{accent}\sffamily\normalsize\bfseries}
+  {}{0pt}{}
+\titlespacing*{\subsection}{0pt}{6pt}{2pt}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyfoot[L]{\color{lighttext}\footnotesize\itshape EMDS --- Actividad en equipo S4.1: Conteo IFPUG (CitasUPA)}
+\fancyfoot[R]{\color{lighttext}\footnotesize\thepage}
+
+\newcommand{\institutionalheader}{%
+\noindent
+\hfill{\color{lighttext}\small\itshape Estándares y Métricas para el Desarrollo de Software\,---\,E-EMDS-2}\\[0.15em]
+{\color{accent}\rule{1.3cm}{2pt}}\\[0.15em]
+{\color{darktext}\fontsize{18}{21}\selectfont\bfseries Actividad en equipo\,---\,Semana 4, Sesión 9}\\[0.15em]
+{\color{accent}\fontsize{12}{14}\selectfont\bfseries Conteo IFPUG colaborativo \textmd{\color{midtext}--- Sistema ``CitasUPA''}}\\[0.3em]
+}
+
+\begin{document}
+\thispagestyle{fancy}
+\institutionalheader
+
+% ---------- Datos del equipo ----------
+\renewcommand{\arraystretch}{1.4}
+\noindent
+\begin{tabularx}{\linewidth}{|>{\columncolor{accentbg}\bfseries\footnotesize}p{1.8cm}|X|>{\columncolor{accentbg}\bfseries\footnotesize}p{1.2cm}|p{1.6cm}|>{\columncolor{accentbg}\bfseries\footnotesize}p{1.2cm}|p{2.5cm}|}
+  \hline
+  Equipo \# & & Grupo & & Fecha & \\\hline
+\end{tabularx}\\[0.2em]
+
+\noindent
+\renewcommand{\arraystretch}{1.5}
+\begin{tabularx}{\linewidth}{|>{\columncolor{accentbg}\bfseries\footnotesize}p{2.2cm}|>{\small}p{0.5cm}|>{\small}X|>{\small}p{0.5cm}|>{\small}X|}
+  \hline
+  \multirow{2}{*}{\bfseries Integrantes} & \textbf{1.} & & \textbf{2.} & \\\cline{2-5}
+                                         & \textbf{3.} & & \textbf{4.} & \\\hline
+\end{tabularx}
+
+% ---------- Instrucciones ----------
+\section*{Instrucciones}
+
+\noindent
+\textbf{Modalidad:} equipo designado. \quad
+\textbf{Valor:} 10 pts (mismo puntaje para todo el equipo).\\[0.2em]
+Apliquen el método \textbf{IFPUG de Puntos de Función} al sistema \emph{CitasUPA} descrito abajo. Trabajen los \textbf{cinco pasos} en orden: identificación, clasificación, UFP, GSC/VAF y AFP. Justifiquen sus decisiones por escrito; el docente revisará la coherencia entre pasos.
+
+\medskip
+\noindent\colorbox{amberbg}{\parbox{\dimexpr\linewidth-2\fboxsep}{%
+\textbf{\color{amber}Regla de equipo:} no se acepta que una sola persona resuelva la actividad. Cada integrante debe \textbf{firmar} qué paso lideró (parte inferior de la última página).}}
+
+% ---------- Caso ----------
+\section*{Caso: sistema \emph{``CitasUPA''}}
+
+\colorbox{accentbg}{\parbox{\dimexpr\linewidth-2\fboxsep}{%
+\textbf{Descripción del módulo a estimar.}\\[0.3em]
+La Coordinación Estudiantil de la UPA desea un módulo web para que los alumnos agenden citas con tutores académicos.
+\begin{itemize}[leftmargin=1.3em,itemsep=0.05em,topsep=0.2em]
+  \item \textbf{Funciones que expone al usuario:}
+  \begin{enumerate}[leftmargin=1.2em,itemsep=0em,topsep=0.05em,label=(\arabic*)]
+    \item Formulario para que el alumno solicite una cita (selecciona tutor, fecha, hora, motivo).
+    \item Formulario para que el tutor confirme, reagende o cancele la cita.
+    \item Listado de las citas vigentes del alumno (consulta simple sin cálculos).
+    \item Listado de las citas vigentes del tutor (consulta simple).
+    \item Reporte mensual con totales: citas atendidas, canceladas, reagendadas, no asistencias, y promedio de duración (incluye cálculos).
+  \end{enumerate}
+  \item \textbf{Datos mantenidos por el sistema:} una tabla \texttt{citas} y una tabla \texttt{usuarios} (alumnos y tutores).
+  \item \textbf{Datos de otro sistema:} catálogo \texttt{materias} (proveniente del sistema escolar institucional, solo lectura).
+  \item \textbf{Stack tentativo:} Java + Spring Boot + PostgreSQL + frontend React.
+  \item \textbf{Tamaño del equipo:} 4 personas. Aplicación intranet (no requiere alta disponibilidad).
+\end{itemize}
+}}
+
+\clearpage
+
+% ============================================================================
+% PASO 1
+% ============================================================================
+\section*{Paso 1 --- Identificación de componentes \hfill {\normalsize\color{lighttext}\itshape (2 puntos)}}
+
+\noindent
+Clasifiquen cada elemento del caso en \textbf{uno} de los cinco tipos IFPUG: ILF, EIF, EI, EO, EQ.
+
+\renewcommand{\arraystretch}{1.5}
+\noindent
+\begin{tabularx}{\linewidth}{|>{\columncolor{accentbg}\bfseries\small\centering\arraybackslash}p{1.6cm}|>{\small}X|>{\columncolor{accentbg}\bfseries\small\centering\arraybackslash}p{1.4cm}|}
+  \hline
+  \rowcolor{accent}
+  {\color{white}\textbf{\#}} &
+  {\color{white}\textbf{Elemento del caso (escriban con sus palabras)}} &
+  {\color{white}\textbf{Tipo IFPUG}} \\\hline
+  1 & & \\\hline
+  2 & & \\\hline
+  3 & & \\\hline
+  4 & & \\\hline
+  5 & & \\\hline
+  6 & & \\\hline
+  7 & & \\\hline
+\end{tabularx}
+
+% ============================================================================
+% PASO 2
+% ============================================================================
+\section*{Paso 2 --- Clasificación por complejidad \hfill {\normalsize\color{lighttext}\itshape (2 puntos)}}
+
+\noindent
+Para cada componente del Paso 1, decidan complejidad \textbf{Baja, Media o Alta}. Justifiquen brevemente.
+
+\renewcommand{\arraystretch}{1.5}
+\noindent
+\begin{tabularx}{\linewidth}{|>{\columncolor{accentbg}\bfseries\small\centering\arraybackslash}p{1.6cm}|>{\columncolor{accentbg}\bfseries\small\centering\arraybackslash}p{1.4cm}|>{\columncolor{accentbg}\bfseries\small\centering\arraybackslash}p{1.8cm}|>{\small}X|}
+  \hline
+  \rowcolor{accent}
+  {\color{white}\textbf{\#}} &
+  {\color{white}\textbf{Tipo}} &
+  {\color{white}\textbf{Complejidad}} &
+  {\color{white}\textbf{Justificación (1 línea)}} \\\hline
+  1 & & & \\\hline
+  2 & & & \\\hline
+  3 & & & \\\hline
+  4 & & & \\\hline
+  5 & & & \\\hline
+  6 & & & \\\hline
+  7 & & & \\\hline
+\end{tabularx}
+
+\clearpage
+
+% ============================================================================
+% PASO 3
+% ============================================================================
+\section*{Paso 3 --- Cálculo de los UFP \hfill {\normalsize\color{lighttext}\itshape (2 puntos)}}
+
+\noindent
+Llenen la matriz con los pesos IFPUG y obtengan los Puntos de Función no Ajustados (UFP).
+Pesos IFPUG: \textbf{ILF} 7/10/15; \textbf{EIF} 5/7/10; \textbf{EI} 3/4/6; \textbf{EO} 4/5/7; \textbf{EQ} 3/4/6.
+
+\renewcommand{\arraystretch}{1.5}
+\noindent
+\begin{tabularx}{\linewidth}{|>{\columncolor{accentbg}\bfseries\small\centering\arraybackslash}p{1.4cm}|X|X|X|X|X|}
+  \hline
+  \rowcolor{accent}
+  {\color{white}\textbf{Tipo}} &
+  {\color{white}\centering\textbf{Cant.\ Baja $\times$ peso}} &
+  {\color{white}\centering\textbf{Cant.\ Media $\times$ peso}} &
+  {\color{white}\centering\textbf{Cant.\ Alta $\times$ peso}} &
+  {\color{white}\centering\textbf{Subtotal}} & \\\hline
+  ILF & & & & & \\\hline
+  EIF & & & & & \\\hline
+  EI  & & & & & \\\hline
+  EO  & & & & & \\\hline
+  EQ  & & & & & \\\hline
+  \rowcolor{accentbg}
+  \textbf{Total UFP} & \multicolumn{5}{c|}{} \\\hline
+\end{tabularx}
+
+% ============================================================================
+% PASO 4
+% ============================================================================
+\section*{Paso 4 --- Evaluación de las 14 GSC y cálculo del VAF \hfill {\normalsize\color{lighttext}\itshape (2 puntos)}}
+
+\noindent
+Asignen un valor de \textbf{0 a 5} a cada Característica General del Sistema, según el contexto de \emph{CitasUPA} (intranet, sin alta disponibilidad, equipo pequeño).
+Sumen y calculen $\text{VAF} = 0{,}65 + 0{,}01 \cdot \sum \text{GSC}$.
+
+\renewcommand{\arraystretch}{1.4}
+\noindent
+{\footnotesize
+\begin{tabularx}{\linewidth}{|>{\bfseries}p{4.5cm}|>{\centering\arraybackslash}p{1cm}|>{\bfseries}p{4.5cm}|>{\centering\arraybackslash}p{1cm}|}
+  \hline
+  \rowcolor{accent}
+  {\color{white}\textbf{Característica GSC}} & {\color{white}\textbf{0-5}} &
+  {\color{white}\textbf{Característica GSC}} & {\color{white}\textbf{0-5}} \\\hline
+  1. Comunicaciones de datos     & & 8. Actualización en línea     & \\\hline
+  2. Procesamiento distribuido   & & 9. Procesamiento complejo     & \\\hline
+  3. Rendimiento                 & & 10. Reusabilidad              & \\\hline
+  4. Uso intensivo de config.    & & 11. Facilidad de instalación  & \\\hline
+  5. Tasa de transacciones       & & 12. Facilidad de operación    & \\\hline
+  6. Entrada de datos en línea   & & 13. Múltiples sitios          & \\\hline
+  7. Eficiencia del usuario final& & 14. Facilidad de cambio       & \\\hline
+\end{tabularx}}
+
+\medskip
+\noindent
+\begin{tabularx}{\linewidth}{|>{\columncolor{accentbg}\bfseries\small}p{4cm}|X|>{\columncolor{accentbg}\bfseries\small}p{2cm}|X|}
+  \hline
+  Suma $\sum \text{GSC}$ & & VAF $=$ & \\\hline
+\end{tabularx}
+
+\clearpage
+
+% ============================================================================
+% PASO 5
+% ============================================================================
+\section*{Paso 5 --- AFP y conversión a esfuerzo \hfill {\normalsize\color{lighttext}\itshape (1 punto)}}
+
+\noindent
+Calculen los Puntos de Función Ajustados y conviertan a horas de esfuerzo.
+Usen un factor de productividad de \textbf{12 horas por AFP} (típico para aplicación web Java/Spring).
+
+\medskip
+\renewcommand{\arraystretch}{1.7}
+\noindent
+\begin{tabularx}{\linewidth}{|>{\columncolor{accentbg}\bfseries}p{4.5cm}|X|}
+  \hline
+  $\text{AFP} = \text{UFP} \cdot \text{VAF}$ & \\\hline
+  Esfuerzo (h) $= \text{AFP} \cdot 12$ & \\\hline
+  Equivalencia en meses-persona (1 mes $=$ 160 h) & \\\hline
+\end{tabularx}
+
+% ============================================================================
+% PASO 6 (reflexión)
+% ============================================================================
+\section*{Paso 6 --- Análisis de equipo \hfill {\normalsize\color{lighttext}\itshape (1 punto)}}
+
+\noindent
+Respondan en una o dos líneas cada una:
+
+\renewcommand{\arraystretch}{1.7}
+\noindent
+\begin{tabularx}{\linewidth}{|>{\columncolor{accentbg}\bfseries\small}p{6cm}|X|}
+  \hline
+  ¿Qué componente fue el más difícil de clasificar y por qué? & \\\hline
+  ¿Qué GSC les generó más debate? & \\\hline
+  Si en vez de intranet fuera una app pública, ¿qué GSC subirían y por qué? & \\\hline
+\end{tabularx}
+
+% ============================================================================
+% FIRMAS POR PASO
+% ============================================================================
+\section*{Firma de aporte por integrante}
+
+\noindent\textit{\small\color{lighttext}Cada integrante firma frente a el/los paso(s) que lideró. Si la repartición se ve desbalanceada, se descuenta a todo el equipo.}
+
+\medskip
+\renewcommand{\arraystretch}{1.6}
+\noindent
+\begin{tabularx}{\linewidth}{|>{\columncolor{accentbg}\bfseries\small}p{1.5cm}|X|X|X|X|}
+  \hline
+  Paso & Integrante 1 & Integrante 2 & Integrante 3 & Integrante 4 \\\hline
+  Paso 1 & & & & \\\hline
+  Paso 2 & & & & \\\hline
+  Paso 3 & & & & \\\hline
+  Paso 4 & & & & \\\hline
+  Paso 5 & & & & \\\hline
+  Paso 6 & & & & \\\hline
+\end{tabularx}
+
+% ============================================================================
+% VALIDACIÓN
+% ============================================================================
+\vspace{0.4em}
+\section*{Validación}
+
+\renewcommand{\arraystretch}{1.7}
+\noindent
+\begin{tabularx}{\linewidth}{|>{\columncolor{accentbg}\bfseries\small}p{3.0cm}|X|>{\columncolor{accentbg}\bfseries\small}p{2.4cm}|X|}
+  \hline
+  Firma del líder & & Firma del docente & \\\hline
+  Hora de entrega & & Calificación / 10 & \\\hline
+\end{tabularx}\\[0.3em]
+
+\noindent{\footnotesize\color{lighttext}\itshape
+Genera 1 firma del rubro \emph{Actividades en clase} (10\,\%) para cada integrante presente. En la revisión grupal compararemos los UFP y AFP obtenidos por cada equipo.}
+
+\end{document}
