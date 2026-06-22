@@ -1,3 +1,4 @@
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=wiki-sqa_wiki-analisis&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=wiki-sqa_wiki-analisis)
 # outline-sqa-docs
 
 El siguiente repositiorio tiene como objetivo tener una documentacion del trabajo que cada quien hizo en el equipo, teniendo como objetivo una mayor organizacion en el equipo, a continuacion se mencionan de lo que se encargara cada quien en el proyecto, se subiran los cambios al repositiorio aqui, tanto su formato tex como pdf, para al final unir el trabajo y subirlo al apartado correspondiente.
