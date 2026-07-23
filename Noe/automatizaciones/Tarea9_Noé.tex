@@ -1,0 +1,137 @@
+\documentclass[12pt, letterpaper]{article}
+
+% =========================================================
+% PAQUETES DE CONFIGURACIÓN Y IDIOMA
+% =========================================================
+\usepackage[spanish, es-tabla]{babel}
+\usepackage[utf8]{utf8}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{amsmath, amssymb}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{hyperref}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    citecolor=blue,
+    pdftitle={Reporte de Métricas y Calidad - Proyecto Outline},
+    pdfpagemode=FullScreen,
+}
+
+% =========================================================
+% ENCABEZADO Y DATOS DEL PROYECTO
+% =========================================================
+\title{\textbf{Proyecto Integrador: Outline}\\ \large Subsección 4.4: Investigación de Métricas Reportables e Interpretación}
+\author{\textbf{Noé Ezequiel Estrada Ramirez} \\ Líder / Analista --- Equipo: \texttt{TIID05B\_Equipo4} \\ Docente: Dr. Raul Velasquez}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\hrule
+\vspace{0.5cm}
+
+% =========================================================
+% SECCIÓN 4.4: INVESTIGACIÓN DE MÉTRICAS REPORTABLES E INTERPRETACIONAL
+% =========================================================
+
+\section{Estrategia y Métricas de Calidad de Software}
+
+\subsection{Investigación: métricas reportables e interpretación}
+
+La evaluación cuantitativa del software requiere la definición formal de métricas tanto de producto (código fuente y estructura) como de proceso de pruebas \cite{iso25010, galin2018}. A continuación, se clasifican las métricas clave, sus umbrales de referencia y su correspondencia con el modelo de calidad ISO/IEC 25010:2023 e ISO/IEC 5055:2021 \cite{iso25023, iso5055}.
+
+\begin{table}[H]
+\centering
+\small
+\caption{Métricas reportables de código y pruebas ligadas a ISO/IEC 25010:2023.}
+\label{tab:metricas_calidad}
+\begin{tabular}{|p{2.5cm}|p{3.2cm}|p{3.5cm}|p{2.8cm}|p{3.0cm}|}
+\hline
+\textbf{Categoría} & \textbf{Métrica} & \textbf{Fórmula / Indicador} & \textbf{Umbral de Referencia} & \textbf{Característica ISO 25010} \\ \hline
+Código & Complejidad Ciclomática $V(G)$ & $V(G) = P + 1$ \cite{mccabe1976} & $V(G) \le 10$ por función & Mantenibilidad (Analizabilidad) \\ \hline
+Código & Halstead (Volumen $V$) & $V = (N_1 + N_2) \log_2 (n_1 + n_2)$ & $V \le 1000$ bits/módulo & Mantenibilidad (Comprensibilidad) \\ \hline
+Código & Puntos de Función (IFPUG) & Conteo funcional de ILF, EIF, EI, EO, EQ & Según la historia ($\le 5$ FP/HU) & Adecuación Funcional \\ \hline
+Estructural & Reglas ISO/IEC 5055 & Violaciones estáticas en 4 pilares & 0 fallas críticas & Seguridad y Mantenibilidad \\ \hline
+Pruebas & Cobertura de Código & $\frac{\text{Líneas Ejecutadas}}{\text{Líneas Totales}} \times 100$ & $\ge 80\%$ (Outline: $62\%$) & Testabilidad (Mantenibilidad) \\ \hline
+Pruebas & Densidad de Defectos & $\frac{\text{Defectos Conf.}}{\text{KLOC}}$ & $\le 1.0$ defectos/KLOC & Confiabilidad (Madurez) \\ \hline
+Pruebas & Tasa de Aprobación & $\frac{\text{Casos Aprobados}}{\text{Casos Ejecutados}} \times 100$ & $\ge 95\%$ (Outline: $100\%$) & Correctitud Funcional \\ \hline
+\end{tabular}
+\end{table}
+
+\subsubsection{Análisis e Interpretación de Métricas de Código y Pruebas}
+
+\begin{itemize}
+    \item \textbf{Complejidad Ciclomática de McCabe ($V(G)$):} Determina el número de caminos independientes en el flujo de ejecución \cite{mccabe1976}. Valores superiores a 10 reflejan baja mantenibilidad y exigen división modular.
+    \item \textbf{Métricas de Halstead:} Evalúan la complejidad cuantitativa midiendo operadores ($n_1, N_1$) y operandos ($n_2, N_2$) únicos y totales \cite{galin2018}. Un volumen o dificultad elevado incrementa la probabilidad de inconsistencias lógicas.
+    \item \textbf{Métricas Estructurales ISO/IEC 5055:2021:} Analizan cuantitativamente las vulnerabilidades en código fuente que impactan en la confiabilidad y mantenibilidad, detectando patrones indeseables antes del despliegue \cite{iso5055}.
+    \item \textbf{Métricas de Pruebas (Cobertura y Densidad):} La cobertura de código permite verificar la efectividad de los casos de prueba ejecutados (e.g. Selenium/PyTest). La densidad de defectos valida la estabilidad de las funcionalidades del sistema \cite{istqb2024}.
+\end{itemize}
+
+\subsubsection{Cuadro de KPIs Definidos para el Proyecto Outline}
+
+A partir de la especificación de calidad de la wiki interna \textit{Outline}, se consolidan los 7 KPIs clave de desempeño y calidad de software \cite{pressman2020}:
+
+\begin{enumerate}
+    \item \textbf{KPI-01 (Complejidad Ciclomática):} $V(G) \le 8$ promedio por módulo de edición.
+    \item \textbf{KPI-02 (Duplicación de Código):} Duplicación $< 3\%$ según reporte estático SonarQube / ISO 5055.
+    \item \textbf{KPI-03 (Cobertura de Pruebas):} Cobertura de código automatizado $\ge 80\%$ (Meta de refactorización respecto al $62\%$ de P2).
+    \item \textbf{KPI-04 (Densidad de Defectos):} $< 0.8$ defectos por KLOC en etapa de integración.
+    \item \textbf{KPI-05 (Tasa de Aprobación de Pruebas):} $100\%$ de aprobación en la suite de regresión funcional (42/42 pruebas pasadas).
+    \item \textbf{KPI-06 (Seguridad en Código):} 0 vulnerabilidades de severidad Alta/Bloqueante.
+    \item \textbf{KPI-07 (Comportamiento Temporal):} Tiempo de respuesta $< 500$\,ms al renderizar notas Markdown.
+\end{enumerate}
+
+\vspace{0.8cm}
+\hrule
+\vspace{0.5cm}
+
+% =========================================================
+% SECCIÓN 6: APORTE INDIVIDUAL
+% =========================================================
+
+\section{Aportes Individuales}
+
+\subsection*{Aporte Individual: Noé Ezequiel Estrada Ramirez (Líder / Analista)}
+
+Durante el desarrollo de esta investigación, coordiné la estructuración analítica de las métricas de calidad de software aplicables al proyecto Outline, integrando las especificaciones de ISO/IEC 25010:2023, ISO/IEC 25023 e ISO/IEC 5055:2021. Fundamenté la relación entre las métricas de código (McCabe, Halstead e IFPUG) y las métricas de pruebas automáticas (cobertura y densidad de defectos), definiendo los umbrales de tolerancia técnica y consolidando el conjunto de KPIs del proyecto. Este análisis permitió establecer criterios claros para interpretar los resultados del análisis estático y dinámico en el reporte integrador.
+
+\vspace{0.8cm}
+
+% =========================================================
+% BIBLIOGRAFÍA DE REFERENCIA
+% =========================================================
+
+\begin{thebibliography}{9}
+
+\bibitem{iso25010}
+ISO/IEC 25010:2023, \textit{Systems and software engineering --- Systems and software Quality Requirements and Evaluation (SQuaRE) --- Product quality model}, International Organization for Standardization, 2023.
+
+\bibitem{iso25023}
+ISO/IEC 25023:2016, \textit{Systems and software engineering --- SQuaRE --- Measurement of system and software product quality}, International Organization for Standardization, 2016.
+
+\bibitem{iso5055}
+ISO/IEC 5055:2021, \textit{Software engineering --- Software product quality measurement --- Automated source code quality metrics}, International Organization for Standardization, 2021.
+
+\bibitem{mccabe1976}
+McCabe, T. J. (1976). A Complexity Measure. \textit{IEEE Transactions on Software Engineering}, SE-2(4), 308-320.
+
+\bibitem{galin2018}
+Galin, D. (2018). \textit{Software Quality Assurance: From theory to implementation}. John Wiley \& Sons.
+
+\bibitem{istqb2024}
+ISTQB. (2024). \textit{Certified Tester Foundation Level (CTFL) Syllabus v4.0}. International Software Testing Qualifications Board.
+
+\bibitem{pressman2020}
+Pressman, R. S., \& Maxim, B. R. (2020). \textit{Software Engineering: A Practitioner's Approach} (9th ed.). McGraw-Hill Education.
+
+\end{thebibliography}
+
+\end{document}
