@@ -1,0 +1,592 @@
+\documentclass[12pt, letterpaper]{article}
+
+% =========================================================
+% PAQUETES DE CONFIGURACIÓN Y IDIOMA
+% =========================================================
+\usepackage[spanish, es-tabla]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{amsmath, amssymb}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{parskip}
+\usepackage{setspace}
+\usepackage{titlesec}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{tikz}
+\usepackage{subcaption}
+\usepackage{enumitem}
+\usepackage{multirow}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins}
+\usepackage{csquotes}   % Necesario para biblatex con babel
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,
+    urlcolor=cyan,
+    citecolor=blue,
+    pdftitle={Tarea 09 - Documentación de la Calidad - Proyecto Outline},
+    pdfpagemode=FullScreen,
+}
+
+% Configuración de títulos
+\titleformat{\section}{\large\bfseries}{}{0em}{}
+\titleformat{\subsection}{\normalsize\bfseries}{}{0em}{}
+\titleformat{\subsubsection}{\normalsize\bfseries\itshape}{}{0em}{}
+
+\setlength{\parindent}{0pt}
+\renewcommand{\baselinestretch}{1.15}
+
+% ---- BIBLIOGRAFÍA CON BIBLATEX (APA 7) ----
+\usepackage[backend=biber, style=apa, citestyle=apa]{biblatex}
+
+% =========================================================
+% TODAS LAS REFERENCIAS ESTÁN AQUÍ DENTRO (no necesitas archivo .bib)
+% =========================================================
+\begin{filecontents*}{referencias.bib}
+@book{ieee730,
+    title = {IEEE Standard for Software Quality Assurance Processes (IEEE Std 730-2014)},
+    author = {{IEEE}},
+    year = {2014},
+    publisher = {IEEE},
+    doi = {10.1109/IEEESTD.2014.6835311}
+}
+@standard{iso29119,
+    title = {ISO/IEC/IEEE 29119-3:2021 — Software and systems engineering — Software testing — Part 3: Test documentation},
+    author = {{ISO/IEC}},
+    year = {2022},
+    organization = {ISO/IEC}
+}
+@standard{ieee829,
+    title = {IEEE Standard for Software Test Documentation (IEEE Std 829-1998)},
+    author = {{IEEE}},
+    year = {1998},
+    publisher = {IEEE},
+    note = {Reemplazado en parte por ISO/IEC 29119-3}
+}
+@standard{iso25010,
+    title = {ISO/IEC 25010:2023 — Systems and software engineering — SQuaRE — Product quality model},
+    author = {{ISO/IEC}},
+    year = {2023},
+    organization = {ISO/IEC}
+}
+@standard{iso25023,
+    title = {ISO/IEC 25023:2016 — Systems and software engineering — SQuaRE — Measurement of product quality},
+    author = {{ISO/IEC}},
+    year = {2016},
+    organization = {ISO/IEC}
+}
+@standard{iso5055,
+    title = {ISO/IEC 5055:2021 — Automated Source Code Quality Measures},
+    author = {{ISO/IEC}},
+    year = {2021},
+    organization = {ISO/IEC}
+}
+@book{galin2018,
+    title = {Software Quality: Concepts and Practice},
+    author = {Galin, Daniel},
+    year = {2018},
+    publisher = {Wiley-IEEE Computer Society},
+    isbn = {978-1-119-13449-7}
+}
+@book{pressman2020,
+    title = {Software Engineering: A Practitioner's Approach},
+    author = {Pressman, Roger S. and Maxim, Bruce R.},
+    year = {2020},
+    publisher = {McGraw-Hill},
+    edition = {9th},
+    isbn = {978-1-259-87297-6}
+}
+@manual{istqb2024,
+    title = {ISTQB Glossary of Testing Terms v4.4},
+    author = {{ISTQB}},
+    year = {2024},
+    url = {https://glossary.istqb.org}
+}
+@article{mccabe1976,
+    title = {A Complexity Measure},
+    author = {McCabe, Thomas J.},
+    year = {1976},
+    journal = {IEEE Transactions on Software Engineering},
+    volume = {SE-2},
+    number = {4},
+    pages = {308--320},
+    doi = {10.1109/TSE.1976.233837}
+}
+@book{galin_full,
+    title = {Software Quality Assurance: From theory to implementation},
+    author = {Galin, Daniel},
+    year = {2018},
+    publisher = {John Wiley \& Sons}
+}
+@manual{ifpug2010,
+    title = {Function Point Counting Practices Manual, Release 4.3.1},
+    author = {{IFPUG}},
+    year = {2010},
+    organization = {International Function Point Users Group}
+}
+@techreport{karner1993,
+    title = {Resource Estimation for Objectory Projects},
+    author = {Karner, Gustav},
+    year = {1993},
+    institution = {Objectory Systems}
+}
+@book{cohn2005,
+    title = {Agile Estimating and Planning},
+    author = {Cohn, Mike},
+    year = {2005},
+    publisher = {Prentice Hall},
+    isbn = {978-0-13-147941-8}
+}
+@book{boehm2000,
+    title = {Software Cost Estimation with COCOMO II},
+    author = {Boehm, Barry and Abts, Chris and Brown, A. Winsor and Chulani, Sunita and Clark, Bradford and Horowitz, Ellis and Madachy, Ray and Reifer, Donald and Steece, Bert},
+    year = {2000},
+    publisher = {Prentice Hall PTR},
+    isbn = {978-0-13-026692-6}
+}
+@misc{qsm2024,
+    title = {Function Point Languages Table},
+    author = {{QSM}},
+    year = {2024},
+    url = {https://qsm.com/resources/function-point-languages-table/},
+    note = {Accedido: 30 de mayo de 2026}
+}
+\end{filecontents*}
+\addbibresource{referencias.bib}
+
+\begin{document}
+
+% ==================== PORTADA ====================
+\begin{titlepage}
+    \thispagestyle{empty}
+    \begin{center}
+        \large \textbf{UNIVERSIDAD POLITÉCNICA DE AGUASCALIENTES}\\
+        \normalsize \uppercase{Ingeniería en Tecnologías de la Información e Innovación Digital} \\
+
+        \vspace{0.3cm}
+        \begin{center}
+            \includegraphics[width=0.4\textwidth, height=2.6cm, keepaspectratio]{imagenes/LOGO UPA.png}
+            \hspace{0.6cm}
+            \includegraphics[width=0.3\textwidth, height=2.6cm, keepaspectratio]{imagenes/TIID UPA.png}
+        \end{center}
+
+        \vspace{0.2cm}
+        \rule{\linewidth}{0.3mm} \\
+        { \huge \bfseries Tarea 09: Documentación de la Calidad\\[0.1cm]
+          \large Informe Técnico Integrado del Proyecto Outline }
+        \rule{\linewidth}{0.3mm} \\
+
+        \vspace{0.15cm}
+
+        {\large \textbf{ASIGNATURA}}\\
+        Estándares y Métricas para el Desarrollo de Software\\
+
+        \vspace{0.2cm}
+
+        {\large \textbf{DOCENTE}}\\
+        Dr(c). Raul Alejandro Velasquez Ortiz \\
+
+        \vspace{0.2cm}
+
+        {\large \textbf{PROYECTO INTEGRADOR}}\\
+        Outline - Wiki interna estilo Notion (Open Source maduro) \\
+
+        \vspace{0.2cm}
+
+        {\large \textbf{EQUIPO No. 4}}\\
+        \begin{tabular}{ll}
+            CHAIREZ ALBA OLIVIA LIZBETH & UP240594 \\
+            ESTRADA RAMÍREZ NOÉ EZEQUIEL & UP240770 \\
+            FACIO PALOS OMAR & UP240470 \\
+            JAUREGUI DE LA RIVA ALAN RICARDO & UP240960 \\
+            RUBIO VIRAMONTES BRIAN ODIN & UP250004 \\
+        \end{tabular}
+
+        \vspace{0.2cm}
+
+        {\large \textbf{GRUPO}}\\
+        TIID05B
+
+        \vspace{0.2cm}
+
+        {\large \textbf{REPOSITORIO}}\\
+        \url{https://github.com/UP240594/outline-sqa-docs}
+
+        \vfill
+
+        {\large Aguascalientes, México\\
+        22 de julio de 2026}
+    \end{center}
+\end{titlepage}
+
+% ==================== ÍNDICE ====================
+\newpage
+\tableofcontents
+\newpage
+
+% ==================== 1. INTRODUCCIÓN ====================
+\section{Introducción}
+
+\subsection{Contexto del proyecto}
+
+El presente documento corresponde a la Tarea 09 de la asignatura Estándares y Métricas para el Desarrollo de Software, en la cual se investigan los estándares de documentación de la calidad y la estructura de los informes técnicos de calidad y de pruebas, aplicando esos hallazgos al reporte técnico integrado del proyecto integrador del equipo: \textbf{Outline}, una aplicación web de tipo wiki interna con funcionalidades similares a Notion, de código abierto y con una comunidad activa.
+
+Outline fue seleccionado del Catálogo de 30 alternativas (Semana 1) por su naturaleza madura (más de 5,000 estrellas en GitHub, licencia MIT) y por ser un caso realista para evaluar atributos de calidad como usabilidad, seguridad y fiabilidad. El proyecto será analizado desde la perspectiva de un equipo de desarrollo que busca adoptar, desplegar y posiblemente contribuir a este software en un entorno corporativo.
+
+\subsection{Propósito de la investigación}
+
+Esta tarea tiene como propósito que el equipo investigue qué dicen los estándares y las fuentes recientes sobre cómo documentar la calidad y las pruebas del software, y que aplique esos hallazgos estructurando el reporte técnico integrado de su proyecto (entregable final de la Unidad III). Este documento constituye el primer borrador del reporte integrador: la investigación fundamenta la estructura, y la aplicación produce las primeras secciones (introducción, alcance y metodología).
+
+\subsection{Objetivos específicos}
+
+\begin{enumerate}
+    \item Comparar los estándares de documentación de calidad y pruebas: IEEE 730, ISO/IEC/IEEE 29119 e IEEE 829.
+    \item Investigar la anatomía del informe técnico de calidad y del informe de pruebas (secciones obligatorias).
+    \item Investigar el concepto de trazabilidad (requisito $\to$ caso $\to$ defecto $\to$ métrica) y su matriz.
+    \item Investigar qué métricas son reportables y cómo se interpretan (ISO/IEC 25010:2023 / 25023).
+    \item Analizar y comparar dos ejemplos reales de informes de aseguramiento de calidad.
+    \item Proponer la estructura del reporte integrador y redactar sus primeras secciones.
+\end{enumerate}
+
+\subsection{Estructura del documento}
+
+El documento se organiza en seis secciones principales de desarrollo (4.1 a 4.6): estándares de documentación, anatomía del informe técnico, trazabilidad, métricas reportables, ejemplos reales y aplicación al proyecto Outline. Finaliza con conclusión, aportes individuales y referencias.
+
+% ==================== 4.1 Y 4.2 — ALAN ====================
+\section{Investigación y anatomía de estándares}
+
+\subsection{Comparativa de estándares de calidad y pruebas}
+
+La adopción de estándares formalizados permite establecer procesos sistemáticos para el aseguramiento de la calidad y la ejecución de pruebas, proporcionando un marco de referencia que facilita la trazabilidad, la repetibilidad y la mejora continua. Para el proyecto \textit{Outline} —una wiki interna de tipo Notion— se han analizado tres estándares internacionales representativos de distintas facetas de la calidad del software: IEEE 730-2014 (enfocado en el aseguramiento de la calidad, SQA), ISO/IEC/IEEE 29119-3 (que abarca el proceso completo de pruebas) e IEEE 829 (especializado en la documentación de pruebas). La Tabla~\ref{tab:estandares} sintetiza sus características fundamentales.
+
+\begin{table}[H]
+\centering
+\caption{Comparativa de estándares para \textit{Outline}}
+\label{tab:estandares}
+\begin{tabular}{|>{\raggedright\arraybackslash}p{3cm}|>{\raggedright\arraybackslash}p{3.2cm}|>{\raggedright\arraybackslash}p{3.2cm}|>{\raggedright\arraybackslash}p{3.2cm}|}
+\hline
+\textbf{Criterio} & \textbf{IEEE 730-2014} & \textbf{ISO/IEC/IEEE 29119-3} & \textbf{IEEE 829} \\
+\hline
+\textbf{Propósito} & Definir los procesos de aseguramiento de la calidad del software (SQA) para garantizar que el producto cumple los requisitos y estándares establecidos. & Especificar la documentación de pruebas, incluyendo los artefactos que deben generarse en cada nivel de prueba (unidad, integración, sistema, aceptación). & Establecer un proceso de pruebas unificado que abarca la gestión, el diseño, la ejecución y la evaluación de resultados, con énfasis en la organización sistemática de las actividades de prueba. \\
+\hline
+\textbf{Documentos que define} & Plan SQA, informes de auditoría, registros de no conformidades, informes de métricas de calidad. & Plan de pruebas, especificación de casos de prueba, informe de incidencias, informe de resultados de pruebas, matriz de trazabilidad. & Plan maestro de pruebas, especificaciones de diseño de pruebas, procedimientos de prueba, informes de ejecución y resúmenes de pruebas. \\
+\hline
+\textbf{Vigencia y aplicabilidad} & Aplicable a cualquier proyecto donde se requiera un enfoque formal de garantía de calidad; vigente desde 2014 y ampliamente utilizado en la industria. & Parte de la familia 29119, actualizada en 2021; aplicable a organizaciones que buscan estandarizar su proceso de pruebas independientemente del ciclo de vida. & Estándar histórico (1998) aún referenciado; ha sido reemplazado en parte por la norma 29119, pero su estructura de documentación sigue siendo una base práctica. \\
+\hline
+\end{tabular}
+\end{table}
+
+A partir del análisis comparativo, se concluye que el estándar más adecuado para el reporte de calidad de \textit{Outline} es el \textbf{IEEE 730-2014}. Esta elección se justifica por tres razones principales:
+
+\begin{enumerate}
+    \item \textbf{Alcance manejable:} \textit{Outline} es un proyecto de equipo estudiantil con una base de código modular y un equipo reducido. IEEE 730 se enfoca en SQA, lo que permite establecer un plan de calidad sin la sobrecarga documental que implicaría adoptar la totalidad de ISO 29119, que es más exhaustivo y está orientado a organizaciones con procesos de pruebas maduros y equipos grandes.
+    \item \textbf{Énfasis en la trazabilidad y métricas:} El estándar IEEE 730 exige la definición de métricas y la documentación de no conformidades, lo que se alinea directamente con los entregables de este reporte, donde se requiere mostrar la trazabilidad entre requisitos, casos de prueba y defectos, así como métricas de cobertura y complejidad.
+    \item \textbf{Complementariedad práctica:} Aunque IEEE 829 proporciona una estructura detallada para la documentación de pruebas, su enfoque es más técnico y está orientado a la fase de pruebas, mientras que el enfoque gerencial de IEEE 730 permite integrar tanto los resultados de pruebas (Selenium) como el análisis estático (SonarQube) en un marco de aseguramiento de calidad global, tal como se ha realizado en el Examen Práctico de la Unidad 2.
+\end{enumerate}
+
+\subsection{Anatomía de los informes de calidad y pruebas}
+
+La documentación de la calidad en un proyecto de software requiere distinguir entre dos perspectivas complementarias: la \textbf{gerencial o de aseguramiento de la calidad (SQA)}, que se enfoca en la supervisión, los riesgos y el estado general del proyecto, y la \textbf{técnica o de pruebas}, que detalla la ejecución, los resultados y los defectos encontrados. A continuación se listan las secciones típicas de cada tipo de informe, basadas en la literatura de referencia y en la práctica documentada para \textit{Outline} \parencite{ieee730, galin2018}.
+
+\subsubsection*{Informe de Aseguramiento de la Calidad (SQA) – Enfoque gerencial}
+
+Este informe está dirigido a la gestión del proyecto y a los \emph{stakeholders}, y resume el estado de la calidad desde una perspectiva de alto nivel. Las secciones habituales son:
+
+\begin{itemize}
+    \item \textbf{Introducción:} Describe el propósito del informe, el alcance del proyecto y el contexto en el que se aplica el plan SQA.
+    \item \textbf{Plan de calidad:} Incluye los objetivos de calidad, los estándares aplicados (ej. IEEE 730, ISO 25010), y la estrategia general para garantizar la calidad.
+    \item \textbf{Gestión de riesgos:} Identifica los riesgos técnicos y organizacionales que afectan a la calidad, junto con las medidas de mitigación adoptadas.
+    \item \textbf{Revisión y auditoría:} Resume las actividades de revisión de código, inspecciones y auditorías realizadas durante el desarrollo.
+    \item \textbf{Métricas de calidad:} Presenta indicadores clave (KPIs) como cobertura de pruebas, complejidad ciclomática, deuda técnica, y su evolución en el tiempo.
+    \item \textbf{No conformidades y acciones correctivas:} Documenta los defectos o desviaciones encontradas, su severidad y el plan de remediación.
+    \item \textbf{Conclusiones y recomendaciones:} Evalúa el cumplimiento de los objetivos de calidad y propone mejoras para iteraciones futuras.
+\end{itemize}
+
+\subsubsection*{Informe de resultados de pruebas – Enfoque técnico}
+
+Este informe se centra en la ejecución de las pruebas y está dirigido al equipo de desarrollo y aseguramiento de calidad. Su propósito es proporcionar evidencia detallada del comportamiento del sistema. Las secciones típicas son:
+
+\begin{itemize}
+    \item \textbf{Resumen ejecutivo de pruebas:} Visión general de los resultados, incluyendo el número total de pruebas ejecutadas, pasadas y fallidas, y el estado del \emph{Quality Gate}.
+    \item \textbf{Estrategia de pruebas:} Describe el enfoque de pruebas (funcional, no funcional, automatizada, manual), los niveles de prueba y los criterios de entrada/salida.
+    \item \textbf{Diseño de casos de prueba:} Lista los casos de prueba agrupados por módulo o historia de usuario, especificando entradas, condiciones previas y resultados esperados.
+    \item \textbf{Resultados de ejecución:} Detalla la ejecución de cada caso de prueba, con trazabilidad a los requisitos y evidencias (capturas de pantalla, \emph{logs}).
+    \item \textbf{Defectos encontrados:} Clasifica los defectos por severidad, estado y módulo afectado, incluyendo su ciclo de vida (abierto, en progreso, resuelto, cerrado).
+    \item \textbf{Cobertura de pruebas:} Presenta métricas de cobertura de código, ramas y líneas, junto con las herramientas utilizadas (ej. pytest-cov, Jest).
+    \item \textbf{Conclusiones y riesgos residuales:} Evalúa la calidad del sistema con base en los resultados y señala áreas que requieren atención adicional.
+\end{itemize}
+
+La distinción entre ambos enfoques es crucial porque el informe SQA permite a la dirección tomar decisiones estratégicas sobre la viabilidad del proyecto y la asignación de recursos, mientras que el informe de pruebas proporciona al equipo técnico la información granular necesaria para corregir defectos y mejorar la calidad del código \parencite{galin2018, pressman2020}.
+
+% ==================== 4.3 Y 4.5 — OMAR ====================
+\section{Matriz de trazabilidad y ejemplos de informes QA}
+
+\subsection{Ejemplo de Matriz de Trazabilidad y Fundamentación de Auditoría}
+
+En el ciclo de vida de pruebas del software, la matriz de trazabilidad garantiza que todo requerimiento del negocio posea su cobertura de prueba correspondiente, rastreando su ciclo de vida hasta las métricas operacionales de calidad.
+
+\subsubsection{Ejemplo de Matriz de Trazabilidad: Historia de Usuario \enquote{Crear Documento}}
+
+\begin{description}[font=\bfseries\color{blue!70!black}]
+    \item[Requisito (Historia de Usuario):] \texttt{HU-DOC-001} --- \textit{Como usuario autenticado de la Wiki, quiero crear un nuevo documento en una colección para documentar procesos del equipo.}
+    \item[Caso de Prueba (Test Case):] \texttt{TC-DOC-001-VAL} --- \textit{Validar que al presionar el botón \enquote{+ New doc} en la barra lateral e ingresar un título válido, el documento se persista y redireccione a la ruta \texttt{/doc/...}}
+    \item[Defecto (Bug Report):] \texttt{BUG-DOC-104} --- \textit{En el entorno de integración, el clic en la confirmación de la creación genera una excepción de timeouts por latencia en el orquestador local antes de renderizar.}
+    \item[Métricas de Calidad:]
+    \begin{itemize}[leftmargin=*, noitemsep]
+        \item Porcentaje de ejecuciones pasadas ($100\%$ esperado tras re-ejecución).
+        \item Tiempo de respuesta de creación $< 500\text{ ms}$.
+        \item Cobertura de código en \texttt{document\_page.py} $\ge 80\%$ (alcanzado $95\%$ según evidencias del proyecto).
+    \end{itemize}
+\end{description}
+
+\vspace{0.3cm}
+
+\begin{tcolorbox}[colback=gray!5,colframe=blue!50!black,boxrule=1pt,arc=2mm,title=\textbf{¿Por qué una Auditoría de Calidad exige esta Trazabilidad?}]
+Desde el marco de estándares como \textbf{ISO/IEC 25010} y \textbf{CMMI Nivel 3} (Procesos Definidos), una auditoría de \textit{Software Quality Assurance} (SQA) requiere evidencia matemática e irrefutable de la conformidad del producto. Las razones clave incluyen:
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Garantía de Cobertura de Requisitos (Sin Brechas):} Previene la entrega de funcionalidades no probadas (vacíos de prueba) o la construcción de código \enquote{fantasma} que no responde a ninguna necesidad del cliente.
+    \item \textbf{Análisis de Impacto:} Permite determinar exactamente qué pruebas y componentes se ven afectados cuando cambia una especificación o cuando falla un test funcional.
+    \item \textbf{Control de Deuda Técnica y Gestión de Defectos:} Relacionar métricas de cobertura con defectos específicos ayuda a justificar auditorías de remediación bajo la filosofía \textit{Clean as You Code}.
+    \item \textbf{Validación Transparente y Auditable:} Ante evaluaciones externas o normativas formales (como \textbf{IEEE 730}), la trazabilidad bi-direccional demuestra que los criterios de aceptación fueron validados mediante métricas cuantitativas recopiladas en pipelines automáticos de CI/CD.
+\end{enumerate}
+\end{tcolorbox}
+
+\subsection{Comparativa: Reporte de SonarQube vs. Reporte de Selenium}
+
+En los procesos SQA de la plataforma Wiki \textit{Outline}, se combinan dos técnicas de evaluación: \textbf{Análisis Estático} (SonarQube/SonarCloud) y \textbf{Análisis Dinámico Funcional} (Selenium WebDriver con Pytest).
+
+\subsubsection{Tabla Comparativa de Información Reportada}
+
+\begin{table}[h!]
+\centering
+\small
+\renewcommand{\arraystretch}{1.4}
+\begin{tabularx}{\textwidth}{>{\bfseries\color{blue!70!black}}p{3cm} X X}
+\toprule
+\textbf{Criterio} & \textbf{Reporte de SonarQube (Análisis Estático)} & \textbf{Reporte de Selenium / Pytest (Análisis Dinámico)} \\
+\midrule
+Dimensión Evaluada & 
+\textbf{Calidad Interna:} Confiabilidad, Seguridad, Mantenibilidad, Cobertura y Duplicaciones. & 
+\textbf{Comportamiento Funcional:} Interacción E2E, flujos de negocio e interfaz de usuario (UI/DOM). \\
+\hline
+Aporte de Información & 
+\begin{itemize}[leftmargin=*,noitemsep,topsep=0pt]
+    \item Identificación de \textit{Code Smells} y ternarios anidados.
+    \item Detección de \textit{Security Hotspots}.
+    \item Deuda técnica calculada en días ($23\text{ días}$).
+    \item Porcentaje de código duplicado.
+\end{itemize} & 
+\begin{itemize}[leftmargin=*,noitemsep,topsep=0pt]
+    \item Estatus de ejecución (\textit{Passed/Failed/Skipped}).
+    \item Excepciones en tiempo de ejecución (timeouts, aserciones).
+    \item Desempeño y tiempos de ejecución ($42\text{ passed}$ en $125.22\text{ s}$).
+\end{itemize} \\
+\hline
+Fase del Ciclo de Vida & 
+Inspecciona el código fuente \textbf{sin ejecutar el programa} (\textit{Shift-left}). & 
+Evalúa la aplicación \textbf{en tiempo de ejecución} con navegadores reales/headless. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsubsection{Buenas Prácticas de Reporte Identificadas en Ambos Enfoques}
+
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Uso de Formatos Estándar e Intercambiables (XML / HTML):}
+    \begin{itemize}
+        \item \textit{Selenium/Pytest:} Genera reportes interactivos autocontenidos (\texttt{reporte.html}) y reportes estructurados de cobertura (\texttt{coverage.xml}).
+        \item \textit{SonarQube:} Parsea y procesa directamente el artefacto \texttt{coverage.xml} para consolidar métricas dinámicas y estáticas en un único tablero central.
+    \end{itemize}
+    \item \textbf{Establecimiento de Criterios de Aprobación Explícitos (\textit{Quality Gates}):}
+    Definir un estatus global claro (\textit{Passed} / \textit{Failed}) que evalúe si el código cumple con los umbrales mínimos de mantenibilidad, porcentaje de fallas y cobertura de código antes de autorizar una fusión (\textit{merge}) en el repositorio.
+    \item \textbf{Estructura y Desacoplamiento de la Información:}
+    \begin{itemize}
+        \item \textit{Diseño en Selenium:} Implementación del patrón \textit{Page Object Model} (POM) para que los fallos del reporte mapeen directamente hacia clases de negocio (\texttt{login\_page.py}, \texttt{search\_page.py}).
+        \item \textit{Clasificación en SonarQube:} Categorización de los hallazgos por nivel de severidad (\textit{Blocker, Critical, Major, Minor}) y asignación de responsables para la planificación de \textit{sprints} de refactorización.
+    \end{itemize}
+    \item \textbf{Automatización e Integración Continua (CI/CD):}
+    Ambas herramientas ejecutan sus reportes de forma automatizada en pipelines (GitHub Actions) en cada evento de \textit{push} o \textit{pull request}, asegurando la visibilidad del estado de la calidad para todo el equipo sin depender de ejecuciones manuales aisladas.
+\end{enumerate}
+
+% ==================== 4.4 — NOÉ ====================
+\section{Estrategia y Métricas de Calidad de Software}
+
+\subsection{Investigación: métricas reportables e interpretación}
+
+La evaluación cuantitativa del software requiere la definición formal de métricas tanto de producto (código fuente y estructura) como de proceso de pruebas \parencite{iso25010, galin2018}. A continuación, se clasifican las métricas clave, sus umbrales de referencia y su correspondencia con el modelo de calidad ISO/IEC 25010:2023 e ISO/IEC 5055:2021 \parencite{iso25023, iso5055}.
+
+\begin{table}[H]
+\centering
+\small
+\caption{Métricas reportables de código y pruebas ligadas a ISO/IEC 25010:2023.}
+\label{tab:metricas_calidad}
+\begin{tabular}{|p{2.5cm}|p{3.2cm}|p{3.5cm}|p{2.8cm}|p{3.0cm}|}
+\hline
+\textbf{Categoría} & \textbf{Métrica} & \textbf{Fórmula / Indicador} & \textbf{Umbral de Referencia} & \textbf{Característica ISO 25010} \\ \hline
+Código & Complejidad Ciclomática $V(G)$ & $V(G) = P + 1$ \parencite{mccabe1976} & $V(G) \le 10$ por función & Mantenibilidad (Analizabilidad) \\ \hline
+Código & Halstead (Volumen $V$) & $V = (N_1 + N_2) \log_2 (n_1 + n_2)$ & $V \le 1000$ bits/módulo & Mantenibilidad (Comprensibilidad) \\ \hline
+Código & Puntos de Función (IFPUG) & Conteo funcional de ILF, EIF, EI, EO, EQ & Según la historia ($\le 5$ FP/HU) & Adecuación Funcional \\ \hline
+Estructural & Reglas ISO/IEC 5055 & Violaciones estáticas en 4 pilares & 0 fallas críticas & Seguridad y Mantenibilidad \\ \hline
+Pruebas & Cobertura de Código & $\frac{\text{Líneas Ejecutadas}}{\text{Líneas Totales}} \times 100$ & $\ge 80\%$ (Outline: $62\%$) & Testabilidad (Mantenibilidad) \\ \hline
+Pruebas & Densidad de Defectos & $\frac{\text{Defectos Conf.}}{\text{KLOC}}$ & $\le 1.0$ defectos/KLOC & Confiabilidad (Madurez) \\ \hline
+Pruebas & Tasa de Aprobación & $\frac{\text{Casos Aprobados}}{\text{Casos Ejecutados}} \times 100$ & $\ge 95\%$ (Outline: $100\%$) & Correctitud Funcional \\ \hline
+\end{tabular}
+\end{table}
+
+\subsubsection{Análisis e Interpretación de Métricas de Código y Pruebas}
+
+\begin{itemize}
+    \item \textbf{Complejidad Ciclomática de McCabe ($V(G)$):} Determina el número de caminos independientes en el flujo de ejecución \parencite{mccabe1976}. Valores superiores a 10 reflejan baja mantenibilidad y exigen división modular.
+    \item \textbf{Métricas de Halstead:} Evalúan la complejidad cuantitativa midiendo operadores ($n_1, N_1$) y operandos ($n_2, N_2$) únicos y totales \parencite{galin2018}. Un volumen o dificultad elevado incrementa la probabilidad de inconsistencias lógicas.
+    \item \textbf{Métricas Estructurales ISO/IEC 5055:2021:} Analizan cuantitativamente las vulnerabilidades en código fuente que impactan en la confiabilidad y mantenibilidad, detectando patrones indeseables antes del despliegue \parencite{iso5055}.
+    \item \textbf{Métricas de Pruebas (Cobertura y Densidad):} La cobertura de código permite verificar la efectividad de los casos de prueba ejecutados (e.g. Selenium/PyTest). La densidad de defectos valida la estabilidad de las funcionalidades del sistema \parencite{istqb2024}.
+\end{itemize}
+
+\subsubsection{Cuadro de KPIs Definidos para el Proyecto Outline}
+
+A partir de la especificación de calidad de la wiki interna \textit{Outline}, se consolidan los 7 KPIs clave de desempeño y calidad de software \parencite{pressman2020}:
+
+\begin{enumerate}
+    \item \textbf{KPI-01 (Complejidad Ciclomática):} $V(G) \le 8$ promedio por módulo de edición.
+    \item \textbf{KPI-02 (Duplicación de Código):} Duplicación $< 3\%$ según reporte estático SonarQube / ISO 5055.
+    \item \textbf{KPI-03 (Cobertura de Pruebas):} Cobertura de código automatizado $\ge 80\%$ (Meta de refactorización respecto al $62\%$ de P2).
+    \item \textbf{KPI-04 (Densidad de Defectos):} $< 0.8$ defectos por KLOC en etapa de integración.
+    \item \textbf{KPI-05 (Tasa de Aprobación de Pruebas):} $100\%$ de aprobación en la suite de regresión funcional (42/42 pruebas pasadas).
+    \item \textbf{KPI-06 (Seguridad en Código):} 0 vulnerabilidades de severidad Alta/Bloqueante.
+    \item \textbf{KPI-07 (Comportamiento Temporal):} Tiempo de respuesta $< 500$\,ms al renderizar notas Markdown.
+\end{enumerate}
+
+% ==================== 4.6 — ODIN ====================
+\section{Aplicación al proyecto Outline}
+
+\subsection{Índice comentado del reporte}
+
+A modo de esqueleto, el reporte de aplicación se organiza en los siguientes apartados, cada uno con el contenido que le corresponde:
+
+\begin{itemize}
+  \item \textbf{Introducción}: presenta el objetivo del reporte y describe brevemente qué es Outline y por qué se documenta su calidad.
+  \item \textbf{Alcance}: delimita los módulos de Outline sometidos a prueba y aquellos que quedaron fuera del análisis.
+  \item \textbf{Metodología}: explica el enfoque empleado en el Examen Práctico de la Unidad 2 (pruebas funcionales con Selenium y análisis estático con SonarQube).
+  \item \textbf{Resultados}: consolida las métricas cuantitativas obtenidas (cobertura, deuda técnica, casos de prueba y \textit{Quality Gate}).
+  \item \textbf{Conclusiones}: sintetiza los hallazgos clave y las recomendaciones de remediación de la deuda técnica detectada.
+\end{itemize}
+
+\subsection{Introducción}
+
+El presente apartado documenta la aplicación práctica de las estrategias de aseguramiento de la calidad sobre el proyecto integrador \textbf{Outline}, una plataforma \textit{open source} de gestión del conocimiento empresarial de arquitectura similar a Notion. A diferencia de las secciones anteriores —de carácter conceptual—, aquí se reportan resultados concretos: la forma en que se auditó la calidad del sistema mediante pruebas funcionales automatizadas y análisis estático de código, así como las métricas obtenidas de dicho ejercicio.
+
+Los resultados se enmarcan en el modelo de calidad de producto \textbf{ISO/IEC 25010:2023} —que define características como la mantenibilidad, la fiabilidad y la eficiencia de desempeño— y en el estándar \textbf{IEEE 730}, que estructura el plan de aseguramiento de la calidad del software (SQA). El objetivo es evidenciar, de manera trazable y verificable, el estado de calidad del módulo evaluado de Outline.
+
+\subsection{Alcance}
+
+El análisis práctico se concentró en los flujos funcionales críticos de Outline accesibles desde su interfaz web, ejecutados sobre una instancia desplegada localmente:
+
+\begin{itemize}
+  \item \textbf{Autenticación}: ingreso mediante correo electrónico y el flujo de inicio de sesión.
+  \item \textbf{Búsqueda de documentos}: recuperación de artículos existentes y manejo de resultados vacíos.
+  \item \textbf{Creación y edición documental}: validación del flujo de alta de documentos dentro del \textit{wiki}.
+\end{itemize}
+
+Estos módulos se modelaron mediante el patrón Page Object Model (POM), con clases dedicadas (\texttt{base\_page}, \texttt{login\_page}, \texttt{search\_page} y \texttt{document\_page}).
+
+Quedaron \textbf{fuera del alcance} de las pruebas automatizadas: la colaboración en tiempo real, las integraciones con servicios externos (por ejemplo, autenticación real vía Slack o \textit{webhooks}), la totalidad del \textit{backend} y el renderizado recursivo del árbol de navegación de colecciones (analizado de forma teórica en la Unidad 1, pero no cubierto por la suite E2E).
+
+\subsection{Metodología}
+
+El aseguramiento de la calidad se abordó con un enfoque dual y complementario:
+
+\begin{itemize}
+  \item \textbf{Análisis dinámico (pruebas funcionales E2E)}: se implementó una suite de pruebas de extremo a extremo con \textbf{Selenium WebDriver} y \textbf{pytest}, bajo el patrón Page Object Model. La sincronización se resolvió exclusivamente con esperas explícitas (\texttt{WebDriverWait}), evitando pausas fijas, y se incorporaron pruebas basadas en datos (\textit{data-driven}) mediante el decorador \texttt{@pytest.mark.parametrize}. La cobertura se midió con \texttt{pytest-cov}, exportando los reportes \texttt{coverage.xml} y \texttt{report.html}.
+  \item \textbf{Análisis estático}: se auditó el código fuente con \textbf{SonarQube v10.6}, evaluando sus cinco dimensiones (Seguridad, Confiabilidad, Mantenibilidad, Cobertura y Duplicación) y aplicando un \textit{Quality Gate} como criterio automático de aprobación.
+\end{itemize}
+
+El entorno de ejecución se levantó localmente mediante Docker (contenedores de Redis y PostgreSQL) sobre el dominio \texttt{local.outline.dev:3000}, y el flujo se automatizó con un \textit{pipeline} de Integración Continua en GitHub Actions.
+
+\vspace{4pt}
+\noindent\textit{Nota:} conforme a la naturaleza documental de esta tarea, esta sección \textbf{no ejecuta nuevas pruebas}; consolida y documenta los resultados previamente obtenidos en el Examen Práctico de la Unidad 2 (P2).
+
+\subsection{Resultados: métricas del Examen Práctico U2}
+
+La Tabla~\ref{tab:metricas-p2} sintetiza las métricas cuantitativas obtenidas durante el Examen Práctico de la Unidad 2, junto con su interpretación.
+
+\begin{table}[H]
+\centering
+\caption{Métricas de calidad obtenidas en el Examen Práctico de la Unidad 2 (P2).}
+\label{tab:metricas-p2}
+\begin{tabular}{|p{3.1cm}|p{2.4cm}|p{8.4cm}|}
+\hline
+\textbf{Métrica} & \textbf{Valor} & \textbf{Interpretación} \\
+\hline
+Cobertura de código & 62\% &
+Porcentaje de líneas del paquete de pruebas ejercitadas por la suite, reportado por \texttt{pytest-cov}. Se ubica por debajo del umbral ideal ($>$80\%), lo que señala rutas de código aún sin verificar. Se vincula con la \textbf{Mantenibilidad} de ISO/IEC 25010. \\
+\hline
+Deuda técnica & 23 días &
+Esfuerzo estimado por SonarQube para remediar la totalidad de los \textit{code smells} detectados; equivale a jornadas de refactorización pendientes. \\
+\hline
+Pruebas pasadas & 42/42 &
+Todos los casos ejecutados (42 de 42) resultaron exitosos (\textit{passed}), validando funcionalmente los flujos de autenticación, búsqueda y creación documental; adicionalmente, 8 casos quedaron omitidos (\textit{skipped}) por dependencias del entorno. \\
+\hline
+Quality Gate & Aprobado &
+El proyecto satisfizo los umbrales del \textit{Quality Gate} definido en SonarQube; la puerta de calidad no bloqueó la integración del código. \\
+\hline
+\end{tabular}
+\end{table}
+
+En conjunto, las métricas indican un sistema funcionalmente estable —la totalidad de los casos ejecutados pasaron— que satisface el \textit{Quality Gate} configurado. No obstante, es importante señalar que las dimensiones de \textbf{Seguridad} y \textbf{Confiabilidad} obtuvieron una calificación \textit{rating} D, lo que revela una deuda técnica considerable (23 días) y la necesidad de priorizar refactorizaciones en los \textit{sprints} venideros para aproximar dichas dimensiones al estándar ideal A.
+
+% ==================== 5. CONCLUSIÓN — OLIVIA ====================
+\section{Conclusión integral}
+
+La aplicación de los estándares ISO/IEC 25010, IEEE 730, CMMI y MoProSoft al proyecto Outline ha permitido al equipo descubrir varios aprendizajes clave:
+
+\textbf{Hallazgo 1: La priorización es esencial.} No todas las características de calidad tienen el mismo peso. Para una wiki interna, usabilidad y seguridad dominan sobre portabilidad.
+
+\textbf{Hallazgo 2: Los KPIs deben ser realistas.} Definir umbrales como disponibilidad 99,9\% es alcanzable; 99,999\% no lo es para un proyecto open-source.
+
+\textbf{Hallazgo 3: IEEE 730 es estructurado pero adaptable.} Adaptarlo a un equipo de 5 personas requirió recortar secciones no aplicables.
+
+\textbf{Hallazgo 4: MoProSoft es relevante y vigente.} Sigue siendo pertinente para PYMEs locales, con principios de baja burocracia.
+
+\textbf{Hallazgo 5: La trazabilidad es clave para auditorías.} La matriz de trazabilidad requisito $\to$ caso de prueba $\to$ defecto $\to$ métrica permite demostrar que cada funcionalidad ha sido probada y que los defectos se gestionan adecuadamente.
+
+\textbf{Conexión con próximos parciales:} Los KPIs definidos serán la base para las pruebas del Parcial 2, y la matriz de riesgos alimentará el informe técnico del Parcial 3.
+
+Este trabajo ha permitido al equipo comprender la importancia de documentar la calidad de manera sistemática, aplicando estándares reconocidos internacionalmente y adaptándolos al contexto específico de un proyecto de código abierto como Outline.
+
+% ==================== 6. APORTES INDIVIDUALES ====================
+\section{Aportes individuales}
+
+\subsection*{Chairez Alba Olivia Lizbeth (UP240594) — Coordinadora}
+
+Redacté la portada, introducción, conclusión y la sección de referencias unificadas. Unifiqué y armonicé todas las partes de mis compañeros en un solo documento LaTeX, corregí errores de compilación y formateé el documento final. Gestioné el repositorio Git y aseguré la consistencia general. Además, consolidé la estructura del reporte integrador y verifiqué que todas las citas y referencias cumplieran con el formato APA 7.
+
+\subsection*{Estrada Ramírez Noé Ezequiel (UP240770) — Líder / Analista}
+
+Durante el desarrollo de esta investigación, coordiné la estructuración analítica de las métricas de calidad de software aplicables al proyecto Outline, integrando las especificaciones de ISO/IEC 25010:2023, ISO/IEC 25023 e ISO/IEC 5055:2021. Fundamenté la relación entre las métricas de código (McCabe, Halstead e IFPUG) y las métricas de pruebas automáticas (cobertura y densidad de defectos), definiendo los umbrales de tolerancia técnica y consolidando el conjunto de KPIs del proyecto. Este análisis permitió establecer criterios claros para interpretar los resultados del análisis estático y dinámico en el reporte integrador.
+
+\subsection*{Facio Palos Omar (UP240470) — QA Tester}
+
+Elaboré las secciones de trazabilidad (4.3) y ejemplos reales de QA (4.5), definiendo la matriz de trazabilidad con un ejemplo concreto basado en la historia de usuario HU-01 (Crear documento) de Outline. Además, realicé una comparativa detallada entre los reportes generados por SonarQube (análisis estático) y Selenium (análisis dinámico), identificando las buenas prácticas de reporte y las carencias de cada enfoque.
+
+\subsection*{Jauregui De La Riva Alan Ricardo (UP240960) — Documentador}
+
+Redacté las secciones 4.1 (estándares de documentación) y 4.2 (anatomía del informe técnico), comparando los estándares IEEE 730-2014, ISO/IEC/IEEE 29119-3 e IEEE 829, y justificando la elección de IEEE 730 para el proyecto Outline. Además, describí las secciones obligatorias de los informes de calidad (SQA) y de pruebas, distinguiendo el enfoque gerencial del técnico.
+
+\subsection*{Rubio Viramontes Brian Odin (UP250004) — Developer}
+
+Desarrollé la sección 4.6 (Aplicación), que incluye el índice comentado del reporte integrador, la redacción de la introducción, alcance y metodología del proyecto Outline, y la consolidación de las métricas obtenidas en el Examen Práctico de la Unidad 2 (P2), incluyendo la cobertura de código (62\%), la deuda técnica (23 días), las pruebas pasadas (42/42) y el estado del Quality Gate (Aprobado).
+
+% ==================== REFERENCIAS ====================
+\newpage
+\printbibliography[title={Referencias}]
+
+\end{document}
