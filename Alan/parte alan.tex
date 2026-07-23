@@ -1,0 +1,109 @@
+\documentclass[12pt, letterpaper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{geometry}
+\geometry{margin=2.5cm}
+
+\begin{document}
+
+% ===== SECCIÓN 4.1 Y 4.2 — Alan =====
+\section{Investigación y anatomía de estándares}
+
+\subsection{Comparativa de estándares de calidad y pruebas}
+
+La adopción de estándares formalizados permite establecer procesos sistemáticos para el aseguramiento de la calidad y la ejecución de pruebas, proporcionando un marco de referencia que facilita la trazabilidad, la repetibilidad y la mejora continua. Para el proyecto \textit{Outline} —una wiki interna de tipo Notion— se han analizado tres estándares internacionales representativos de distintas facetas de la calidad del software: IEEE 730-2014 (enfocado en el aseguramiento de la calidad, SQA), ISO/IEC/IEEE 29119-3 (que abarca el proceso completo de pruebas) e IEEE 829 (especializado en la documentación de pruebas). La Tabla~\ref{tab:estandares} sintetiza sus características fundamentales.
+
+\begin{table}[H]
+\centering
+\caption{Comparativa de estándares para \textit{Outline}}
+\label{tab:estandares}
+\begin{tabular}{|>{\raggedright\arraybackslash}p{3cm}|>{\raggedright\arraybackslash}p{3.2cm}|>{\raggedright\arraybackslash}p{3.2cm}|>{\raggedright\arraybackslash}p{3.2cm}|}
+\hline
+\textbf{Criterio} & \textbf{IEEE 730-2014} & \textbf{ISO/IEC/IEEE 29119-3} & \textbf{IEEE 829} \\
+\hline
+\textbf{Propósito} & Definir los procesos de aseguramiento de la calidad del software (SQA) para garantizar que el producto cumple los requisitos y estándares establecidos. & Especificar la documentación de pruebas, incluyendo los artefactos que deben generarse en cada nivel de prueba (unidad, integración, sistema, aceptación). & Establecer un proceso de pruebas unificado que abarca la gestión, el diseño, la ejecución y la evaluación de resultados, con énfasis en la organización sistemática de las actividades de prueba. \\
+\hline
+\textbf{Documentos que define} & Plan SQA, informes de auditoría, registros de no conformidades, informes de métricas de calidad. & Plan de pruebas, especificación de casos de prueba, informe de incidencias, informe de resultados de pruebas, matriz de trazabilidad. & Plan maestro de pruebas, especificaciones de diseño de pruebas, procedimientos de prueba, informes de ejecución y resúmenes de pruebas. \\
+\hline
+\textbf{Vigencia y aplicabilidad} & Aplicable a cualquier proyecto donde se requiera un enfoque formal de garantía de calidad; vigente desde 2014 y ampliamente utilizado en la industria. & Parte de la familia 29119, actualizada en 2021; aplicable a organizaciones que buscan estandarizar su proceso de pruebas independientemente del ciclo de vida. & Estándar histórico (1998) aún referenciado; ha sido reemplazado en parte por la norma 29119, pero su estructura de documentación sigue siendo una base práctica. \\
+\hline
+\end{tabular}
+\end{table}
+
+A partir del análisis comparativo, se concluye que el estándar más adecuado para el reporte de calidad de \textit{Outline} es el \textbf{IEEE 730-2014}. Esta elección se justifica por tres razones principales:
+
+\begin{enumerate}
+    \item \textbf{Alcance manejable:} \textit{Outline} es un proyecto de equipo estudiantil con una base de código modular y un equipo reducido. IEEE 730 se enfoca en SQA, lo que permite establecer un plan de calidad sin la sobrecarga documental que implicaría adoptar la totalidad de ISO 29119, que es más exhaustivo y está orientado a organizaciones con procesos de pruebas maduros y equipos grandes.
+    \item \textbf{Énfasis en la trazabilidad y métricas:} El estándar IEEE 730 exige la definición de métricas y la documentación de no conformidades, lo que se alinea directamente con los entregables de este reporte, donde se requiere mostrar la trazabilidad entre requisitos, casos de prueba y defectos, así como métricas de cobertura y complejidad.
+    \item \textbf{Complementariedad práctica:} Aunque IEEE 829 proporciona una estructura detallada para la documentación de pruebas, su enfoque es más técnico y está orientado a la fase de pruebas, mientras que el enfoque gerencial de IEEE 730 permite integrar tanto los resultados de pruebas (Selenium) como el análisis estático (SonarQube) en un marco de aseguramiento de calidad global, tal como se ha realizado en el Examen Práctico de la Unidad 2.
+\end{enumerate}
+
+\subsection{Anatomía de los informes de calidad y pruebas}
+
+La documentación de la calidad en un proyecto de software requiere distinguir entre dos perspectivas complementarias: la \textbf{gerencial o de aseguramiento de la calidad (SQA)}, que se enfoca en la supervisión, los riesgos y el estado general del proyecto, y la \textbf{técnica o de pruebas}, que detalla la ejecución, los resultados y los defectos encontrados. A continuación se listan las secciones típicas de cada tipo de informe, basadas en la literatura de referencia y en la práctica documentada para \textit{Outline} \citep{ieee730, galin2018}.
+
+\subsubsection*{Informe de Aseguramiento de la Calidad (SQA) – Enfoque gerencial}
+
+Este informe está dirigido a la gestión del proyecto y a los \emph{stakeholders}, y resume el estado de la calidad desde una perspectiva de alto nivel. Las secciones habituales son:
+
+\begin{itemize}
+    \item \textbf{Introducción:} Describe el propósito del informe, el alcance del proyecto y el contexto en el que se aplica el plan SQA.
+    \item \textbf{Plan de calidad:} Incluye los objetivos de calidad, los estándares aplicados (ej. IEEE 730, ISO 25010), y la estrategia general para garantizar la calidad.
+    \item \textbf{Gestión de riesgos:} Identifica los riesgos técnicos y organizacionales que afectan a la calidad, junto con las medidas de mitigación adoptadas.
+    \item \textbf{Revisión y auditoría:} Resume las actividades de revisión de código, inspecciones y auditorías realizadas durante el desarrollo.
+    \item \textbf{Métricas de calidad:} Presenta indicadores clave (KPIs) como cobertura de pruebas, complejidad ciclomática, deuda técnica, y su evolución en el tiempo.
+    \item \textbf{No conformidades y acciones correctivas:} Documenta los defectos o desviaciones encontradas, su severidad y el plan de remediación.
+    \item \textbf{Conclusiones y recomendaciones:} Evalúa el cumplimiento de los objetivos de calidad y propone mejoras para iteraciones futuras.
+\end{itemize}
+
+\subsubsection*{Informe de resultados de pruebas – Enfoque técnico}
+
+Este informe se centra en la ejecución de las pruebas y está dirigido al equipo de desarrollo y aseguramiento de calidad. Su propósito es proporcionar evidencia detallada del comportamiento del sistema. Las secciones típicas son:
+
+\begin{itemize}
+    \item \textbf{Resumen ejecutivo de pruebas:} Visión general de los resultados, incluyendo el número total de pruebas ejecutadas, pasadas y fallidas, y el estado del \emph{Quality Gate}.
+    \item \textbf{Estrategia de pruebas:} Describe el enfoque de pruebas (funcional, no funcional, automatizada, manual), los niveles de prueba y los criterios de entrada/salida.
+    \item \textbf{Diseño de casos de prueba:} Lista los casos de prueba agrupados por módulo o historia de usuario, especificando entradas, condiciones previas y resultados esperados.
+    \item \textbf{Resultados de ejecución:} Detalla la ejecución de cada caso de prueba, con trazabilidad a los requisitos y evidencias (capturas de pantalla, \emph{logs}).
+    \item \textbf{Defectos encontrados:} Clasifica los defectos por severidad, estado y módulo afectado, incluyendo su ciclo de vida (abierto, en progreso, resuelto, cerrado).
+    \item \textbf{Cobertura de pruebas:} Presenta métricas de cobertura de código, ramas y líneas, junto con las herramientas utilizadas (ej. pytest-cov, Jest).
+    \item \textbf{Conclusiones y riesgos residuales:} Evalúa la calidad del sistema con base en los resultados y señala áreas que requieren atención adicional.
+\end{itemize}
+
+La distinción entre ambos enfoques es crucial porque el informe SQA permite a la dirección tomar decisiones estratégicas sobre la viabilidad del proyecto y la asignación de recursos, mientras que el informe de pruebas proporciona al equipo técnico la información granular necesaria para corregir defectos y mejorar la calidad del código \citep{galin2018, pressman2020}.
+
+% ===== REFERENCIAS =====
+\begin{thebibliography}{9}
+\bibitem{ieee730}
+IEEE. (2014). \textit{IEEE Standard for Software Quality Assurance Processes (IEEE Std 730-2014)}. IEEE. \url{https://doi.org/10.1109/IEEESTD.2014.6835311}
+
+\bibitem{iso29119}
+ISO/IEC. (2022). \textit{ISO/IEC/IEEE 29119-3:2021 — Test documentation}. ISO/IEC.
+
+\bibitem{ieee829}
+IEEE. (1998). \textit{IEEE Standard for Software Test Documentation (IEEE Std 829-1998)}. IEEE. (Reemplazado en parte por ISO/IEC 29119-3).
+
+\bibitem{galin2018}
+Galin, D. (2018). \textit{Software Quality: Concepts and Practice}. Wiley-IEEE.
+
+\bibitem{pressman2020}
+Pressman, R. S., \& Maxim, B. R. (2020). \textit{Software Engineering} (9th ed.). McGraw-Hill.
+
+\bibitem{iso25010}
+ISO/IEC. (2023). \textit{ISO/IEC 25010:2023 — Product quality model}. ISO/IEC.
+
+\bibitem{iso25023}
+ISO/IEC. (2016). \textit{ISO/IEC 25023:2016 — Measurement of product quality}. ISO/IEC.
+
+\bibitem{iso5055}
+ISO/IEC. (2021). \textit{ISO/IEC 5055:2021 — Automated Source Code Quality Measures}. ISO/IEC.
+
+\bibitem{istqb}
+ISTQB. (2024). \textit{Glossary of Testing Terms v4.4}. \url{https://glossary.istqb.org}
+\end{thebibliography}
+
+\end{document}
