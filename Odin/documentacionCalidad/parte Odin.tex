@@ -1,0 +1,205 @@
+% =====================================================================
+% TAREA 09 - DOCUMENTACION DE LA CALIDAD (Semana 11, Unidad III)
+% Proyecto Integrador: Outline (Wiki interna estilo Notion)
+% Grupo TIID05B - Equipo 4
+% ---------------------------------------------------------------------
+% SECCION 4.6 "Aplicacion"  ->  Brian Odin Rubio Viramontes (Developer)
+% Formato solicitado: Texto + Tabla de resultados. Citas: ISO 25010, IEEE 730.
+% Basado en datos REALES del Examen Practico U2 (P2) del equipo.
+% =====================================================================
+
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{float}   % opcion [H] para fijar la tabla
+\usepackage{array}   % columnas tipo p{}
+\usepackage{hyperref}
+
+\renewcommand{\tablename}{Tabla} % "Tabla" en lugar de "Cuadro"
+
+\title{Tarea 09 --- Documentaci\'on de la Calidad de Outline\\[2pt]
+       \large Secci\'on 4.6: Aplicaci\'on (borrador de Odin)}
+\author{Brian Odin Rubio Viramontes --- TIID05B, Equipo 4}
+\date{Julio 2026}
+
+\begin{document}
+\maketitle
+
+% ---------------------------------------------------------------------
+% NOTA PARA OLIVIA (unificacion en Overleaf):
+%  - Este archivo contiene UNICAMENTE la seccion 4.6.
+%  - Para integrarlo, copia el bloque entre los marcadores
+%    "INICIO / FIN SECCION 4.6 (ODIN)".
+%  - Uso \section*{} y \subsection*{} para que en el preview no salga
+%    doble numeracion. Si quieres numeracion automatica, quita los
+%    asteriscos (*) y ajusta los contadores segun el estilo del equipo.
+% ---------------------------------------------------------------------
+
+% =====================================================================
+% ===================  INICIO SECCION 4.6 (ODIN)  =====================
+% =====================================================================
+\section*{4.6 Aplicaci\'on al proyecto Outline}
+
+% ---------- INDICE COMENTADO ----------
+\subsection*{\'Indice comentado del reporte}
+
+A modo de esqueleto, el reporte de aplicaci\'on se organiza en los siguientes
+apartados, cada uno con el contenido que le corresponde:
+
+\begin{itemize}
+  \item \textbf{Introducci\'on}: presenta el objetivo del reporte y describe
+        brevemente qu\'e es Outline y por qu\'e se documenta su calidad.
+  \item \textbf{Alcance}: delimita los m\'odulos de Outline sometidos a prueba
+        y aquellos que quedaron fuera del an\'alisis.
+  \item \textbf{Metodolog\'ia}: explica el enfoque empleado en el Examen
+        Pr\'actico de la Unidad 2 (pruebas funcionales con Selenium y
+        an\'alisis est\'atico con SonarQube).
+  \item \textbf{Resultados}: consolida las m\'etricas cuantitativas obtenidas
+        (cobertura, deuda t\'ecnica, casos de prueba y \textit{Quality Gate}).
+  \item \textbf{Conclusiones}: sintetiza los hallazgos clave y las
+        recomendaciones de remediaci\'on de la deuda t\'ecnica detectada.
+\end{itemize}
+
+% ---------- INTRODUCCION ----------
+\subsection*{Introducci\'on}
+
+El presente apartado documenta la aplicaci\'on pr\'actica de las estrategias de
+aseguramiento de la calidad sobre el proyecto integrador \textbf{Outline}, una
+plataforma \textit{open source} de gesti\'on del conocimiento empresarial de
+arquitectura similar a Notion. A diferencia de las secciones anteriores ---de
+car\'acter conceptual---, aqu\'i se reportan resultados concretos: la forma en
+que se audit\'o la calidad del sistema mediante pruebas funcionales
+automatizadas y an\'alisis est\'atico de c\'odigo, as\'i como las m\'etricas
+obtenidas de dicho ejercicio.
+
+Los resultados se enmarcan en el modelo de calidad de producto
+\textbf{ISO/IEC 25010:2023} ---que define caracter\'isticas como la
+mantenibilidad, la fiabilidad y la eficiencia de desempe\~no--- y en el
+est\'andar \textbf{IEEE 730}, que estructura el plan de aseguramiento de la
+calidad del software (SQA). El objetivo es evidenciar, de manera trazable y
+verificable, el estado de calidad del m\'odulo evaluado de Outline.
+
+% ---------- ALCANCE ----------
+\subsection*{Alcance}
+
+El an\'alisis pr\'actico se concentr\'o en los flujos funcionales cr\'iticos de
+Outline accesibles desde su interfaz web, ejecutados sobre una instancia
+desplegada localmente:
+
+\begin{itemize}
+  \item \textbf{Autenticaci\'on}: ingreso mediante correo electr\'onico y el
+        flujo de inicio de sesi\'on.
+  \item \textbf{B\'usqueda de documentos}: recuperaci\'on de art\'iculos
+        existentes y manejo de resultados vac\'ios.
+  \item \textbf{Creaci\'on y edici\'on documental}: validaci\'on del flujo de
+        alta de documentos dentro del \textit{wiki}.
+\end{itemize}
+
+Estos m\'odulos se modelaron mediante el patr\'on Page Object Model (POM), con
+clases dedicadas (\texttt{base\_page}, \texttt{login\_page},
+\texttt{search\_page} y \texttt{document\_page}).
+
+Quedaron \textbf{fuera del alcance} de las pruebas automatizadas: la
+colaboraci\'on en tiempo real, las integraciones con servicios externos (por
+ejemplo, autenticaci\'on real v\'ia Slack o \textit{webhooks}), la totalidad del
+\textit{backend} y el renderizado recursivo del \'arbol de navegaci\'on de
+colecciones (analizado de forma te\'orica en la Unidad 1, pero no cubierto por
+la suite E2E).
+
+% ---------- METODOLOGIA ----------
+\subsection*{Metodolog\'ia}
+
+El aseguramiento de la calidad se abord\'o con un enfoque dual y complementario:
+
+\begin{itemize}
+  \item \textbf{An\'alisis din\'amico (pruebas funcionales E2E)}: se implement\'o
+        una suite de pruebas de extremo a extremo con \textbf{Selenium
+        WebDriver} y \textbf{pytest}, bajo el patr\'on Page Object Model. La
+        sincronizaci\'on se resolvi\'o exclusivamente con esperas expl\'icitas
+        (\texttt{WebDriverWait}), evitando pausas fijas, y se incorporaron
+        pruebas basadas en datos (\textit{data-driven}) mediante el decorador
+        \texttt{@pytest.mark.parametrize}. La cobertura se midi\'o con
+        \texttt{pytest-cov}, exportando los reportes \texttt{coverage.xml} y
+        \texttt{report.html}.
+  \item \textbf{An\'alisis est\'atico}: se audit\'o el c\'odigo fuente con
+        \textbf{SonarQube v10.6}, evaluando sus cinco dimensiones (Seguridad,
+        Confiabilidad, Mantenibilidad, Cobertura y Duplicaci\'on) y aplicando un
+        \textit{Quality Gate} como criterio autom\'atico de aprobaci\'on.
+\end{itemize}
+
+El entorno de ejecuci\'on se levant\'o localmente mediante Docker (contenedores
+de Redis y PostgreSQL) sobre el dominio \texttt{local.outline.dev:3000}, y el
+flujo se automatiz\'o con un \textit{pipeline} de Integraci\'on Continua en
+GitHub Actions.
+
+\vspace{4pt}
+\noindent\textit{Nota:} conforme a la naturaleza documental de esta tarea, esta
+secci\'on \textbf{no ejecuta nuevas pruebas}; consolida y documenta los
+resultados previamente obtenidos en el Examen Pr\'actico de la Unidad 2 (P2).
+
+% ---------- RESULTADOS + TABLA ----------
+\subsection*{Resultados: m\'etricas del Examen Pr\'actico U2}
+
+La Tabla~\ref{tab:metricas-p2} sintetiza las m\'etricas cuantitativas obtenidas
+durante el Examen Pr\'actico de la Unidad 2, junto con su interpretaci\'on.
+
+\begin{table}[H]
+\centering
+\caption{M\'etricas de calidad obtenidas en el Examen Pr\'actico de la Unidad 2 (P2).}
+\label{tab:metricas-p2}
+\begin{tabular}{|p{3.1cm}|p{2.4cm}|p{8.4cm}|}
+\hline
+\textbf{M\'etrica} & \textbf{Valor} & \textbf{Interpretaci\'on} \\
+\hline
+Cobertura de c\'odigo & 62\% &
+Porcentaje de l\'ineas del paquete de pruebas ejercitadas por la suite,
+reportado por \texttt{pytest-cov}. Se ubica por debajo del umbral ideal
+($>$80\%), lo que se\~nala rutas de c\'odigo a\'un sin verificar. Se vincula con
+la \textbf{Mantenibilidad} de ISO/IEC 25010. \\
+\hline
+Deuda t\'ecnica & 23 d\'ias &
+Esfuerzo estimado por SonarQube para remediar la totalidad de los
+\textit{code smells} detectados; equivale a jornadas de refactorizaci\'on
+pendientes. \\
+\hline
+Pruebas pasadas & 42/42 &
+Todos los casos ejecutados (42 de 42) resultaron exitosos (\textit{passed}),
+validando funcionalmente los flujos de autenticaci\'on, b\'usqueda y creaci\'on
+documental; adicionalmente, 8 casos quedaron omitidos (\textit{skipped}) por
+dependencias del entorno. \\
+\hline
+Quality Gate & Aprobado &
+El proyecto satisfizo los umbrales del \textit{Quality Gate} definido en
+SonarQube; la puerta de calidad no bloque\'o la integraci\'on del c\'odigo. \\
+\hline
+\end{tabular}
+\end{table}
+
+En conjunto, las m\'etricas indican un sistema funcionalmente estable ---la
+totalidad de los casos ejecutados pasaron--- que satisface el \textit{Quality
+Gate} configurado. No obstante, es importante se\~nalar que las dimensiones de
+\textbf{Seguridad} y \textbf{Confiabilidad} obtuvieron una calificaci\'on
+\textit{rating} D, lo que revela una deuda t\'ecnica considerable (23 d\'ias) y
+la necesidad de priorizar refactorizaciones en los \textit{sprints} venideros
+para aproximar dichas dimensiones al est\'andar ideal A.
+
+% =====================================================================
+% ====================  FIN SECCION 4.6 (ODIN)  =======================
+% =====================================================================
+
+
+% ---------------------------------------------------------------------
+% ESPACIO RESERVADO PARA LAS DEMAS SECCIONES DEL EQUIPO
+% (borrar / completar en el otro chat o al unificar en Overleaf)
+% ---------------------------------------------------------------------
+%   Portada, Indice, Introduccion general, Conclusion, Referencias -> Olivia
+%   4.1 Estandares  y  4.2 Anatomia   -> Alan
+%   4.3 Trazabilidad y 4.5 Ejemplos   -> Omar
+%   4.4 Metricas y KPIs               -> Noe
+%   4.6 Aplicacion                    -> Odin  (ESTE ARCHIVO)
+% ---------------------------------------------------------------------
+
+\end{document}
