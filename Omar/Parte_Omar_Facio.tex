@@ -1,0 +1,133 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{geometry}
+\geometry{top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{tcolorbox}
+\usepackage{hyperref}
+\usepackage{enumitem}
+
+% Definición de colores corporativos/técnicos
+\definecolor{primary}{RGB}{30, 58, 138}    % Azul marino profundo
+\definecolor{secondary}{RGB}{15, 118, 110} % Verde azulado / Teal
+\definecolor{lightbg}{RGB}{248, 250, 252}   % Gris claro para cajas
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=primary,
+    citecolor=secondary,
+    urlcolor=primary
+}
+
+\setlength{\parskip}{0.8em}
+\setlength{\parindent}{0pt}
+
+\begin{document}
+
+% --- Encabezado ---
+
+
+\vspace{0.3cm}
+
+% --- Sección 1 ---
+\section*{\color{primary} 1. Ejemplo de Matriz de Trazabilidad y Fundamentación de Auditoría}
+
+En el ciclo de vida de pruebas del software, la matriz de trazabilidad garantiza que todo requerimiento del negocio posea su cobertura de prueba correspondiente, rastreando su ciclo de vida hasta las métricas operacionales de calidad.
+
+\subsection*{\color{secondary} Ejemplo de Matriz de Trazabilidad: Historia de Usuario ``Crear Documento''}
+
+\begin{description}[font=\bfseries\color{primary}]
+    \item[Requisito (Historia de Usuario):] \texttt{HU-DOC-001} --- \textit{Como usuario autenticado de la Wiki, quiero crear un nuevo documento en una colección para documentar procesos del equipo.}
+    \item[Caso de Prueba (Test Case):] \texttt{TC-DOC-001-VAL} --- \textit{Validar que al presionar el botón ``+ New doc'' en la barra lateral e ingresar un título válido, el documento se persista y redireccione a la ruta \texttt{/doc/...}}
+    \item[Defecto (Bug Report):] \texttt{BUG-DOC-104} --- \textit{En el entorno de integración, el clic en la confirmación de la creación genera una excepción de timeouts por latencia en el orquestador local antes de renderizar.}
+    \item[Métricas de Calidad:]
+    \begin{itemize}[leftmargin=*, noitemsep]
+        \item Porcentaje de ejecuciones pasadas ($100\%$ esperado tras re-ejecución).
+        \item Tiempo de respuesta de creación $< 500\text{ ms}$.
+        \item Cobertura de código en \texttt{document\_page.py} $\ge 80\%$ (alcanzado $95\%$ según evidencias del proyecto).
+    \end{itemize}
+\end{description}
+
+\vspace{0.3cm}
+
+\begin{tcolorbox}[colback=lightbg,colframe=secondary,boxrule=1pt,arc=2mm,title=\textbf{¿Por qué una Auditoría de Calidad exige esta Trazabilidad?}]
+Desde el marco de estándares como \textbf{ISO/IEC 25010} y \textbf{CMMI Nivel 3} (Procesos Definidos), una auditoría de \textit{Software Quality Assurance} (SQA) requiere evidencia matemática e irrefutable de la conformidad del producto. Las razones clave incluyen:
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Garantía de Cobertura de Requisitos (Sin Brechas):} Previene la entrega de funcionalidades no probadas (vacíos de prueba) o la construcción de código ``fantasma'' que no responde a ninguna necesidad del cliente.
+    \item \textbf{Análisis de Impacto:} Permite determinar exactamente qué pruebas y componentes se ven afectados cuando cambia una especificación o cuando falla un test funcional.
+    \item \textbf{Control de Deuda Técnica y Gestión de Defectos:} Relacionar métricas de cobertura con defectos específicos ayuda a justificar auditorías de remediación bajo la filosofía \textit{Clean as You Code}.
+    \item \textbf{Validación Transparente y Auditable:} Ante evaluaciones externas o normativas formales (como \textbf{IEEE 730}), la trazabilidad bi-direccional demuestra que los criterios de aceptación fueron validados mediante métricas cuantitativas recopiladas en pipelines automáticos de CI/CD.
+\end{enumerate}
+\end{tcolorbox}
+
+\vspace{0.3cm}
+
+% --- Sección 2 ---
+\section*{\color{primary} 2. Comparativa: Reporte de SonarQube vs. Reporte de Selenium}
+
+En los procesos SQA de la plataforma Wiki \textit{Outline}, se combinan dos técnicas de evaluación: \textbf{Análisis Estático} (SonarQube/SonarCloud) y \textbf{Análisis Dinámico Funcional} (Selenium WebDriver con Pytest).
+
+\vspace{0.3cm}
+
+\subsection*{\color{secondary} Tabla Comparativa de Información Reportada}
+
+\begin{table}[h!]
+\centering
+\small
+\renewcommand{\arraystretch}{1.4}
+\begin{tabularx}{\textwidth}{>{\bfseries\color{primary}}p{3cm} X X}
+\toprule
+\rowcolor{}
+\textbf{Criterio} & \textbf{Reporte de SonarQube (Análisis Estático)} & \textbf{Reporte de Selenium / Pytest (Análisis Dinámico)} \\
+\midrule
+Dimensión Evaluada & 
+\textbf{Calidad Interna:} Confiabilidad, Seguridad, Mantenibilidad, Cobertura y Duplicaciones. & 
+\textbf{Comportamiento Funcional:} Interacción E2E, flujos de negocio e interfaz de usuario (UI/DOM). \\
+\hline
+Aporte de Información & 
+\begin{itemize}[leftmargin=*,noitemsep,topsep=0pt]
+    \item Identificación de \textit{Code Smells} y ternarios anidados.
+    \item Detección de \textit{Security Hotspots}.
+    \item Deuda técnica calculada en días ($23\text{ días}$).
+    \item Porcentaje de código duplicado.
+\end{itemize} & 
+\begin{itemize}[leftmargin=*,noitemsep,topsep=0pt]
+    \item Estatus de ejecución (\textit{Passed/Failed/Skipped}).
+    \item Excepciones en tiempo de ejecución (timeouts, aserciones).
+    \item Desempeño y tiempos de ejecución ($42\text{ passed}$ en $125.22\text{ s}$).
+\end{itemize} \\
+\hline
+Fase del Ciclo de Vida & 
+Inspecciona el código fuente \textbf{sin ejecutar el programa} (\textit{Shift-left}). & 
+Evalúa la aplicación \textbf{en tiempo de ejecución} con navegadores reales/headless. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\vspace{0.3cm}
+
+\subsection*{\color{secondary} Buenas Prácticas de Reporte Identificadas en Ambos Enfoques}
+
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Uso de Formatos Estándar e Intercambiables (XML / HTML):}
+    \begin{itemize}
+        \item \textit{Selenium/Pytest:} Genera reportes interactivos autocontenidos (\texttt{reporte.html}) y reportes estructurados de cobertura (\texttt{coverage.xml}).
+        \item \textit{SonarQube:} Parsea y procesa directamente el artefacto \texttt{coverage.xml} para consolidar métricas dinámicas y estáticas en un único tablero central.
+    \end{itemize}
+    \item \textbf{Establecimiento de Criterios de Aprobación Explícitos (\textit{Quality Gates}):}
+    Definir un estatus global claro (\textit{Passed} / \textit{Failed}) que evalúe si el código cumple con los umbrales mínimos de mantenibilidad, porcentaje de fallas y cobertura de código antes de autorizar una fusión (\textit{merge}) en el repositorio.
+    \item \textbf{Estructura y Desacoplamiento de la Información:}
+    \begin{itemize}
+        \item \textit{Diseño en Selenium:} Implementación del patrón \textit{Page Object Model} (POM) para que los fallos del reporte mapeen directamente hacia clases de negocio (\texttt{login\_page.py}, \texttt{search\_page.py}).
+        \item \textit{Clasificación en SonarQube:} Categorización de los hallazgos por nivel de severidad (\textit{Blocker, Critical, Major, Minor}) y asignación de responsables para la planificación de \textit{sprints} de refactorización.
+    \end{itemize}
+    \item \textbf{Automatización e Integración Continua (CI/CD):}
+    Ambas herramientas ejecutan sus reportes de forma automatizada en pipelines (GitHub Actions) en cada evento de \textit{push} o \textit{pull request}, asegurando la visibilidad del estado de la calidad para todo el equipo sin depender de ejecuciones manuales aisladas.
+\end{enumerate}
+
+\end{document}
