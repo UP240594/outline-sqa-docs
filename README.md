@@ -1,72 +1,89 @@
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=wiki-sqa_wiki-analisis&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=wiki-sqa_wiki-analisis)
-# outline-sqa-docs
 
-El siguiente repositiorio tiene como objetivo tener una documentacion del trabajo que cada quien hizo en el equipo, teniendo como objetivo una mayor organizacion en el equipo, a continuacion se mencionan de lo que se encargara cada quien en el proyecto, se subiran los cambios al repositiorio aqui, tanto su formato tex como pdf, para al final unir el trabajo y subirlo al apartado correspondiente.
+# 📘 outline-sqa-docs
 
-En el entregable anterior nos enfocamos en encontrar metricas y estandares que cumplieran ciertas normas, ahora nos enfocaremos a medir el codigo de nuestro codigo haciendo como testers y haciendo pruebas con sonarqube y selenium, las partes de cada quien estuvieron distribuidas en base al documento proporcionado por el profesor
+Repositorio oficial del **Equipo 4** (TIID05B) para la asignatura **Estándares y Métricas para el Desarrollo de Software**.
+Contiene la documentación completa del proyecto integrador **Outline** (wiki interna estilo Notion), incluyendo:
 
-# Roles y cosas que le toca a cada uno: #
-
-### Odin: Investigador de Herramientas (Enfoque Teórico)
-> **Responsable de las secciones 4.1 y 4.2**
-
-* Comparar al menos tres frameworks E2E y tres herramientas de análisis estático.
-* Crear una tabla comparativa de herramientas E2E incluyendo criterios como lenguajes soportados, curva de aprendizaje y soporte de navegadores.
-* Explicar los defectos que detecta el análisis estático frente al dinámico.
-* Redactar las recomendaciones justificadas para la Wiki utilizando citas en formato APA.
+- Análisis de calidad según **ISO/IEC 25010:2023**.
+- Plan SQA basado en **IEEE 730-2014**.
+- **KPIs** y métricas reportables (ISO 25023, ISO 5055).
+- **Matriz de trazabilidad** requisito → caso de prueba → defecto → métrica.
+- **Ejemplos reales** de informes QA (SonarQube y Selenium).
+- **Resultados prácticos** del análisis estático (SonarQube) y pruebas E2E (Selenium) realizados en el Examen Práctico de la Unidad 2.
+- **Reporte integrador** en formato LaTeX (PDF + `.tex`) y evidencias en `.zip`.
 
 ---
 
-### Alan: Ingeniero E2E - Arquitectura y Page Object Model
-> **Responsable de la sección 4.3 (Parte 1)**
+## 📁 Estructura del repositorio
 
-* Estructurar el proyecto de pruebas creando los directorios `pages/`, `tests/` y el archivo `conftest.py`.
-* Programar al menos 2 *Page Objects* con sus respectivos localizadores y métodos de negocio para la Wiki.
-* Implementar al menos 5 pruebas automatizadas que abarquen casos válidos, de frontera y de error.
-* Utilizar exclusivamente esperas explícitas de Selenium, evitando `time.sleep`.
-
----
-
-### Olivia: Ingeniera E2E - Pruebas Data-driven e Integración Continua
-> **Responsable de las secciones 4.3 (Parte 2) y 4.5**
-
-* Desarrollar al menos 1 prueba data-driven utilizando el decorador `@pytest.mark.parametrize`.
-* Capturar la salida de las pruebas y generar el reporte HTML de pytest.
-* Configurar el pipeline de Integración Continua, incluyendo el archivo YAML y la captura de su ejecución.
-* Documentar las condiciones del *Quality Gate* y explicar bajo qué escenarios bloquearía un merge.
-
----
-
-### Noe: Analista de SonarQube y Cobertura
-> **Responsable de la sección 4.4**
-
-* Configurar el archivo `sonar-project.properties` para la Wiki y tomar captura del tablero resultante.
-* Reportar los ratings obtenidos en las cinco dimensiones de calidad: *Reliability, Security, Maintainability, Coverage* y *Duplications*.
-* Analizar a detalle al menos 3 issues detectados, documentando su tipo, severidad, línea de código y explicación.
-* Asegurar la conexión de la cobertura generada por pytest mediante `coverage.xml`.
+```
+outline-sqa-docs/
+├── README.md
+├── Metricas y Estandares/        # Entregables anteriores (Tarea 03, etc.)
+├── Tarea09/                      # Documentación de la calidad (entrega final)
+│   ├── Olivia/                   # Portada, introducción, conclusión, referencias
+│   ├── Alan/                     # Secciones 4.1 y 4.2 (estándares y anatomía)
+│   ├── Omar/                     # Secciones 4.3 y 4.5 (trazabilidad y ejemplos)
+│   ├── Noe/                      # Sección 4.4 (métricas y KPIs)
+│   ├── Odin/                     # Sección 4.6 (aplicación y resultados)
+│   ├── TIID05B_Equipo4_Sem11.tex # Documento unificado (compilable)
+│   └── TIID05B_Equipo4_Sem11.pdf # Versión final en PDF
+└── Evidencias_P2/                # Scripts de Selenium + reportes (coverage.xml, report.html)
+```
 
 ---
 
-### Omar: Gestor de Deuda Técnica y Maestro del Documento
-> **Responsable de la sección 4.6 y la consolidación del entregable**
+## 👥 Roles y responsabilidades (Tarea 09)
 
-* Elaborar la tabla de remediación de deuda técnica tomando los issues de SonarQube e indicando severidad, esfuerzo estimado, prioridad y responsable.
-* Justificar la prioridad de los issues basándose estrictamente en severidad e impacto, aplicando el enfoque *Clean as You Code*.
-* Consolidar el documento final y compilarlo en LaTeX, asegurando los márgenes de 2.5 cm, tipografía Latin Modern y el estilo de citación APA.
-* Generar los archivos finales para la entrega en Classroom (`.pdf`, `.tex` y `.zip`).
-## Estructura de carpetas
- - /Olivia
- - /Noe
- - /Omar
- - /Alan
- - /Odin
+| Integrante | Rol | Secciones a cargo |
+|------------|-----|-------------------|
+| **Olivia Chairez** | Coordinadora | Portada, índice, introducción, conclusión, referencias APA 7, unificación del documento en LaTeX y empaquetado del `.zip` con evidencias del P2. |
+| **Alan Jauregui** | Documentador | **4.1** – Comparativa de estándares (IEEE 730, ISO 29119, IEEE 829) <br> **4.2** – Anatomía del informe de calidad (SQA) y de pruebas. |
+| **Omar Facio** | QA Tester | **4.3** – Matriz de trazabilidad con ejemplo basado en HU-01 (Outline). <br> **4.5** – Comparativa de reportes reales (SonarQube vs Selenium). |
+| **Noé Estrada** | Líder / Analista | **4.4** – Métricas reportables (McCabe, Halstead, IFPUG, cobertura, densidad de defectos) vinculadas a ISO 25010:2023 y umbrales de referencia. |
+| **Odin Rubio** | Developer | **4.6** – Índice comentado del reporte integrador, redacción de introducción, alcance y metodología; consolidación de métricas del Examen P2 (cobertura 62%, deuda técnica 23 días, 42/42 pruebas pasadas, Quality Gate aprobado). |
 
+---
 
-## Comandos básicos git
-- git pull origin main
-- git add .
-- git commit -m "breve descripción"
-- git push origin main
+## 🔧 ¿Qué contiene este repositorio?
 
-  # Nota:
-  Se creearan carpetas para organizar y poner la parte de cada uno ahi, en caso de hacer cualquier cambio, o no documentar este mismo por olvido de un git push, favor de aclararlo.  #    
+- **Documentación normativa**: Aplicación de estándares ISO/IEC 25010, IEEE 730, ISO/IEC 29119, IEEE 829.
+- **Métricas cuantitativas**: KPIs definidos para Outline, cobertura de código, deuda técnica, densidad de defectos.
+- **Pruebas automatizadas**: Scripts de Selenium (Page Object Model, esperas explícitas, pruebas parametrizadas) y análisis estático con SonarQube (reporte de issues y Quality Gate).
+- **Evidencias**: Capturas de pantalla, reportes HTML y XML generados durante la ejecución de pruebas.
+- **Informe final**: Documento unificado en LaTeX (formato APA 7) que integra todas las secciones y referencias.
+
+---
+
+## 🚀 Cómo contribuir
+
+1. **Clona** el repositorio:
+   ```bash
+   git clone https://github.com/UP240594/outline-sqa-docs.git
+   ```
+
+2. Crea una rama para tu trabajo:
+   ```bash
+   git checkout -b tu-nombre/seccion
+   ```
+
+3. Sube tus cambios a tu carpeta personal (`/TuNombre/`) y actualiza el archivo principal si es necesario.
+
+4. Haz un pull request o avisa al equipo para revisar y fusionar.
+
+---
+
+## 📦 Entregable final
+
+- **PDF:** `TIID05B_Equipo4_Sem11.pdf`
+- **Código fuente LaTeX:** `TIID05B_Equipo4_Sem11.tex`
+- **Evidencias comprimidas:** `TIID05B_Equipo4_Sem11.zip` (contiene scripts de Selenium + reportes de cobertura y SonarQube)
+
+---
+
+## 📌 Notas importantes
+
+- El repositorio es privado y solo tienen acceso los miembros del equipo y el profesor.
+- Todas las referencias bibliográficas están en formato APA 7 y se incluyen dentro del documento LaTeX (no se requiere archivo `.bib` externo).
+- El análisis de SonarQube se realizó sobre el código de Outline, y el estado del Quality Gate se refleja en el badge al inicio de este README.
